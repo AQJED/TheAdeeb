@@ -1,3 +1,4 @@
+
 (function ($) {
   "use strict";
 
@@ -119,7 +120,7 @@
       "btn_lang": "عربي",
       "about_title": "About Me",
       "about_subtitle": "10+ Years Experience",
-      "about_text": "I'm a Software Integration Engineer specializing in software development, embedded systems, and AI, with a B.S. in Computer Engineering and a Deep Learning Nanodegree from MISK Foundation.\nWith over a decade of experience, I’ve worked across roles from simulator technician to engineer and supervisor, gaining expertise in middleware development, real-time data integration, and system optimization.\nMy expertise includes microcontroller programming, circuit design, and hardware-software integration.",
+      "about_text": "I'm a Software Integration Engineer specializing in software development, embedded systems, and AI, with a B.S. in Computer Engineering from CSUSB and a Deep Learning Nanodegree from MISK Foundation.\nI’ve worked across roles from simulator technician to engineer and team lead, gaining expertise in middleware development, real-time data integration, and system optimization.\nMy expertise includes microcontroller programming, circuit design, and hardware-software integration.",
       "exp_header": "My Resume",
       "exp_subheader": "Professional & Academic Career",
       "exp_item1_title": "Software Integration Engineer",
@@ -237,7 +238,7 @@
       "btn_lang": "English",
       "about_title": "من أنا",
       "about_subtitle": "أكثر من 10 سنوات خبرة",
-      "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات، الأنظمة المدمجة، والذكاء الاصطناعي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة، وشهادة نانو في التعلم العميق من مؤسسة مسك.\nلدي أكثر من 10 سنوات من الخبرة، بدءًا من فني محاكاة إلى مهندس ومشرف، حيث عملت في تطوير البرمجيات الوسيطة، تكامل البيانات، وتحسين أداء الأنظمة.",
+      "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات، الأنظمة المدمجة، والذكاء الاصطناعي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا، وشهادة نانو في التعلم العميق من مؤسسة مسك.\nلدي أكثر من 10 سنوات من الخبرة، بدءًا من فني محاكاة إلى مهندس و قائد فريق، حيث عملت في تطوير البرمجيات الوسيطة، تكامل البيانات، وتحسين أداء الأنظمة.",
       "exp_header": "السيرة الذاتية",
       "exp_subheader": "المسيرة المهنية والأكاديمية",
       "exp_item1_title": "مهندس تكامل برمجي",
