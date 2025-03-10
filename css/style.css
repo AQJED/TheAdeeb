@@ -511,6 +511,7 @@ a {
         position: relative;
     }
 }
+
 #about_subtitle {
     color: #ffffff; /* or any color of your choice */
 }
@@ -1062,4 +1063,14 @@ navbar {
     font-size: 28px;
     font-weight: 700;
     font-family: 'Harmattan', sans-serif;
+}
+
+/* Add extra space below the "Show More" button */
+.toggle-projects-btn {
+    margin-bottom: 20px !important;
+}
+
+/* Add extra space below the Skills section title */
+.skills .section-header h2 {
+    margin-bottom: 20px;
 }
