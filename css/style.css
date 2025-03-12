@@ -251,7 +251,7 @@ a {
     position: relative;
     width: 100%;
     margin-bottom: 0; /* removed gap below Hero */
-    padding: 120px 0 0 0;
+    padding: 150px 0 0 0;
     overflow: hidden;
     background: linear-gradient(#414141, #414141);
     background-position: center;
