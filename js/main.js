@@ -218,7 +218,7 @@
       {
           "title": "Face Generation (DCGAN)",
           "subtitle": "Personal Project",
-          "description": " Deep Convolutional Generative Adversarial Network (DCGAN) to generate new images",
+          "description": " Deep Convolutional Generative Adversarial Network to generate new images.",
           "technologies": "DCGAN, TensorFlow",
           "link": "https://github.com/AQJED",
           "category": "personal"
