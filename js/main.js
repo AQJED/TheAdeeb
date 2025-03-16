@@ -207,22 +207,30 @@
       "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
       "category": "academic"
       },
-      {
-          "title": "Text Generation Natural Language Processing (NLP)",
-          "subtitle": "Personal Project",
-          "description": "The Neural Network generates texts using RNNs.",
-          "technologies": "RNN, LSTM,Tensorflow",
-          "link": "https://github.com/AQJED",
-          "category": "personal"
-      },
-      {
-          "title": "Face Generation (DCGAN)",
-          "subtitle": "Personal Project",
-          "description": " Deep Convolutional Generative Adversarial Network to generate new images.",
-          "technologies": "DCGAN, TensorFlow",
-          "link": "https://github.com/AQJED",
-          "category": "personal"
-      }
+       {
+     "title": "Text Generation Natural Language Processing (NLP)",
+     "subtitle": "Personal Project",
+     "description": "The Neural Network generates texts using RNNs.",
+     "technologies": "RNN, LSTM,Tensorflow, Python",
+     "link": "https://github.com/AQJED",
+     "category": "personal"
+ },
+ {
+     "title": "Face Generation (DCGAN)",
+     "subtitle": "Personal Project",
+     "description": " Deep Convolutional Generative Adversarial Network (DCGAN) to generate new images.",
+     "technologies": "DCGAN, TensorFlow, Python",
+     "link": "https://github.com/AQJED",
+     "category": "personal"
+ },
+ {
+     "title": "Sales Prediction (Neural Network)",
+     "subtitle": "Personal Project",
+     "description": " Neural Network to predict future revenue.",
+     "technologies": "Python, Pandas, Numpy, Matplotlib",
+     "link": "https://github.com/AQJED",
+     "category": "personal"
+ }
   ]
 },
       "skills_header": "Skills",
