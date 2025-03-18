@@ -192,6 +192,14 @@
       "category": "professional"
     },
     {
+      "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
+      "subtitle": "Professional Application",
+      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against compliance requirements.",
+      "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
+      "link": "https://github.com/AQJED/Host-to-IG-Middleware",
+      "category": "professional"
+    },
+    {
       "title": "Parking Occupancy (FPGA)",
       "subtitle": "Personal Project",
       "description": "An FPGA-based system that monitors and manages parking occupancy in real time using an FSM design.",
