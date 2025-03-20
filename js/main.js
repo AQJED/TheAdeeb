@@ -194,7 +194,7 @@
     {
       "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
       "subtitle": "Professional Application",
-      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against compliance requirements.",
+      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
       "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
       "link": "https://github.com/AQJED/LLM-Driven-Cybersecurity-Compliance-Evaluator",
       "category": "professional"
