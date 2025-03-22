@@ -120,7 +120,7 @@
       "btn_lang": "عربي",
       "about_title": "About Me",
       "about_subtitle": "10+ Years Experience",
-      "about_text": "I'm a Software Integration Engineer specializing in software development, embedded systems, and AI, with a B.S. in Computer Engineering from CSUSB and a Deep Learning Nanodegree from MISK Foundation.\nI’ve worked across roles from simulator technician to engineer and team lead, gaining expertise in middleware development, real-time data integration, and system optimization.\nMy expertise includes microcontroller programming, circuit design, and hardware-software integration.",
+      "about_text": "I'm a Software Integration Engineer with a focus on simulation, embedded systems, and artificial intelligence. I hold a B.S. in Computer Engineering from CSUSB and a Deep Learning Nanodegree from MISK Foundation. My passion lies in building intelligent systems that bridge the physical and digital worlds.\nI’ve worked across roles from simulator technician to engineer and team lead, gaining expertise in middleware development, real-time data integration, and system optimization.\nMy expertise includes microcontroller programming, circuit design, and hardware-software integration.",
       "exp_header": "My Resume",
       "exp_subheader": "Professional & Academic Career",
       "exp_item1_title": "Software Integration Engineer",
@@ -168,19 +168,28 @@
       "category": "professional"
     },
     {
-      "title": "5 DOF Robotic Arm Object Detection (Embedded System)",
-      "subtitle": "Personal Project",
-      "description": "Determines the position and orientation of an object using laser beams and photoresistors to control a 5 DOF robotic arm.",
-      "technologies": "C/C++, Embedded Systems, Robotic Kinematics, DSP",
-      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
-      "category": "personal"
+      "title": "Falcon AI: Reinforcement Learning for Aerial Combat (AI)(Ongoing)",
+      "subtitle": "Professional Application",
+      "description": "A reinforcement learning-based simulation where autonomous jets learn to maneuver and engage in tactical 2D dogfights.",
+      "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
+      "link": "https://github.com/AQJED/Falcon-AI",
+      "category": "professional"
     },
+   
     {
       "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
       "subtitle": "Professional Application",
       "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
       "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
       "link": "https://github.com/AQJED/LLM-Driven-Cybersecurity-Compliance-Evaluator",
+      "category": "professional"
+    },
+    {
+      "title": "Host to IG Middleware: Low-Level C++ Programming",
+      "subtitle": "Professional Application",
+      "description": "Facilitates communication between a Host Computer and an Image Generator by converting CIGI 3.1 packets into CIGI 3.3 packets.",
+      "technologies": "C++, CIGI, Boost, TCP, UDP, Git",
+      "link": "https://github.com/AQJED/Host-to-IG-Middleware",
       "category": "professional"
     },
     {
@@ -192,13 +201,14 @@
       "category": "academic"
     },
     {
-      "title": "Host to IG Middleware: Low-Level C++ Programming",
-      "subtitle": "Professional Application",
-      "description": "Facilitates communication between a Host Computer and an Image Generator by converting CIGI 3.1 packets into CIGI 3.3 packets.",
-      "technologies": "C++, CIGI, Boost, TCP, UDP, Git",
-      "link": "https://github.com/AQJED/Host-to-IG-Middleware",
-      "category": "professional"
+      "title": "5 DOF Robotic Arm Object Detection (Embedded System)",
+      "subtitle": "Personal Project",
+      "description": "Determines the position and orientation of an object using laser beams and photoresistors to control a 5 DOF robotic arm.",
+      "technologies": "C/C++, Embedded Systems, Robotic Kinematics, DSP",
+      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
+      "category": "personal"
     },
+   
     
     {
       "title": "Parking Occupancy (FPGA)",
@@ -229,14 +239,6 @@
      "subtitle": "Personal Project",
      "description": " Deep Convolutional Generative Adversarial Network (DCGAN) to generate new images.",
      "technologies": "DCGAN, TensorFlow, Python",
-     "link": "https://github.com/AQJED",
-     "category": "personal"
- },
- {
-     "title": "Sales Prediction (Neural Network)",
-     "subtitle": "Personal Project",
-     "description": " Neural Network to predict future revenue.",
-     "technologies": "Python, Pandas, Numpy, Matplotlib",
      "link": "https://github.com/AQJED",
      "category": "personal"
  }
