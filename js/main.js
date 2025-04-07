@@ -312,6 +312,22 @@
       "link": "https://github.com/AQJED/DIS---CIGI-Middleware",
       "category": "professional"
     },
+{
+  "title": "فالكون AI: التعلم المعزز للقتال الجوي (AI) (قيد التنفيذ)",
+  "subtitle": "تطبيق احترافي",
+  "description": "محاكاة تعتمد على التعلم المعزز حيث تتعلم الطائرات المقاتلة الذاتية المناورة والانخراط في معارك تكتيكية ثنائية الأبعاد.",
+  "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
+  "link": "https://github.com/AQJED/Falcon-AI",
+  "category": "professional"
+},
+	  {
+  "title": "مقيّم امتثال الأمن السيبراني المعتمد على LLM (AI)",
+  "subtitle": "تطبيق احترافي",
+  "description": "أداة آلية تستخدم نموذج لغة كبير لتقييم ضوابط الأمن السيبراني في شركة مقابل متطلبات الامتثال من الهيئة الوطنية للأمن السيبراني (NCA).",
+  "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
+  "link": "https://github.com/AQJED/LLM-Driven-Cybersecurity-Compliance-Evaluator",
+  "category": "professional"
+},
     {
       "title": "ذراع آلي (نظام مضمن)",
       "subtitle": "مشروع شخصي",
@@ -351,7 +367,15 @@
       "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
       "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
       "category": "academic"
-    }
+    },
+	    {
+  "title": "توليد النصوص باستخدام معالجة اللغة الطبيعية (NLP)",
+  "subtitle": "مشروع شخصي",
+  "description": "الشبكة العصبية تولد نصوصًا باستخدام الشبكات العصبية المتكررة (RNNs).",
+  "technologies": "RNN, LSTM,Tensorflow, Python",
+  "link": "https://github.com/AQJED",
+  "category": "personal"
+}
   ]
 },
       "skills_header": "المهارات",
