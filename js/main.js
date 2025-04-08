@@ -176,9 +176,9 @@
       "category": "professional"
     },
    {
-  "title": "HostJet: Joystick-Driven Host Emulator with CIGI UI",
+  "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
-  "description": "A CIGI-compliant host emulator that simulates jet motion using joystick input and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
+  "description": "A CIGI-compliant host emulator that simulates jet motion and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://github.com/AQJED/hostemulatort",
   "category": "professional"
