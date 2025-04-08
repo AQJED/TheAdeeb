@@ -175,7 +175,14 @@
       "link": "https://github.com/AQJED/Falcon-AI",
       "category": "professional"
     },
-   
+   {
+  "title": "HostJet: Joystick-Driven Host Emulator with CIGI UI",
+  "subtitle": "Professional Application",
+  "description": "A CIGI-compliant host emulator that simulates jet motion using joystick input and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
+  "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
+  "link": "https://github.com/AQJED/hostemulatort",
+  "category": "professional"
+},
     {
       "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
       "subtitle": "Professional Application",
@@ -320,6 +327,14 @@
   "link": "https://github.com/AQJED/Falcon-AI",
   "category": "professional"
 },
+{
+  "title": "HostJet: محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
+  "subtitle": "تطبيق احترافي",
+  "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة رسومية غنية للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
+  "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
+  "link": "https://github.com/AQJED/hostemulatort",
+  "category": "professional"
+}
 	  {
   "title": "مقيّم امتثال الأمن السيبراني المعتمد على LLM (AI)",
   "subtitle": "تطبيق احترافي",
