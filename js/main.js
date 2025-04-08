@@ -334,7 +334,7 @@
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://github.com/AQJED/hostemulatort",
   "category": "professional"
-}
+},
 	  {
   "title": "مقيّم امتثال الأمن السيبراني المعتمد على LLM (AI)",
   "subtitle": "تطبيق احترافي",
