@@ -164,7 +164,7 @@
       "subtitle": "Professional Application",
       "description": "A middleware application that facilitates communication between a CGF system and an Image Generator by converting DIS protocol packets into CIGI protocol packets.",
       "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, TCP, UDP, Git",
-      "link": "https://github.com/AQJED/DIS---CIGI-Middleware",
+      "link": "https://aqjed.github.io/DISCIGIMiddleware/",
       "category": "professional"
     },
     {
@@ -172,7 +172,7 @@
       "subtitle": "Professional Application",
       "description": "A reinforcement learning-based simulation where autonomous jets learn to maneuver and engage in tactical 2D dogfights.",
       "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
-      "link": "https://github.com/AQJED/Falcon-AI",
+      "link": "https://aqjed.github.io/Falcon-AI/",
       "category": "professional"
     },
    {
@@ -180,7 +180,7 @@
   "subtitle": "Professional Application",
   "description": "A CIGI-compliant host emulator that simulates jet motion and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
-  "link": "https://github.com/AQJED/hostemulatort",
+  "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
 },
     {
@@ -188,7 +188,7 @@
       "subtitle": "Professional Application",
       "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
       "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
-      "link": "https://github.com/AQJED/LLM-Driven-Cybersecurity-Compliance-Evaluator",
+      "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
       "category": "professional"
     },
     {
@@ -196,7 +196,7 @@
       "subtitle": "Professional Application",
       "description": "Facilitates communication between a Host Computer and an Image Generator by converting CIGI 3.1 packets into CIGI 3.3 packets.",
       "technologies": "C++, CIGI, Boost, TCP, UDP, Git",
-      "link": "https://github.com/AQJED/Host-to-IG-Middleware",
+      "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
       "category": "professional"
     },
     {
@@ -316,7 +316,7 @@
       "subtitle": "تطبيق احترافي",
       "description": "تطبيق وسيط يسهل الاتصال بين نظام CGF ونظام توليد الصور عن طريق تحويل حزم بروتوكول DIS إلى حزم CIGI.",
       "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, TCP, UDP, Git",
-      "link": "https://github.com/AQJED/DIS---CIGI-Middleware",
+      "link": "https://aqjed.github.io/DISCIGIMiddleware/",
       "category": "professional"
     },
 {
@@ -324,7 +324,7 @@
   "subtitle": "تطبيق احترافي",
   "description": "محاكاة تعتمد على التعلم المعزز حيث تتعلم الطائرات المقاتلة الذاتية المناورة والانخراط في معارك تكتيكية ثنائية الأبعاد.",
   "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
-  "link": "https://github.com/AQJED/Falcon-AI",
+  "link": "https://aqjed.github.io/Falcon-AI/",
   "category": "professional"
 },
 {
@@ -332,7 +332,7 @@
   "subtitle": "تطبيق احترافي",
   "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة رسومية غنية للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
-  "link": "https://github.com/AQJED/hostemulatort",
+  "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
 },
 	  {
@@ -340,7 +340,7 @@
   "subtitle": "تطبيق احترافي",
   "description": "أداة آلية تستخدم نموذج لغة كبير لتقييم ضوابط الأمن السيبراني في شركة مقابل متطلبات الامتثال من الهيئة الوطنية للأمن السيبراني (NCA).",
   "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
-  "link": "https://github.com/AQJED/LLM-Driven-Cybersecurity-Compliance-Evaluator",
+  "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
   "category": "professional"
 },
     {
@@ -364,7 +364,7 @@
       "subtitle": "تطبيق احترافي",
       "description": "تطبيق يسهل الاتصال بين الحاسوب المضيف ونظام توليد الصور عبر تحويل حزم CIGI 3.1 إلى CIGI 3.3.",
       "technologies": "C++, CIGI, Boost, TCP, UDP, Git",
-      "link": "https://github.com/AQJED/Host-to-IG-Middleware",
+      "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
       "category": "professional"
     },
     {
