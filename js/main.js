@@ -160,7 +160,15 @@
   "showLess": "Show Less",
   "projectCards": [
     {
-      "title": "CGF to IG Middleware: Low-Level C++ Programming",
+      "title": "Cougar Full Mission Simulator – Middleware System Development",
+      "subtitle": "Professional Application",
+      "description": "Middleware system for the Cougar Full Mission Simulator (FMS), a high-fidelity military flight simulator used for tactical training.",
+      "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, TCP, UDP, Git",
+      "link": "https://aqjed.github.io/FMS_MiddleWare/",
+      "category": "professional"
+    },
+	{
+      "title": "DIS to CIGI Middleware: Low-Level C++ Programming",
       "subtitle": "Professional Application",
       "description": "A middleware application that facilitates communication between a CGF system and an Image Generator by converting DIS protocol packets into CIGI protocol packets.",
       "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, TCP, UDP, Git",
@@ -192,7 +200,7 @@
       "category": "professional"
     },
     {
-      "title": "Host to IG Middleware: Low-Level C++ Programming",
+      "title": "CIGI to CIGI Middleware: Low-Level C++ Programming",
       "subtitle": "Professional Application",
       "description": "Facilitates communication between a Host Computer and an Image Generator by converting CIGI 3.1 packets into CIGI 3.3 packets.",
       "technologies": "C++, CIGI, Boost, TCP, UDP, Git",
