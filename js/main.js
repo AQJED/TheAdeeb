@@ -175,14 +175,14 @@
       "link": "https://aqjed.github.io/DISCIGIMiddleware/",
       "category": "professional"
     },
-    {
-      "title": "Falcon AI: Reinforcement Learning for Aerial Combat (AI)(Ongoing)",
-      "subtitle": "Professional Application",
-      "description": "A reinforcement learning-based simulation where autonomous jets learn to maneuver and engage in tactical 2D dogfights.",
-      "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
-      "link": "https://aqjed.github.io/Falcon-AI/",
-      "category": "professional"
-    },
+     {
+    "title": "AI-Guided Gun-Based Drone Interceptor System: A Reinforcement Learning Approach for Cost-Effective Aerial Defense in Large-Scale Territories (Ongoing)",
+    "subtitle": "Professional Application",
+    "description": "A reinforcement learning–based simulation where an existing UAV detects, pursues, and neutralizes hostile drones to deliver a cost-effective layer of air defense.",
+    "technologies": "Python, stable-baselines3 (PPO), gymnasium, numpy, physics, CIGI",
+    "link": "https://aqjed.github.io/Falcon-AI/",
+    "category": "professional"
+  },
    {
   "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
@@ -339,14 +339,14 @@
   "title": "فالكون AI: التعلم المعزز للقتال الجوي (AI) (قيد التنفيذ)",
   "subtitle": "تطبيق احترافي",
   "description": "محاكاة تعتمد على التعلم المعزز حيث تتعلم الطائرات المقاتلة الذاتية المناورة والانخراط في معارك تكتيكية ثنائية الأبعاد.",
-  "technologies": "PettingZoo, PyFlyt, Stable-Baselines3 (PPO), PyTorch, Gymnasium",
+  "technologies": "Python, stable-baselines3 (PPO), gymnasium, numpy, physics, CIGI",
   "link": "https://aqjed.github.io/Falcon-AI/",
   "category": "professional"
 },
 {
-  "title": "HostJet: محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
-  "subtitle": "تطبيق احترافي",
-  "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة رسومية غنية للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
+  "title": "نظام اعتراض الطائرات بدون طيار المدعوم بالذكاء الاصطناعي: نهج التعلم المعزز للدفاع الجوي الفعال من حيث التكلفة في المناطق واسعة النطاق (قيد التنفيذ)",
+    "subtitle": "تطبيق احترافي",
+    "description": "محاكاة تعتمد على التعلم المعزز حيث يتم تجهيز طائرة بدون طيار بحامل رشاش عيار 12.7 مم لتعقب وتحييد واسقاط الطائرات المسيرة المعادية بكفاءة اقتصادية   .",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
