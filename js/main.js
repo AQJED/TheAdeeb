@@ -175,14 +175,6 @@
       "link": "https://aqjed.github.io/DISCIGIMiddleware/",
       "category": "professional"
     },
-     {
-    "title": "AI-Guided Gun-Based Drone Interceptor System: A Reinforcement Learning Approach for Cost-Effective Aerial Defense in Large-Scale Territories (Ongoing)",
-    "subtitle": "Professional Application",
-    "description": "A reinforcement learning–based simulation where an existing UAV detects, pursues, and neutralizes hostile drones to deliver a cost-effective layer of air defense.",
-    "technologies": "Python, C++, stable-baselines3 (PPO), gymnasium, numpy, physics, CIGI",
-    "link": "https://aqjed.github.io/Falcon-AI/",
-    "category": "professional"
-  },
    {
   "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
@@ -335,14 +327,6 @@
       "link": "https://aqjed.github.io/DISCIGIMiddleware/",
       "category": "professional"
     },
-{
-  "title": "نظام اعتراض الطائرات بدون طيار المدعوم بالذكاء الاصطناعي: (قيد التنفيذ)",
-    "subtitle": "تطبيق احترافي",
-    "description": "محاكاة تعتمد على التعلم المعزز حيث يتم تجهيز طائرة بدون طيار لتعقب وتحييد واسقاط الطائرات المسيرة المعادية بكفاءة اقتصادية   .",
-  "technologies": "Python, C++, stable-baselines3 (PPO), gymnasium, numpy, physics, CIGI",
-  "link": "https://aqjed.github.io/hostemulator/",
-  "category": "professional"
-},
 {
   "title": "HostJet: محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
   "subtitle": "تطبيق احترافي",
