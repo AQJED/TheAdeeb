@@ -370,7 +370,7 @@
     {
       "title": "متحكم إشغال مواقف السيارات Real-Time (Verilog / FPGA)",
       "subtitle": "مشروع شخصي",
-      "description": "تصميم وتنفيذ متحكم لإشغال مواقف السيارات باستخدام Verilog وآلة حالات منتهية (FSM) على منصة Xilinx FPGA، لتتبع دخول وخروج المركبات وتحديث حالة المواقف المتاحة بشكل Real time.",
+      "description": "تصميم وتنفيذ متحكم لإشغال مواقف السيارات باستخدام Verilog وآلة حالات منتهية (FSM) على  Xilinx FPGA، لتتبع دخول وخروج المركبات وتحديث حالة المواقف المتاحة بشكل Real time.",
       "technologies": "Verilog, FSM, FPGA, Xilinx",
       "link": "https://github.com/AQJED/Parking-lot-occupancy",
       "category": "personal"
