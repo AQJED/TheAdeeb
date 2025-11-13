@@ -120,7 +120,7 @@
       "btn_lang": "عربي",
       "about_title": "About Me",
       "about_subtitle": "12+ Years Experience",
-  	  "about_text": "I'm a Software Integration Engineer with a focus on simulation and embedded systems. I hold a B.S. in Computer Engineering from CSUSB, a Deep Learning Nanodegree from MISK Foundation and an A.S. in Electrical & Electronics (Instrumentation and Control Systems) from Yanbu Industrial College. My passion lies in building intelligent systems that bridge the physical and digital worlds.\nMy technical expertise includes microcontroller programming, circuit design, hardware-software integration, and software development in defense and aerospace applications, developing low-latency solutions and integrating next-generation technologies into complex systems.",
+  	  "about_text": "I'm a Software Integration Engineer in defense and aerospace, specializing in real-time middleware and interface systems. I hold a B.S. in Computer Engineering (high-performance and embedded systems) from California State University, San Bernardino and an A.S. in Electrical & Electronics (Instrumentation and Control Systems) from Yanbu Industrial College. \nMy technical expertise includes designing and integrating low latency software and hardware for mission critical defense applications, including C/C++ development for flight simulators, microcontroller programming, digital and analog circuit design, and hardware and software integration that connects sensors, avionics, and real time training systems.",
       "exp_header": "My Resume",
       "exp_subheader": "Professional & Academic Career",
       "exp_item1_title": "Software Integration Engineer",
@@ -200,9 +200,9 @@
       "category": "professional"
     },
     {
-      "title": "Facial Recognition App",
+      "title": "NMF-Based Facial Recognition System (MATLAB)",
       "subtitle": "Academic Project",
-      "description": "Uses Non-negative Matrix Factorization (NMF) to evaluate a captured image and identify a person from a database.",
+      "description": "MATLAB-based face verification tool that uses Non-negative Matrix Factorization (NMF) to compare a captured facial image against a stored image dataset and decide whether there is a valid identity match.",
       "technologies": "MATLAB, NMF, Image Processing, GUI, Pattern Recognition",
       "link": "https://github.com/AQJED/Facial-Recognition-App-with-Matlab",
       "category": "academic"
@@ -218,11 +218,19 @@
    
     
     {
-      "title": "Parking Occupancy (FPGA)",
+      "title": "Real-Time Parking Occupancy Controller (Verilog / FPGA)",
       "subtitle": "Personal Project",
-      "description": "An FPGA-based system that monitors and manages parking occupancy in real time using an FSM design.",
-      "technologies": "Verilog, FSM, FPGA, Xilinx",
+      "description": "Designed and implemented a Verilog-based FSM on a Xilinx FPGA to track vehicle entry/exit and update parking occupancy status in real time.",
+      "technologies": "Verilog, FSM Design, FPGA, Xilinx",
       "link": "https://github.com/AQJED/Parking-lot-occupancy",
+      "category": "personal"
+    },
+    {
+      "title": "ARINC 429 Avionics Bus Interface (Verilog / FPGA)",
+      "subtitle": "Personal Project",
+      "description": "Designed and implemented an ARINC 429 transmitter/receiver core in Verilog on a Xilinx FPGA, handling word formatting, label decoding, parity, and data monitoring via a PC interface.",
+      "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
+      "link": "https://github.com/AQJED",
       "category": "personal"
     },
     {
@@ -232,15 +240,7 @@
       "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
       "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
       "category": "academic"
-      },
-       {
-     "title": "Text Generation Natural Language Processing (NLP)",
-     "subtitle": "Personal Project",
-     "description": "The Neural Network generates texts using RNNs.",
-     "technologies": "RNN, LSTM,Tensorflow, Python",
-     "link": "https://github.com/AQJED",
-     "category": "personal"
- }
+      }
   ]
 },
       "skills_header": "Skills",
@@ -272,7 +272,7 @@
       "btn_lang": "English",
       "about_title": "من أنا",
       "about_subtitle": "أكثر من 12 عامًا من الخبرة",
-	  "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات، الأنظمة المدمجة، والذكاء الاصطناعي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا، وشهادة نانو في التعلم العميق من مؤسسةمسك بالاظافة الى شهادة جامعية متوسطة في الهندسة الكهربائية والإلكترونية من جامعة ينبع الصناعية .\nلدي أكثر من 12 عاما من الخبرة،  حيث عملت في تطوير البرمجيات الوسيطة، تكامل البيانات، وتحسين أداء الأنظمة.",      "exp_header": "السيرة الذاتية",
+	  "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات وتكامل الأنظمة المدمجة. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا بالاظافة الى شهادة جامعية متوسطة في الهندسة الكهربائية والإلكترونية من جامعة ينبع الصناعية .\nلدي أكثر من 12 عاما من الخبرة،  حيث عملت في تطوير البرمجيات الوسيطة، تكامل وتحسين أداء الأنظمة للتطبيقات الدفاعية الحساسة ومحاكيات الطيران.",      "exp_header": "السيرة الذاتية",
       "exp_subheader": "المسيرة المهنية والأكاديمية",
       "exp_item1_title": "مهندس تكامل برمجي",
       "exp_item1_company": "رينمتال العربية، الرياض، المملكة العربية السعودية",
@@ -327,9 +327,9 @@
       "category": "professional"
     },
 {
-  "title": "HostJet: محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
+  "title": "محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
   "subtitle": "تطبيق احترافي",
-  "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة رسومية غنية للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
+  "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة مستخدم للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
@@ -351,7 +351,7 @@
       "category": "personal"
     },
     {
-      "title": "تطبيق التعرف على الوجوه",
+      "title": "نظام التعرف على الوجوه",
       "subtitle": "مشروع جامعي",
       "description": "باستخدام تحليل المصفوفة غير السالبة (NMF)، يتم تحليل الصورة الملتقطة للتعرف على الشخص بمقارنتها مع قاعدة البيانات.",
       "technologies": "MATLAB, NMF, Image Processing, GUI, Pattern Recognition",
@@ -366,10 +366,11 @@
       "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
       "category": "professional"
     },
+
     {
-      "title": "مواقف السيارات (نظام مضمن)",
+      "title": "متحكم إشغال مواقف السيارات Real-Time (Verilog / FPGA)",
       "subtitle": "مشروع شخصي",
-      "description": "نظام يعتمد على FPGA لرصد وإدارة شغل مواقف السيارات في الوقت الفعلي باستخدام تصميم آلة ذات حالات منتهية.",
+      "description": "تصميم وتنفيذ متحكم لإشغال مواقف السيارات باستخدام Verilog وآلة حالات منتهية (FSM) على منصة Xilinx FPGA، لتتبع دخول وخروج المركبات وتحديث حالة المواقف المتاحة بشكل Real time.",
       "technologies": "Verilog, FSM, FPGA, Xilinx",
       "link": "https://github.com/AQJED/Parking-lot-occupancy",
       "category": "personal"
@@ -377,16 +378,16 @@
     {
       "title": "التحكم في الإضاءة وتوقع المسار (نظام مضمن)",
       "subtitle": "مشروع جامعي",
-      "description": "نظام مدمج منخفض التكلفة للتحكم الذكي في الإضاءة وتوقع المسار باستخدام أردوينو ومستشعرات متعددة.",
+      "description": "نظام مضمن منخفض التكلفة للتحكم الذكي في الإضاءة وتوقع اتجاه مسار المشاة باستخدام مستشعرات متعددة.",
       "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
       "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
       "category": "academic"
     },
 	    {
-  "title": "توليد النصوص باستخدام معالجة اللغة الطبيعية (NLP)",
+  "title": "واجهة ناقل إلكترونيات الطيران ARINC 429 (Verilog / FPGA)",
   "subtitle": "مشروع شخصي",
-  "description": "الشبكة العصبية تولد نصوصًا باستخدام الشبكات العصبية المتكررة (RNNs).",
-  "technologies": "RNN, LSTM,Tensorflow, Python",
+  "description": "تصميم وتنفيذ نواة مرسل ومستقبل لبروتوكول ARINC 429 باستخدام Verilog على  Xilinx FPGA.",
+  "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
   "link": "https://github.com/AQJED",
   "category": "personal"
 }
