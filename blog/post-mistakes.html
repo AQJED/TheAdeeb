@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Dirty Dozen - The Solo Developer</title>
     <style>
-        /* --- SAME CSS AS HOMEPAGE --- */
+        /* --- VARIABLES & RESET --- */
         :root {
             --bg-color: #0f172a;
             --card-bg: #1e293b;
@@ -64,53 +64,52 @@
             </p>
 
             <div class="mistake-box">
-                <h3>1. The ICD is Law</h3>
-                <p><span class="problem">Problem:</span> I attempted to reverse engineer a flight plan from post-flight hex logs without an Interface Control Document (ICD). Without the live command-and-control stream or documentation, identifying field offsets and data types was nearly impossible.</p>
-                <p><span class="solution">Solution:</span> In the absence of an ICD, you must secure the live communication link to correlate actions with data patterns. Never attempt to "guess" binary structures from static logs if a live capture is possible.</p>
+                <h3>1. The ICD is Law (Reverse Engineering Reality)</h3>
+                <p><span class="problem">Problem:</span> I attempted to reverse engineer a flight plan from post-flight hex logs without an Interface Control Document (ICD). Without the live command-and-control stream, identifying field offsets and data types was nearly impossible.</p>
+                <p><span class="solution">Solution:</span> In the absence of an ICD, you must secure the live communication link to correlate actions with data patterns. Never attempt to guess binary structures from static logs if a live capture is possible.</p>
                 <p><span class="why">Why:</span> Binary protocols rely on strict memory alignment. A single misplaced byte shifts every subsequent field, rendering the entire data set corrupted.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>2. The Struct Padding Trap</h3>
-                <p><span class="problem">Problem:</span> C++ compilers insert "padding" bytes to align data for the CPU. Sending these raw structures over a network results in garbage data on the receiving end.</p>
+                <p><span class="problem">Problem:</span> C++ compilers insert padding bytes to align data for the CPU. Sending these raw structures over a network results in garbage data on the receiving end.</p>
                 <p><span class="solution">Solution:</span> Use <code>#pragma pack(push, 1)</code> or serialize data into byte arrays manually to ensure no hidden gaps are inserted into the message.</p>
                 <p><span class="why">Why:</span> CPUs access memory faster when aligned to 4 or 8-byte boundaries. Compilers prioritize this speed over network compatibility.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>3. Endianness Mismatches</h3>
-                <p><span class="problem">Problem:</span> Modern PCs use Little Endian, but many legacy or defense systems use Big Endian. Without conversion, multi-byte integers arrive reversed.</p>
-                <p><span class="solution">Solution:</span> Verify the raw hex values of incoming data. Use standard conversion functions (like <code>ntohl</code> or <code>htonl</code>) to ensure the byte order matches the local architecture.</p>
-                <p><span class="why">Why:</span> Different CPU architectures store the Most Significant Byte (MSB) at different addresses. Failure to convert results in mathematically incorrect values.</p>
+                <p><span class="problem">Problem:</span> Modern PCs use Little Endian, but many legacy systems use Big Endian. Without conversion, multi-byte integers arrive reversed.</p>
+                <p><span class="solution">Solution:</span> Verify the raw hex values of incoming data. Use standard conversion functions (like <code>ntohl</code>) to ensure the byte order matches your architecture.</p>
+                <p><span class="why">Why:</span> Different CPU architectures store the Most Significant Byte at different addresses. Failure to convert results in mathematically incorrect values.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>4. Shared Memory Race Conditions</h3>
                 <p><span class="problem">Problem:</span> Using Shared Memory without protection leads to "Data Tearing," where one system reads a value while another is mid-write.</p>
                 <p><span class="solution">Solution:</span> Implement a Named Mutex. Wrap every read and write operation in a strict Lock-Copy-Unlock pattern to ensure data integrity.</p>
-                <p><span class="why">Why:</span> Writing large structures is not an atomic operation. Without locking, you risk reading a hybrid of old and new data, which leads to system instability.</p>
+                <p><span class="why">Why:</span> Writing large structures is not an instant operation. Without locking, you risk reading a hybrid of old and new data, causing crashes.</p>
             </div>
 
             <div class="mistake-box">
-                <div class="mistake-box">
-                <h3>5. The Monkey Test (Edge-Case Validation)</h3>
-                <p><span class="problem">Problem:</span> Testing only the "Happy Path" leads to crashes when users provide unexpected input, such as double-clicking execution triggers or entering out-of-sequence commands.</p>
-                <p><span class="solution">Solution:</span> Perform a "Monkey Test." Attempt to break the application logic with rapid, random, and out-of-sequence inputs to verify that the state machine is robust enough to handle non-linear usage.</p>
-                <p><span class="why">Why:</span> Software must be designed to handle invalid input gracefully. Assuming the user will follow a logical, documented sequence is a high-risk strategy that leads to production failures.</p>
+                <h3>5. The Monkey Test</h3>
+                <p><span class="problem">Problem:</span> Testing only the "Happy Path" leads to crashes when users provide unexpected input, such as double-clicking execution triggers.</p>
+                <p><span class="solution">Solution:</span> Perform a "Monkey Test." Attempt to break the application logic with rapid, random, and out-of-sequence inputs to verify that the state machine is robust.</p>
+                <p><span class="why">Why:</span> Software must handle invalid input gracefully. Assuming the user will follow a logical sequence is a high-risk strategy that leads to production failures.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>6. Silent Firewall Interference</h3>
-                <p><span class="problem">Problem:</span> UDP traffic functions in local testing but fails on-site because the OS silently blocks traffic on "Public" network profiles.</p>
-                <p><span class="solution">Solution:</span> Verify the Network Profile type immediately. Explicitly define Inbound and Outbound firewall rules for the application binary during deployment.</p>
+                <p><span class="problem">Problem:</span> UDP traffic functions in testing but fails on-site because the OS silently blocks traffic on "Public" network profiles.</p>
+                <p><span class="solution">Solution:</span> Verify the Network Profile type immediately. Explicitly define firewall rules for the application binary during deployment.</p>
                 <p><span class="why">Why:</span> Firewalls treat Public networks as hostile and often drop unsolicited UDP packets without notifying the application.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>7. Incorrect Network Routing</h3>
-                <p><span class="problem">Problem:</span> Data is sent to the wrong interface because the OS prioritized a WiFi connection with internet access over a local Ethernet link.</p>
-                <p><span class="solution">Solution:</span> Explicitly bind the socket to the IP address of the intended Network Interface Card (NIC) rather than using <code>INADDR_ANY</code>.</p>
-                <p><span class="why">Why:</span> Operating systems use metrics to decide the "best" route; often, the interface with an internet gateway is favored over a private simulation network.</p>
+                <p><span class="problem">Problem:</span> Data is sent to the wrong interface because the OS prioritized a WiFi connection over a local Ethernet link.</p>
+                <p><span class="solution">Solution:</span> Explicitly bind the socket to the IP address of the intended Network Interface Card (NIC).</p>
+                <p><span class="why">Why:</span> Operating systems use metrics to decide the best route; often, the interface with an internet gateway is favored over a private simulation network.</p>
             </div>
 
             <div class="mistake-box">
@@ -122,29 +121,29 @@
 
             <div class="mistake-box">
                 <h3>9. Descriptive Bug Reporting</h3>
-                <p><span class="problem">Problem:</span> Attempting to fix "It doesn't work" reports with no technical context leads to inefficient "Shotgun Debugging."</p>
-                <p><span class="solution">Solution:</span> Always require three data points: What was the action? What was the observed result? What was the expected result?</p>
-                <p><span class="why">Why:</span> You cannot fix a bug that you cannot reproduce. Reproducing the failure is the only way to verify the eventual fix.</p>
+                <p><span class="problem">Problem:</span> Attempting to fix "It doesn't work" reports with no context leads to inefficient debugging.</p>
+                <p><span class="solution">Solution:</span> Always require three data points: What was the action? What was the result? What was the expected result?</p>
+                <p><span class="why">Why:</span> You cannot fix a bug that you cannot reproduce. Reproducing the failure is the only way to verify the fix.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>10. Configuration Versioning</h3>
-                <p><span class="problem">Problem:</span> Changing complex system settings without a backup often leads to an unrecoverable "broken" state.</p>
-                <p><span class="solution">Solution:</span> Back up all configuration files (INI, XML, JSON) before modifying a single value. Create a manual recovery point.</p>
+                <p><span class="problem">Problem:</span> Changing system settings without a backup often leads to an unrecoverable "broken" state.</p>
+                <p><span class="solution">Solution:</span> Back up all configuration files before modifying a single value. Create a manual recovery point.</p>
                 <p><span class="why">Why:</span> In complex integrations, initial attempts to solve a problem often introduce new variables that complicate the original issue.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>11. Persistent Documentation</h3>
                 <p><span class="problem">Problem:</span> Solving the same technical obstacle twice because the original solution was not documented and was forgotten.</p>
-                <p><span class="solution">Solution:</span> Maintain a technical log. Record the symptoms and the specific fix for any non-obvious bug encountered during development.</p>
+                <p><span class="solution">Solution:</span> Maintain a technical log. Record the symptoms and the specific fix for any non-obvious bug encountered.</p>
                 <p><span class="why">Why:</span> Technical knowledge is volatile. Documentation ensures that a solved problem remains solved.</p>
             </div>
 
             <div class="mistake-box">
                 <h3>12. The Physical Layer</h3>
-                <p><span class="problem">Problem:</span> Hours wasted debugging software logic when the failure was caused by a faulty or disconnected cable.</p>
-                <p><span class="solution">Solution:</span> Verify Layer 1 (Physical) connectivity before proceeding to Layer 2 and beyond in the debugging process.</p>
+                <p><span class="problem">Problem:</span> Hours wasted debugging software logic when the failure was caused by a disconnected cable.</p>
+                <p><span class="solution">Solution:</span> Verify physical connectivity (Layer 1) before proceeding to software debugging.</p>
                 <p><span class="why">Why:</span> Hardware disconnects mimic software failures. Checking the simplest failure point first is the most efficient use of time.</p>
             </div>
 
@@ -159,4 +158,3 @@
 
 </body>
 </html>
-
