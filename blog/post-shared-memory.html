@@ -51,32 +51,26 @@
             <h1>The Buffer Paradox: My Mistake with Shared Memory FIFOs</h1>
             
             <p>
-                In the early stages of a middleware project, I decided to use <code>Boost.Interprocess</code> to manage data flow between two high-speed components. I opted for a standard FIFO (First-In-First-Out) structure, assuming it would provide the stability I needed.
+                In the early stages of a middleware project, I decided to use <code>Boost.Interprocess</code> to manage data flow between high-speed components. I opted for a standard FIFO structure, assuming it would provide the stability I needed.
             </p>
 
             <p>
-                To be "safe," I configured the shared memory with a high number of slots. I thought more memory would provide a better safety net against data loss. This was a significant architectural mistake.
+                To be "safe," I configured the shared memory with a massive number of slots. I thought a deep buffer would provide a better safety net against data loss during CPU spikes. This was a significant architectural mistake.
             </p>
 
             <h2>The Failure: Latency as a Feature</h2>
             <p>
-                As soon as the system went under load, the "jitter" began. The visualization felt disconnected from the inputs. Because my Writer (Producer) was faster than my Reader (Consumer), that large buffer was acting as a reservoir for stale data.
-            </p>
-            
-            
-
-            <p>
-                The Reader was processing packets that were 100-200ms old because it had to dig through the entire backlog before reaching the most recent data. I had unintentionally designed a system that prioritized the past over the present.
+                As the system went under load, the "jitter" began. The visualization felt disconnected from the inputs. Because my Writer was faster than my Reader, that large buffer was acting as a reservoir for stale data. The Reader was processing packets that were hundreds of milliseconds old because it had to dig through the entire backlog before reaching the most recent state.
             </p>
 
-            <h2>The Tactical Fix</h2>
+            <h2>The Tactical Fix: Reducing the Depth</h2>
             <p>
-                My first reaction was to stop the bleeding. I reduced the number of slots from hundreds down to three. Immediately, the jitter vanished. By shrinking the pipe, I forced the Reader to stay synchronized with the most recent data, creating a "fast-fail" environment that kept latency to a minimum.
+                My first reaction was to stop the bleeding. I reduced the number of slots down to <strong>256</strong>. While still providing a safety margin for bursts of data, it drastically reduced the "lag reservoir." Immediately, the jitter became manageable. By limiting the depth of the pipe, I reduced the maximum possible age of the data being read.
             </p>
 
             <h2>Beyond the Library: Custom Shared Memory</h2>
             <p>
-                While reducing the slots worked, it exposed the limitations of a standard FIFO for real-time needs. Shortly after, I disregarded the Boost FIFO entirely.
+                While the 256-slot adjustment worked, it exposed the limitations of a standard FIFO for real-time needs. Shortly after, I disregarded the Boost FIFO entirely.
             </p>
             <p>
                 I moved to a custom-tailored shared memory implementation designed for our specific requirements. Instead of a blocking queue that waits for old data to be read, I implemented a mechanism that prioritizes state-updates—ensuring that the Reader always has access to the most recent packet, even if it means dropping an old one.
@@ -89,7 +83,7 @@
             <h2>The Takeaway</h2>
             <ul>
                 <li><strong>Don't Over-Buffer:</strong> In low-latency systems, large buffers don't provide safety; they provide lag.</li>
-                <li><strong>Generic Tools have Limits:</strong> Standard libraries like Boost are excellent for general use, but mission-critical simulation often requires a tailored approach to memory management.</li>
+                <li><strong>Generic Tools have Limits:</strong> Standard libraries like Boost are excellent for general use, but mission-critical simulation often requires a tailored approach.</li>
                 <li><strong>Freshness is King:</strong> If your Producer is faster than your Consumer, your architecture must be designed to discard the past to protect the present.</li>
             </ul>
 
