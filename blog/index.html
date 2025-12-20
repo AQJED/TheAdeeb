@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solo Developer</title>
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f172a;       
+            --card-bg: #1e293b;        
+            --text-main: #e2e8f0;      
+            --text-muted: #94a3b8;     
+            --accent: #10b981;         
+            --accent-hover: #34d399;   
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        ul { list-style: none; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .section-spacer { padding: 80px 0; }
+        
+        /* HEADER */
+        header { padding: 20px 0; border-bottom: 1px solid #334155; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        .nav-links a { margin-left: 20px; font-size: 0.9rem; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO */
+        .hero { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; border-bottom: 1px solid #334155; }
+        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; font-family: var(--font-mono); }
+        .hero .highlight { color: var(--accent); }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
+        .cta-button { display: inline-block; background-color: var(--accent); color: var(--bg-color); padding: 12px 30px; font-family: var(--font-mono); font-weight: bold; border-radius: 4px; }
+        .cta-button:hover { background-color: var(--accent-hover); }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        .about-text h2 { font-size: 2rem; margin-bottom: 20px; font-family: var(--font-mono); }
+        .stat-box { background-color: var(--card-bg); padding: 20px; border-left: 3px solid var(--accent); margin-bottom: 15px; }
+        .stat-box h3 { font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; font-family: var(--font-mono); }
+
+        /* GRID */
+        .latest-logs h2 { font-size: 2rem; margin-bottom: 40px; font-family: var(--font-mono); border-left: 4px solid var(--accent); padding-left: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background-color: var(--card-bg); border: 1px solid #334155; padding: 30px; border-radius: 8px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 15px; display: inline-block; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .read-more { font-family: var(--font-mono); font-size: 0.9rem; font-weight: bold; color: var(--text-main); }
+        .read-more:hover { color: var(--accent); }
+
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .about-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;Solo_Dev /&gt;</div>
+                <div class="nav-links">
+                    <a href="#">Logs</a>
+                    <a href="#">About</a>
+                    <a href="#">Portfolio</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>The Solo Developer<span class="highlight">.</span></h1>
+            <p>
+                Building mission-critical software in uncharted territory. 
+                No team. No legacy code. Just the documentation and the deadline.
+            </p>
+            <a href="#logs" class="cta-button">Read the Logs</a>
+        </div>
+    </section>
+
+    <section class="section-spacer">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Why This Blog Exists</h2>
+                    <p style="margin-bottom: 20px;">
+                        In the software industry, we often talk about "Best Practices." But best practices assume you have a team, a QA department, and a roadmap.
+                    </p>
+                    <p>
+                        I am documenting the reality of the <strong>Army of One</strong>. I work on software solutions for defense training applications where failure isn't an option, but the path forward isn't documented.
+                    </p>
+                </div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <h3>The Challenge</h3>
+                        <p>Integrating legacy hardware with modern middleware.</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>The Constraint</h3>
+                        <p>High-performance simulation. Zero latency tolerance.</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>The Goal</h3>
+                        <p>Solving problems we didn't know we had.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="logs" class="section-spacer" style="background-color: #162032;">
+        <div class="container">
+            <div class="latest-logs">
+                <h2>Recent Logs</h2>
+                <div class="grid">
+                    
+                    <article class="card">
+                        <div>
+                            <span class="tag">AI // ARCHITECTURE</span>
+                            <h3>The Junior Typist</h3>
+                            <p>
+                                Why AI can't build defense simulators. It knows syntax, but it doesn't understand physics, memory alignment, or cache lines. The new role of the Architect.
+                            </p>
+                        </div>
+                        <a href="post-ai-architect.html" class="read-more">Read Entry →</a>
+                    </article>
+
+                    <article class="card">
+                        <div>
+                            <span class="tag">CHECKLIST // TIPS // DEBUGGING</span>
+                            <h3>The Dirty Dozen</h3>
+                            <p>
+                                12 Quick-fire lessons from the trenches. From Struct Padding and Endianness to loose cables and silent firewalls. A checklist for integration.
+                            </p>
+                        </div>
+                        <a href="post-mistakes.html" class="read-more">Read Entry →</a>
+                    </article>
+
+                    <article class="card">
+                        <div>
+                            <span class="tag">MATH // OPEN SOURCE</span>
+                            <h3>Reinventing the Flat Tire</h3>
+                            <p>
+                                I tried to manually convert coordinates between two incompatible systems. My plane ended up in the ocean. Why you should never write your own math libraries.
+                            </p>
+                        </div>
+                        <a href="post-library.html" class="read-more">Read Entry →</a>
+                    </article>
+
+                    <article class="card">
+                        <div>
+                            <span class="tag">DEBUGGING // ENVIRONMENT</span>
+                            <h3>Sabotaged by a Checkbox</h3>
+                            <p>
+                                I was 30 minutes away from a demo when my software started crashing silently. It wasn't a bug. It was a checkbox I missed six hours earlier.
+                            </p>
+                        </div>
+                        <a href="post-bloatware.html" class="read-more">Read Entry →</a>
+                    </article>
+
+                    <article class="card">
+                        <div>
+                            <span class="tag">NETWORKING // PERFORMANCE</span>
+                            <h3>Don't Drink from the Firehose</h3>
+                            <p>
+                                I tried filtering simulation packets by IP in user-space. Then I opened YouTube. Here is how I flooded my NIC and how Kernel-level BPF saved the architecture.
+                            </p>
+                        </div>
+                        <a href="post-bpf.html" class="read-more">Read Entry →</a>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Built by [Your Name]. Code. Crash. Learn. Repeat.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
