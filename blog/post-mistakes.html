@@ -92,10 +92,11 @@
             </div>
 
             <div class="mistake-box">
-                <h3>5. Edge-Case Validation</h3>
-                <p><span class="problem">Problem:</span> Testing only the "Happy Path" leads to crashes when users provide unexpected input, such as double-clicking execution triggers.</p>
-                <p><span class="solution">Solution:</span> Perform stress testing. Attempt to break the application logic with rapid, out-of-sequence inputs to verify that the state machine is robust.</p>
-                <p><span class="why">Why:</span> Software must be designed to handle invalid input gracefully; assuming the user follows a logical sequence is a high-risk strategy.</p>
+                <div class="mistake-box">
+                <h3>5. The Monkey Test (Edge-Case Validation)</h3>
+                <p><span class="problem">Problem:</span> Testing only the "Happy Path" leads to crashes when users provide unexpected input, such as double-clicking execution triggers or entering out-of-sequence commands.</p>
+                <p><span class="solution">Solution:</span> Perform a "Monkey Test." Attempt to break the application logic with rapid, random, and out-of-sequence inputs to verify that the state machine is robust enough to handle non-linear usage.</p>
+                <p><span class="why">Why:</span> Software must be designed to handle invalid input gracefully. Assuming the user will follow a logical, documented sequence is a high-risk strategy that leads to production failures.</p>
             </div>
 
             <div class="mistake-box">
@@ -158,3 +159,4 @@
 
 </body>
 </html>
+
