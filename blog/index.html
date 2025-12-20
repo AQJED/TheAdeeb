@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Solo Developer</title>
+    <title>The Solo Developer | Technical Logs</title>
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
@@ -68,8 +68,8 @@
                 <div class="logo">&lt;Solo_Dev /&gt;</div>
                 <div class="nav-links">
                     <a href="#logs">Logs</a>
-                    <a href="/blog/">About</a>
-                    <a href="/">Portfolio</a>
+                    <a href="#">About</a>
+                    <a href="#">Portfolio</a>
                 </div>
             </nav>
         </div>
@@ -79,10 +79,10 @@
         <div class="container">
             <h1>The Solo Developer<span class="highlight">.</span></h1>
             <p>
-                Building mission-critical software in uncharted territory. 
-                No team. No legacy code. Just the documentation and the deadline.
+                Technical post-mortems on building mission-critical software. 
+                Focusing on integration, performance, and environmental stability in defense training applications.
             </p>
-            <a href="#logs" class="cta-button">Read the Logs</a>
+            <a href="#logs" class="cta-button">View Technical Logs</a>
         </div>
     </section>
 
@@ -90,26 +90,26 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-text">
-                    <h2>Why This Blog Exists</h2>
+                    <h2>Engineering Documentation</h2>
                     <p style="margin-bottom: 20px;">
-                        In the software industry, we often talk about "Best Practices." But best practices assume you have a team, a QA department, and a roadmap.
+                        Standard industry practices often assume the existence of large-scale support infrastructures. These logs document the technical reality of independent software integration.
                     </p>
                     <p>
-                        I am documenting the reality of the <strong>Army of One</strong>. I work on software solutions for defense training applications where failure isn't an option, but the path forward isn't documented.
+                        I focus on software solutions for high-fidelity simulations where the path forward requires navigating undocumented legacy systems and strict hardware constraints.
                     </p>
                 </div>
                 <div class="stats">
                     <div class="stat-box">
-                        <h3>The Challenge</h3>
-                        <p>Integrating legacy hardware with modern middleware.</p>
+                        <h3>Domain</h3>
+                        <p>Systems integration and real-time middleware development.</p>
                     </div>
                     <div class="stat-box">
-                        <h3>The Constraint</h3>
-                        <p>High-performance simulation. Zero latency tolerance.</p>
+                        <h3>Constraint</h3>
+                        <p>High-performance simulation with zero latency tolerance.</p>
                     </div>
                     <div class="stat-box">
-                        <h3>The Goal</h3>
-                        <p>Solving problems we didn't know we had.</p>
+                        <h3>Focus</h3>
+                        <p>Architectural stability and environment integrity.</p>
                     </div>
                 </div>
             </div>
@@ -121,15 +121,13 @@
             <div class="latest-logs">
                 <h2>Recent Logs</h2>
                 <div class="grid">
-                    
-                    
 
                     <article class="card">
                         <div>
-                            <span class="tag">CHECKLIST // TIPS // DEBUGGING</span>
+                            <span class="tag">CHECKLIST // INTEGRATION</span>
                             <h3>The Dirty Dozen</h3>
                             <p>
-                                12 Quick-fire lessons from the trenches. From Struct Padding and Endianness to loose cables and silent firewalls. A checklist for integration.
+                                A technical checklist for system integration. Addressing common failures in struct padding, endianness, and network configuration.
                             </p>
                         </div>
                         <a href="post-mistakes.html" class="read-more">Read Entry →</a>
@@ -137,10 +135,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">MATH // OPEN SOURCE</span>
+                            <span class="tag">GEODESY // OPEN SOURCE</span>
                             <h3>Reinventing the Flat Tire</h3>
                             <p>
-                                I tried to manually convert coordinates between two incompatible systems. My plane ended up in the ocean. Why you should never write your own math libraries.
+                                A post-mortem on custom coordinate conversion. Why linear approximations fail at scale and the necessity of using validated geodetic libraries.
                             </p>
                         </div>
                         <a href="post-library.html" class="read-more">Read Entry →</a>
@@ -148,10 +146,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">DEBUGGING // ENVIRONMENT</span>
+                            <span class="card-tag tag">ENVIRONMENT // SECURITY</span>
                             <h3>Sabotaged by a Checkbox</h3>
                             <p>
-                                I was 30 minutes away from a demo when my software started crashing silently. It wasn't a bug. It was a checkbox I missed six hours earlier.
+                                Analyzing how unmanaged third-party utilities and heuristic engines can compromise a development environment and cause silent application failure.
                             </p>
                         </div>
                         <a href="post-bloatware.html" class="read-more">Read Entry →</a>
@@ -159,10 +157,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">NETWORKING // PERFORMANCE</span>
-                            <h3>Don't Drink from the Firehose</h3>
+                            <span class="tag">NETWORKING // BPF</span>
+                            <h3>Architectural Filtering</h3>
                             <p>
-                                I tried filtering simulation packets by IP in user-space. Then I opened YouTube. Here is how I flooded my NIC and how Kernel-level BPF saved the architecture.
+                                Evaluating the performance impact of user-space vs. kernel-space packet filtering in high-traffic simulation environments using BPF.
                             </p>
                         </div>
                         <a href="post-bpf.html" class="read-more">Read Entry →</a>
