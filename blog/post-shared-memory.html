@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Buffer Paradox - The Solo Developer</title>
+    <title>The Buffer Paradox | The Solo Developer</title>
     <style>
-        /* --- STYLES REMAIN CONSISTENT --- */
         :root {
             --bg-color: #0f172a;
             --card-bg: #1e293b;
@@ -55,15 +54,13 @@
             </p>
 
             <p>
-                While the FIFO functioned correctly—meaning it successfully transported every packet—it introduced a subtle, non-linear jitter under load. The issue wasn't a bug in the code, but an inherent characteristic of the FIFO's sequential nature when over-buffered.
+                While the FIFO functioned correctly (meaning it successfully transported every packet), it introduced a subtle, non-linear jitter under load. The issue was not a bug in the code, but an inherent characteristic of the FIFO's sequential nature when over-buffered.
             </p>
 
             <h2>The Sequential Bottleneck</h2>
             <p>
                 In a FIFO, the Reader is strictly bound to the order of operations. If the Write thread consistently outpaces the Read thread, the buffer fills, creating a "Lag Reservoir." The Reader is then forced to spend cycles processing historical data before it can ever reach the current state. Even if the lag is just a few dozen milliseconds, in high-fidelity simulation, that data is already stale.
             </p>
-
-            
 
             <h2>The Tactical Fix: Limiting Depth</h2>
             <p>
@@ -76,7 +73,7 @@
             </p>
             
             <p>
-                The new system shifted the priority from <strong>message integrity</strong> to <strong>state concurrency</strong>. Instead of a queue that forces a backlog, I implemented a mechanism where new data overwrites previous updates if the reader hasn't consumed them yet. This guarantees that the Read thread always accesses the most recent state, regardless of the producer's frequency.
+                The new system shifted the priority from message integrity to state concurrency. Instead of a queue that forces a backlog, I implemented a mechanism where new data overwrites previous updates if the reader has not consumed them yet. This guarantees that the Read thread always accesses the most recent state, regardless of the producer's frequency.
             </p>
 
             <div class="callout">
@@ -87,7 +84,7 @@
             <ul>
                 <li><strong>Sequence vs. State:</strong> A FIFO is for streams where every packet matters (like logs). Real-time simulation requires a state-update model.</li>
                 <li><strong>Predicting Load-Drift:</strong> Always design for the scenario where the consumer thread hits a 100% CPU spike; your architecture should skip data, not store it.</li>
-                <li><strong>Config as a Diagnostic:</strong> Using slot counts as a "fix" is a great diagnostic tool, but the long-term solution usually requires changing the communication pattern entirely.</li>
+                <li><strong>Config as a Diagnostic:</strong> Using slot counts as a fix is a great diagnostic tool, but the long-term solution usually requires changing the communication pattern entirely.</li>
             </ul>
 
         </article>
@@ -101,4 +98,3 @@
 
 </body>
 </html>
-
