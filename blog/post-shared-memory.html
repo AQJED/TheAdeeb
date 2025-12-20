@@ -28,7 +28,6 @@
         article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
         .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
         article h2 { color: var(--accent); font-family: var(--font-mono); margin-top: 40px; margin-bottom: 15px; font-size: 1.8rem; }
-        article h3 { color: white; margin-top: 30px; margin-bottom: 10px; }
         article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
         .callout { background-color: #162032; border-left: 4px solid var(--accent); padding: 20px; margin: 30px 0; font-style: italic; }
         footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 80px; }
@@ -48,58 +47,51 @@
 
     <div class="container">
         <article>
-            <span class="meta">TAGS: BOOST // SHARED-MEMORY // LATENCY</span>
-            <h1>The Buffer Paradox: When More Memory Means More Lag</h1>
+            <span class="meta">TAGS: BOOST // SHARED-MEMORY // PERFORMANCE</span>
+            <h1>The Buffer Paradox: My Mistake with Shared Memory FIFOs</h1>
             
             <p>
-                I recently stepped into a project where the middleware was already long-established. It was built using <code>Boost.Interprocess</code> to handle high-speed communication between systems via a Shared Memory FIFO.
+                In the early stages of a middleware project, I decided to use <code>Boost.Interprocess</code> to manage data flow between two high-speed components. I opted for a standard FIFO (First-In-First-Out) structure, assuming it would provide the stability I needed.
             </p>
 
             <p>
-                The client was complaining of "jitter." The visualization would stutter, frame rates would drop, and the data felt "behind." In defense simulation, if your data is 100ms old, it’s useless.
+                To be "safe," I configured the shared memory with a high number of slots. I thought more memory would provide a better safety net against data loss. This was a significant architectural mistake.
+            </p>
+
+            <h2>The Failure: Latency as a Feature</h2>
+            <p>
+                As soon as the system went under load, the "jitter" began. The visualization felt disconnected from the inputs. Because my Writer (Producer) was faster than my Reader (Consumer), that large buffer was acting as a reservoir for stale data.
+            </p>
+            
+            
+
+            <p>
+                The Reader was processing packets that were 100-200ms old because it had to dig through the entire backlog before reaching the most recent data. I had unintentionally designed a system that prioritized the past over the present.
+            </p>
+
+            <h2>The Tactical Fix</h2>
+            <p>
+                My first reaction was to stop the bleeding. I reduced the number of slots from hundreds down to three. Immediately, the jitter vanished. By shrinking the pipe, I forced the Reader to stay synchronized with the most recent data, creating a "fast-fail" environment that kept latency to a minimum.
+            </p>
+
+            <h2>Beyond the Library: Custom Shared Memory</h2>
+            <p>
+                While reducing the slots worked, it exposed the limitations of a standard FIFO for real-time needs. Shortly after, I disregarded the Boost FIFO entirely.
+            </p>
+            <p>
+                I moved to a custom-tailored shared memory implementation designed for our specific requirements. Instead of a blocking queue that waits for old data to be read, I implemented a mechanism that prioritizes state-updates—ensuring that the Reader always has access to the most recent packet, even if it means dropping an old one.
             </p>
 
             <div class="callout">
-                "The original developers assumed that a larger buffer was a safer buffer. They were wrong."
+                "In real-time simulation, completeness is the enemy of freshness. If the buffer is full, you don't want the new data to wait; you want it to take over."
             </div>
 
-            <h2>The Problem: The FIFO Lag Reservoir</h2>
-            <p>
-                The system was using a standard <strong>First-In, First-Out (FIFO)</strong> structure. It was configured with hundreds of slots. The logic was simple: more slots prevent data loss if the Reader (Consumer) hits a snag.
-            </p>
-            <p>
-                However, in a real-time environment, if your Writer (Producer) is even slightly faster than your Reader, that massive buffer starts to fill up. Because it's a FIFO, the Reader is <strong>forced</strong> to process the oldest data first. 
-            </p>
-            <p>
-                The Reader wasn't seeing the current state of the simulation; it was digging through a "reservoir" of stale packets. The jitter occurred because the Reader was struggling to clear a backlog that should never have existed.
-            </p>
-
-            <h2>The Tactical Fix: Don't Rewrite, Reconfigure</h2>
-            <p>
-                As a solo contractor, you often don't want to get your hands dirty refactoring thousands of lines of legacy middleware code. It's risky and out of scope. 
-            </p>
-            <p>
-                Instead of rewriting the core communication logic, I simply <strong>reduced the number of slots</strong> in the shared memory configuration. I shrank the "pipe" from hundreds of slots down to three.
-            </p>
-
-            <h3>Why This Worked:</h3>
+            <h2>The Takeaway</h2>
             <ul>
-                <li><strong>Forced Synchronization:</strong> With only 3 slots, the Reader is always working on data that was generated mere milliseconds ago.</li>
-                <li><strong>Natural Backpressure:</strong> It prevented the Writer from "overdriving" the system. If the buffer is full, the Writer has to wait, keeping both processes in lock-step.</li>
-                <li><strong>Zero Stale Data:</strong> There is no longer a "waiting room" for old packets to accumulate.</li>
+                <li><strong>Don't Over-Buffer:</strong> In low-latency systems, large buffers don't provide safety; they provide lag.</li>
+                <li><strong>Generic Tools have Limits:</strong> Standard libraries like Boost are excellent for general use, but mission-critical simulation often requires a tailored approach to memory management.</li>
+                <li><strong>Freshness is King:</strong> If your Producer is faster than your Consumer, your architecture must be designed to discard the past to protect the present.</li>
             </ul>
-
-            <h2>The Real-Time Reality</h2>
-            <p>
-                Standard FIFOs are "bad" for real-time systems because they prioritize <strong>completeness over freshness</strong>. If a FIFO fills up, it blocks or drops <em>new</em> packets while holding onto <em>old</em> ones. 
-            </p>
-            <p>
-                If I were writing this from scratch, I would have used a <strong>circular buffer</strong> where new data overwrites the old. But when you are dealing with a deadline and legacy code, knowing how the underlying <code>Boost</code> structures behave allows you to fix performance issues with a single configuration change.
-            </p>
-
-            <p>
-                The result? The jitter vanished, the latency was eliminated, and the client accepted the enhancement immediately. Sometimes the best code change is the one you don't have to write.
-            </p>
 
         </article>
     </div>
