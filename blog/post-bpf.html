@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't Drink from the Firehose - The Solo Developer</title>
+    <style>
+        /* --- SAME CSS AS HOMEPAGE FOR CONSISTENCY --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8; /* Slightly increased for reading long text */
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; } /* Narrower for reading */
+
+        /* --- HEADER --- */
+        header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        .back-link { font-size: 0.9rem; color: var(--text-muted); }
+        .back-link:hover { color: var(--accent); }
+
+        /* --- ARTICLE STYLES --- */
+        article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
+        
+        article h3 { 
+            color: var(--accent); 
+            font-family: var(--font-mono); 
+            margin-top: 40px; 
+            margin-bottom: 15px; 
+            font-size: 1.4rem; 
+        }
+
+        article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
+        
+        strong { color: white; }
+
+        /* --- CALLOUT BOX --- */
+        .callout {
+            background-color: #162032;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* --- DIAGRAM PLACEHOLDER --- */
+        .diagram-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #1e293b;
+            border: 2px dashed #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;Solo_Dev /&gt;</div>
+                <a href="index.html" class="back-link">← Back to Logs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article>
+            <span class="meta">TAGS: NETWORKING // PERFORMANCE // OPEN_DIS</span>
+            <h1>Don't Drink from the Firehose: The Journey from Crashes to BPF</h1>
+            
+            <p>
+                I was working on the integration between the CGF (Computer Generated Forces) and my middleware. The goal was simple: direct the CGF to send DIS (Distributed Interactive Simulation) packets to my machine's IP, read them, and write them into a Shared Memory block for processing.
+            </p>
+            <p>
+                I wrote the code with a naive assumption: <strong>"I am only receiving DIS packets on this Ethernet port."</strong>
+            </p>
+            <p>I was wrong.</p>
+
+            <h3>The Crash</h3>
+            <p>
+                My code was reading raw data off the wire and immediately dumping it into Shared Memory. Then, my parser (using the <strong>OpenDIS</strong> library) would read from that memory and try to deserialize the bytes into simulation objects.
+            </p>
+            <p>
+                The application kept crashing. It wasn't a logic error in my math. It was a segfault in the parser.
+            </p>
+            <div class="callout">
+                "I realized that because I was listening to ETH0, I wasn't just picking up the simulation data. I was picking up everything."
+            </div>
+            <p>
+                ARP requests, Windows background chatter, random broadcast packets—it was all getting shoveled into Shared Memory. When OpenDIS tried to interpret a random Windows networking packet as a "Tank Entity State PDU," it choked and crashed the application.
+            </p>
+
+            <h3>Attempt 1: The "Band-Aid" (Manual Header Checks)</h3>
+            <p>
+                My first reaction was to protect the parser. I wrote a manual check to verify the packet header <em>before</em> passing it to OpenDIS.
+            </p>
+            <ul>
+                <li>Step 1: Read packet.</li>
+                <li>Step 2: Manually check bytes 0-4 for the DIS Protocol ID.</li>
+                <li>Step 3: If valid, pass to OpenDIS (which checks it again).</li>
+            </ul>
+            <br>
+            <p>
+                <strong>The Result:</strong> The crashes stopped, but the <strong>Latency</strong> spiked. I was double-handling every single byte of data coming in—once in my manual check, and again inside the library. In a real-time simulation where every millisecond counts, this "double-check" overhead was unacceptable.
+            </p>
+
+            <h3>Attempt 2: User-Space IP Filtering</h3>
+            <p>
+                I decided to filter earlier. I modified my socket loop to check the IP header inside my application loop.
+            </p>
+            <p>
+                <strong>The Result:</strong> It worked functionally, but I was stressing the machine. My Network Interface Card (NIC) was still accepting <em>every</em> packet from the network cable, firing an interrupt, and copying that data from the Kernel to my User Space application just so I could say "No."
+            </p>
+            <p>
+                I was flooding my own application with useless work. I needed to stop the garbage before it even rang the doorbell.
+            </p>
+
+            <div class="diagram-placeholder">
+                [Diagram: User Space vs. Kernel Space Filtering]
+            </div>
+
+            <h3>The Solution: Berkeley Packet Filter (BPF)</h3>
+            <p>
+                I realized I didn't need faster code; I needed a kernel-level bouncer. I moved to <strong>BPF</strong>.
+            </p>
+            <p>
+                BPF allows you to define a filter that runs inside the OS Kernel. The CPU checks the packet the moment it hits the network stack.
+            </p>
+            <ul>
+                <li><strong>If it's DIS:</strong> The Kernel passes it to my app.</li>
+                <li><strong>If it's junk:</strong> The Kernel drops it instantly. My app never wakes up. My Shared Memory never sees it.</li>
+            </ul>
+
+            <h3>The Lesson</h3>
+            <p>
+                When you are a solo developer, you often learn by crashing. I started with a crash caused by "dirty" data, moved to a slow solution (manual checks), and finally arrived at the correct architectural solution (Kernel filtering).
+            </p>
+            <p>
+                In defense simulation, never assume the wire is clean. Filter at the gate, or your parser will pay the price.
+            </p>
+        </article>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by [Your Name]. Code. Crash. Learn. Repeat.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

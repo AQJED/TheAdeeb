@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interpreter Tax - The Solo Developer</title>
+    <style>
+        /* --- SAME CSS AS HOMEPAGE --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.8; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; } 
+        header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        .back-link { font-size: 0.9rem; color: var(--text-muted); }
+        .back-link:hover { color: var(--accent); }
+        article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
+        article h3 { color: var(--accent); font-family: var(--font-mono); margin-top: 40px; margin-bottom: 15px; font-size: 1.4rem; }
+        article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
+        strong { color: white; }
+        .callout { background-color: #162032; border-left: 4px solid var(--accent); padding: 20px; margin: 30px 0; font-style: italic; color: var(--text-muted); }
+        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;Solo_Dev /&gt;</div>
+                <a href="index.html" class="back-link">← Back to Logs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article>
+            <span class="meta">TAGS: STRATEGY // MANAGEMENT // REALITY_CHECK</span>
+            <h1>The Interpreter Tax: Why I Traded Delegation for Speed</h1>
+            
+            <h3>The Premise</h3>
+            <p>
+                There is a golden rule in management: "Delegate." They tell you that a senior engineer should be a "force multiplier," lifting up the team.
+            </p>
+            <p>
+                But in integration engineering, there is a dirty secret. Sometimes, the gap between <em>what needs to be done</em> and <em>what the other person knows</em> is so wide that delegation becomes a liability.
+            </p>
+            <p>
+                I recently faced a choice: I needed a GUI for my middleware. I had a colleague who was a "GUI Guy," but he had never worked on low-latency software, and physics wasn't his strength.
+            </p>
+
+            <h3>1. The "Interpreter Tax"</h3>
+            <p>
+                The biggest cost in software isn't typing; it's downloading the architecture from my brain into yours.
+            </p>
+            <p>
+                To get a standard GUI developer to build a flight control panel correctly, I can't just say "Make a button." I have to explain why the backend runs on a high-priority UDP loop. I have to explain why blocking the main thread for 10ms to render a fancy animation will cause the physics engine to stutter.
+            </p>
+            <p>
+                If it takes me 4 hours to teach a crash course in "Real-Time Thread Safety" just to get a working progress bar, I haven't saved time. I’ve paid the <strong>Interpreter Tax</strong>.
+            </p>
+
+            <h3>2. The Low-Latency Blind Spot</h3>
+            <p>
+                Developers who live in the world of standard apps often view "performance" differently than we do in defense simulation. To them, a 100ms delay is "snappy." To us, it's a missed frame.
+            </p>
+            <div class="callout">
+                "If I let a junior dev touch the GUI that drives critical middleware, I have to spend time protecting my code from theirs. I end up building a 'padded crib' for the GUI so it doesn't crash the simulation."
+            </div>
+            <p>
+                It is significantly faster to build the house myself than to build a house <em>and</em> a safety cage around it.
+            </p>
+
+            <h3>3. The "Reference Implementation" Strategy</h3>
+            <p>
+                My decision to "do it myself" wasn't about arrogance. It was about proof.
+            </p>
+            <p>
+                I spent the time learning Qt and building the GUI myself first. This wasn't to exclude the other developer, but to create a <strong>Reference Implementation</strong>.
+            </p>
+            <p>
+                By building the first version, I established the constraints. I proved that the UI could update at 60Hz without locking the backend.
+            </p>
+
+            <h3>The Verdict</h3>
+            <p>
+                Now, I can hand that code to the GUI specialist and say: <em>"Here is the baseline. Make it prettier, add features, but do not break the timing loops."</em>
+            </p>
+            <p>
+                I'm always open to help, and I want them to learn. But in high-stakes integration, you have to build the foundation yourself to make sure the cement dries correctly.
+            </p>
+        </article>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by [Your Name]. Code. Crash. Learn. Repeat.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

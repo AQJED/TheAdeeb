@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dirty Dozen - The Solo Developer</title>
+    <style>
+        /* --- SAME CSS AS HOMEPAGE --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.8; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; } 
+        header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        .back-link { font-size: 0.9rem; color: var(--text-muted); }
+        .back-link:hover { color: var(--accent); }
+        article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
+        article h3 { color: var(--accent); font-family: var(--font-mono); margin-top: 40px; margin-bottom: 15px; font-size: 1.4rem; }
+        article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
+        strong { color: white; }
+        .mistake-box {
+            background-color: #162032;
+            border: 1px solid #334155;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .problem { color: #f87171; font-weight: bold; } /* Red for problem */
+        .solution { color: #34d399; font-weight: bold; } /* Green for solution */
+        .why { color: #94a3b8; font-style: italic; border-top: 1px dashed #334155; margin-top: 10px; padding-top: 10px; font-size: 0.95rem; }
+        
+        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;Solo_Dev /&gt;</div>
+                <a href="index.html" class="back-link">← Back to Logs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article>
+            <span class="meta">TAGS: CHECKLIST // TIPS // DEBUGGING</span>
+            <h1>The Dirty Dozen: 12 Quick Lessons from the Trenches</h1>
+            <p>
+                Not every lesson deserves a full story. Sometimes, you just need a checklist. Here are 12 quick-fire mistakes I made (often more than once) and the solutions that saved me.
+            </p>
+
+            <div class="mistake-box">
+                <h3>1. The ICD is Law (if there’s no ICD… Wallahi I don't know what to tell you 😅)</h3>
+                <p><span class="problem">Problem:</span> I tried to "guess" or "interpret" the Interface Control Document. I assumed a field was an integer because it looked like one.</p>
+                <p><span class="solution">Solution:</span> If it says <code>Unsigned Int 16</code>, do not use <code>Int 32</code>. Even if the data fits, the bytes won't align.</p>
+                <p><span class="why">Why:</span> Network protocols operate on raw memory offsets. If you guess the wrong data type size, every subsequent field in the packet will be shifted and corrupted.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>2. The "Struct Padding" Trap</h3>
+                <p><span class="problem">Problem:</span> C++ compilers automatically add invisible bytes between variables to align memory for the CPU. Sending this struct over the network creates garbage data.</p>
+                <p><span class="solution">Solution:</span> Construct your message using 8-bit sequential values (byte arrays) or sizes the compiler is comfortable with, bypassing the alignment issue entirely.</p>
+                <p><span class="why">Why:</span> CPUs access memory faster when data is aligned to 4 or 8 bytes. The compiler inserts "gap" bytes to ensure this speed, but these gaps break the continuous stream required for network messages.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>3. The Endianness Mismatch</h3>
+                <p><span class="problem">Problem:</span> My PC (Intel) reads bytes Right-to-Left (Little Endian). The network/legacy hardware reads Left-to-Right (Big Endian). Numbers came out backwards.</p>
+                <p><span class="solution">Solution:</span> Investigate the received data first. Look at the raw hex values to confirm the order before injecting it into your code.</p>
+                <p><span class="why">Why:</span> Different CPU architectures store the "Most Significant Byte" at different memory addresses. If you don't verify the incoming format, you are just guessing at the math.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>4. The Shared Memory Race</h3>
+                <p><span class="problem">Problem:</span> Shared Memory is the fastest way to communicate, but it bypasses OS safety. Without protection, "Data Tearing" occurs: System B reads a value while System A is only halfway through writing it. The result is garbage data or an immediate crash (Access Violation).</p>
+                <p><span class="solution">Solution:</span> Use a <strong>Named Mutex</strong> to act as a "bathroom lock." Wrap every access in a strict pattern: Lock &rarr; Copy Data &rarr; Unlock. Ensure your locking mechanism handles "Abandoned Mutexes" (if a process crashes while holding the lock) so the system doesn't deadlock.</p>
+                <p><span class="why">Why:</span> Writing a large structure to memory isn't instant (atomic). If you don't lock the door, you are effectively letting two drivers steer the same car at the same time. You will read a number that never actually existed.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>5. The Monkey Test</h3>
+                <p><span class="problem">Problem:</span> I only tested the "Happy Path" (buttons clicked in the right order). The first user clicked "Connect" twice and crashed the app.</p>
+                <p><span class="solution">Solution:</span> Be a monkey. Mash the keyboard. Click buttons randomly. Flood the inputs. If it crashes, your error handling is weak.</p>
+                <p><span class="why">Why:</span> Users do not follow algorithms. Code that cannot handle unexpected input states is code that will fail in production.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>6. The Silent Firewall Block</h3>
+                <p><span class="problem">Problem:</span> UDP traffic works perfectly in the lab but fails at the site. Windows Firewall often silently blocks UDP on "Public" networks while allowing it on "Private" ones.</p>
+                <p><span class="solution">Solution:</span> Check the Network Profile type immediately. Explicitly add Inbound/Outbound rules for your application binary.</p>
+                <p><span class="why">Why:</span> OS Firewalls treat "Public" networks as hostile environments and default to blocking unsolicited UDP traffic to protect the user.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>7. The Wrong Route</h3>
+                <p><span class="problem">Problem:</span> My software was sending a manually-constructed UDP payload but Wireshark on the Ethernet NIC showed nothing.The OS had decided to route the packets via WiFi because it had internet access.</p>
+                <p><span class="solution">Solution:</span> Don't let the OS decide. Force your socket to bind to the specific IP address of the Ethernet adapter.</p>
+                <p><span class="why">Why:</span> Operating Systems prioritize network routes based on "metrics". And metrics often favor the interface that looks “more useful”.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>8. Time Synchronization (NTP)</h3>
+                <p><span class="problem">Problem:</span> Two integrated systems started behaving erratically. One was rejecting packets because they arrived "in the past" due to clock drift.</p>
+                <p><span class="solution">Solution:</span> NTP (Network Time Protocol) is King. Ensure all machines are synced to a single time source.</p>
+                <p><span class="why">Why:</span> Real-time systems often use timestamps to validate data freshness. If clocks aren't synced, valid packets look like old ("stale") data and are discarded.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>9. The "It Doesn't Work" Ticket</h3>
+                <p><span class="problem">Problem:</span> Receiving a failure report with zero details. No logs, no steps to reproduce.</p>
+                <p><span class="solution">Solution:</span> Never guess. Ask three questions: What did you do? What did you see? What did you expect? Reproduce it before you touch a line of code.</p>
+                <p><span class="why">Why:</span> Attempting to fix a bug you haven't reproduced usually leads to "Shotgun Debugging"—changing random code hoping something works, which often creates new bugs.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>10. The Golden Image Rule</h3>
+                <p><span class="problem">Problem:</span> I tried to fix a broken system by changing settings. I made it worse and couldn't remember the original state.</p>
+                <p><span class="solution">Solution:</span> Touch nothing initially. Copy the entire Configuration folder (INI, XML, JSON) to a USB stick before you change a single value. Create your own "Undo" button.</p>
+                <p><span class="why">Why:</span> Entropy increases. In complex integrations, it is statistically likely that your first few attempts to fix a problem will actually break configuration further.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>11. Don't Rely on Memory</h3>
+                <p><span class="problem">Problem:</span> I faced a bug I <em>knew</em> I had solved a year ago, but I couldn't remember how. I had to solve it from scratch again.</p>
+                <p><span class="solution">Solution:</span> Keep a <code>dev_log.txt</code>. If you fix a tricky bug, write down the symptom and the fix. You are writing a letter to your future self.</p>
+                <p><span class="why">Why:</span> Human memory is volatile and context-dependent. Text files are persistent.</p>
+            </div>
+
+            <div class="mistake-box">
+                <h3>12. The Physical Layer</h3>
+                <p><span class="problem">Problem:</span> I spent hours debugging code, checking logs, and rewriting logic because the software wasn't receiving data.</p>
+                <p><span class="solution">Solution:</span> The cable was loose. Always check Layer 1 (Physical connections) before you open the debugger.</p>
+                <p><span class="why">Why:</span> No amount of code can fix a hardware disconnect. Checking the easiest failure point first saves the most time.</p>
+            </div>
+
+        </article>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by [Your Name]. Code. Crash. Learn. Repeat.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

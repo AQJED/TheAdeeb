@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabotaged by a Checkbox - The Solo Developer</title>
+    <style>
+        /* --- SAME CSS AS HOMEPAGE --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.8; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; } 
+        header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        .back-link { font-size: 0.9rem; color: var(--text-muted); }
+        .back-link:hover { color: var(--accent); }
+        article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
+        article h3 { color: var(--accent); font-family: var(--font-mono); margin-top: 40px; margin-bottom: 15px; font-size: 1.4rem; }
+        article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
+        strong { color: white; }
+        .callout { background-color: #162032; border-left: 4px solid var(--accent); padding: 20px; margin: 30px 0; font-style: italic; color: var(--text-muted); }
+        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">&lt;Solo_Dev /&gt;</div>
+                <a href="index.html" class="back-link">← Back to Logs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article>
+            <span class="meta">TAGS: DEBUGGING // ENVIRONMENT // POST-MORTEM</span>
+            <h1>Sabotaged by a Checkbox: How Bloatware Killed My Demo</h1>
+            
+            <h3>The Setup</h3>
+            <p>
+                There is a specific kind of adrenaline you feel right before a demo. I had finished a major sprint involving complex backend networking and system-to-system communication. I was ahead of schedule. The code was clean. I had tested it. I was ready.
+            </p>
+            <p>
+                I set up the environment, prepared the scenarios, and waited for the stakeholders. Thirty minutes before the call, I did one final "sanity check" launch.
+            </p>
+
+            <h3>The Crash</h3>
+            <p>
+                I clicked run. Nothing happened. Three seconds later, the process terminated silently.
+            </p>
+            <p>
+                I stared at the screen. A silent crash is the worst kind of crash. No error message, no exception popup, just... gone. I relaunched it. Same result.
+            </p>
+            <p>
+                I started to panic. Even though I was ahead of schedule and the client wasn't pushing for this demo, I have a low tolerance for failure. Presenting broken software is my nightmare. With 20 minutes left, I was furiously grepping through logs, looking for a null pointer or a race condition.
+            </p>
+            <div class="callout">
+                "I couldn't find it. I had to make the call: Demo postponed."
+            </div>
+
+            <h3>The Investigation</h3>
+            <p>
+                The shame of cancelling the demo forced me to dig deep. I spent the next few hours instrumenting the code with manual loggers, tracing the execution flow line by line.
+            </p>
+            <p>
+                The logs showed the software initializing, loading the configuration, and then... vanishing exactly when it tried to load the core dynamic link libraries (DLLs).
+            </p>
+            <p>
+                I checked the folder. The DLLs were gone. I rebuilt the project. The DLLs appeared. I ran the software. The DLLs disappeared instantly.
+            </p>
+
+            <h3>The Root Cause</h3>
+            <p>
+                It wasn't a bug in my C++ code. It was a checkbox I had missed six hours earlier.
+            </p>
+            <p>
+                That morning, I had been wearing my "IT Support" hat. One of our delivery machines had an issue where the GPU fans weren't spinning up fast enough, causing temperatures to hit 80°C. The quick fix was to install MSI Afterburner to force a custom fan curve on boot.
+            </p>
+            <p>
+                I had downloaded the installer and rushed through the setup wizard, clicking <em>Next, Next, Next</em>. I didn't notice the "Optional Offer" checkbox. I had accidentally installed Norton Antivirus bundled with the fan controller.
+            </p>
+            <p>
+                Norton had been running silently in the background. When my software tried to load its custom networking DLLs, Norton's heuristics flagged them as "suspicious behavior" (likely due to the raw socket manipulation). It didn't ask me for permission; it just quarantined and deleted the files immediately.
+            </p>
+
+            <h3>The Lesson</h3>
+            <p>
+                I recovered the files and uninstalled the bloatware.
+            </p>
+            <p>
+                As a solo developer, you are often the DevOps engineer, the IT support, and the Lead Architect all at once. It is easy to blur the lines between these roles.
+            </p>
+            <p><strong>The takeaway: strict discipline in the development environment.</strong></p>
+            <ul>
+                <li><strong>Read the installer dialogs.</strong> "Next, Next, Finish" is a dangerous habit.</li>
+                <li><strong>Isolate tasks.</strong> The machine used for compiling mission-critical defense software should not be the same machine used for testing third-party utilities.</li>
+                <li><strong>Bloatware is a valid threat model.</strong> If a random antivirus can kill your simulation, your deployment environment needs to be strictly controlled.</li>
+            </ul>
+        </article>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by [Your Name]. Code. Crash. Learn. Repeat.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
