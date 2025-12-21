@@ -18,7 +18,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.8; }
         a { text-decoration: none; color: inherit; transition: 0.2s; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; } 
+        .container { max-width: 800px; margin: 0 auto; padding: 00px 20px; } 
         header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
@@ -46,46 +46,46 @@
 
     <div class="container">
         <article>
-            <span class="meta">TAGS: LIBRARIES // DIS // SERIALIZATION</span>
+            <span class="meta">TAGS: LIBRARIES // ARCHITECTURE // EFFICIENCY</span>
             <h1>Why I stopped coding from scratch</h1>
             
             <p>
-                When I started working on simulation programs, I tried to write every part of the data handling myself. I thought that writing my own packing and serialization code would make the program faster or easier to manage. This was a mistake that cost me a lot of time.
+                When I first started working on simulation programs, I tried to write every part of the data handling myself. I manually wrote packing and serialization code because I lacked the experience to know there were better ways. I spent a lot of time writing logic that was already solved.
             </p>
 
-            <h2>The Manual Implementation Trap</h2>
+            <h2>The Lack of Experience Trap</h2>
             <p>
-                I used to manually calculate offsets and bit-shift data for protocols like DIS (Distributed Interactive Simulation). I believed my custom code was better than using a generic library. In reality, I was recreating logic that had already been solved and tested.
+                I used to manually calculate offsets and bit-shift data for network protocols. I did this because I did not check the library include files or the source code to see what was available. I wasted hours writing code from scratch that I could have found in the library headers in a few minutes.
             </p>
 
-            <h2>Searching the Source Code</h2>
+            <h2>Reviewing the Header Files</h2>
             <p>
-                Instead of writing a new function to check a message or pack a struct, I now open the library folders. I look through the header files and the source code to see how the original developers solved the problem. Most of the time, the method or function I need already exists inside the library.
+                Instead of immediately writing a new function to parse a message or pack a struct, I now look at the library directories first. I read through the header files to see the class definitions and methods. Most of the time, the functionality I need is already implemented by the developers who built the library.
             </p>
 
             
 
             <p>
-                Spending thirty minutes reading the library source code is much more productive than writing new code from zero. It helps me understand the logic and prevents me from creating bugs in the serialization process.
+                Spending time reading the source code of a library is much more useful than trying to write a custom solution from zero. It helps me understand how the system works and prevents me from making mistakes in the data structures.
             </p>
 
-<pre><code>// Example: Checking the PDU type using existing library methods
-if (pdu->getPduType() == PduType_EntityState) {
-    // Logic is already handled by the library classes
+<pre><code>// Example: Using an existing library method to check message types
+if (message->isValid()) {
+    // The library already handles the validation logic
 }</code></pre>
 
-            <h2>Reliability of Established Code</h2>
+            <h2>Reliability of Established Tools</h2>
             <p>
-                Libraries like CCL or Open-DIS are written by large teams with a lot of experience. They have tested their code in many different scenarios and handled edge cases that I might not notice until a simulation fails during a demo. These libraries are stable and often include validation checks that are difficult to write manually.
+                Established simulation libraries are usually built by experienced teams. They have tested their code in many different environments and fixed edge cases that a single developer might miss. These tools are often more stable than anything I could write quickly by myself.
             </p>
 
-            <h2>When to Customize</h2>
+            <h2>Modifying Instead of Replacing</h2>
             <p>
-                There are rare cases where a library does not fit the specific needs of a project perfectly. In these situations, I modify or extend the library code instead of replacing it. This allows me to keep the reliable parts of the code while adding the specific features I need.
+                In some cases, a library might not do exactly what I need for a specific project. Instead of disregarding the entire library and writing my own version, I now look for ways to extend or modify it. This allows me to use the parts that are already tested while adding only the specific code I need for the project.
             </p>
             
             <p>
-                As a software integration engineer, it is better to focus on the main integration logic and system communication. Writing basic data structures manually is a waste of time when high-quality libraries are already available and tested.
+                As a software integration engineer, it is more important to focus on the overall system communication and integration logic. Writing raw data handling code manually is not efficient when reliable and tested libraries are already available.
             </p>
 
         </article>
