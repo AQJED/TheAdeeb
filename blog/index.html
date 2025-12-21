@@ -125,9 +125,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">LIBRARIES // ARCHITECTURE // EFFICIENCY</span>
-                            <h3>Why I stopped coding from scratch</h3>
+                            <h3>Read the Headers: Why I Stopped Reinventing the Data Stack</h3>
                             <p>
-                                An honest look at how inexperience led me to write custom code for problems that were already solved. Why I now check library headers and source code before writing a single line.
+                                An audit of why I stopped writing manual bit-shifting logic. Your primary job is to understand the existing library interface before you write a single line of custom code.
                             </p>
                         </div>
                         <a href="post-source-code.html" class="read-more">Read Log →</a>
@@ -136,9 +136,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">PORTABILITY // CPP // SYSTEMS-INTEGRATION</span>
-                            <h3>The Cross-Platform Headache</h3>
+                            <h3>The Cross-Platform Headache: Architecture Lessons from a Multi-OS Build</h3>
                             <p>
-                                A look back at the mistakes I made when first moving code from Windows workstations to Linux racks. From integer size mismatches to the sign extension disaster.
+                                Lessons on fixed-width integers and the sign extension disaster. Architect for universal compatibility by assuming the hardware on the other end is different from your own.
                             </p>
                         </div>
                         <a href="post-cross-platform.html" class="read-more">Read Log →</a>
@@ -147,9 +147,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">BOOST // SHARED-MEMORY // PERFORMANCE</span>
-                            <h3>The Buffer Paradox</h3>
+                            <h3>The Buffer Paradox: Architectural Debt in Real-Time FIFOs</h3>
                             <p>
-                                A post-mortem on my mistake of over-buffering shared memory. How I moved from a bloated Boost FIFO to a 256-slot configuration and eventually to a custom low-latency implementation.
+                                In high-performance simulation, a deep buffer is a reservoir for stale data. Why I moved from sequence-heavy FIFOs to a state-update model to ensure deterministic performance.
                             </p>
                         </div>
                         <a href="post-shared-memory.html" class="read-more">Read Log →</a>
@@ -158,9 +158,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">CHECKLIST // INTEGRATION</span>
-                            <h3>The Dirty Dozen</h3>
+                            <h3>The Dirty Dozen: Hard Lessons in Systems Integration</h3>
                             <p>
-                                12 non-negotiable lessons on struct padding, endianness, and the reality of reverse-engineering flight data without an ICD.
+                                12 non-negotiable lessons on struct padding, endianness, and the reality of reverse-engineering flight data without a formal ICD.
                             </p>
                         </div>
                         <a href="post-mistakes.html" class="read-more">Read Log →</a>
@@ -169,9 +169,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">GEODESY // MATH</span>
-                            <h3>Reinventing the Flat Tire</h3>
+                            <h3>The High Cost of DIY Math: A Lesson in Systems Integration</h3>
                             <p>
-                                A post-mortem on why your custom trigonometry will fail at scale and why the curvature of the Earth is not an approximation.
+                                You are a bridge-builder, not a mathematician. Why custom trigonometry will fail as soon as your object moves far enough, and why you should stand on the shoulders of giants.
                             </p>
                         </div>
                         <a href="post-library.html" class="read-more">Read Log →</a>
@@ -179,10 +179,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="card-tag tag">ENVIRONMENT // SECURITY</span>
-                            <h3>Sabotaged by a Checkbox</h3>
+                            <span class="tag">ENVIRONMENT // SECURITY</span>
+                            <h3>Sabotaged by a Checkbox: How Environment Bloat Killed My Demo</h3>
                             <p>
-                                How bundled bloatware and silent heuristic engines can execute your DLLs mid-demo and how to protect your dev environment.
+                                How silent heuristic engines and bundled bloatware can neutralize your binaries mid-demo. Treat your delivery machine as a controlled cleanroom.
                             </p>
                         </div>
                         <a href="post-bloatware.html" class="read-more">Read Log →</a>
@@ -191,9 +191,9 @@
                     <article class="card">
                         <div>
                             <span class="tag">NETWORKING // BPF</span>
-                            <h3>Architectural Filtering</h3>
+                            <h3>Keeping the Noise Out: Why Kernel-Level Filtering Wins</h3>
                             <p>
-                                Stop letting junk traffic wake up your application. Moving packet filtering from User-Space to the Kernel via BPF.
+                                Stop letting junk traffic wake up your application. Moving packet filtering from User-Space to the Kernel via BPF to ensure stable, real-time networking.
                             </p>
                         </div>
                         <a href="post-bpf.html" class="read-more">Read Log →</a>
