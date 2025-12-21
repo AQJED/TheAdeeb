@@ -111,6 +111,7 @@
       "nav_experience": "Experience",
       "nav_portfolio": "Portfolio",
       "nav_skills": "Skills",
+	  "nav_blog": "Blog",
       "nav_endorsements": "Endorsements",
       "hero_prefix": "I'm",
       "hero_title": "Adeeb Alqahtani",
@@ -263,6 +264,7 @@
       "nav_experience": "السيرة الذاتية",
       "nav_portfolio": "المشاريع",
       "nav_skills": "المهارات",
+	  "nav_blog": "المدونة",
       "nav_endorsements": "التوصيات",
       "hero_prefix": "أنا",
       "hero_title": "أديب القحطاني",
@@ -416,6 +418,7 @@
     $("#nav_experience").text(translations[currentLang].nav_experience);
     $("#nav_portfolio").text(translations[currentLang].nav_portfolio);
     $("#nav_skills").text(translations[currentLang].nav_skills);
+	$("#nav_blog").text(translations[currentLang].nav_blog);
     $("#nav_endorsements").text(translations[currentLang].nav_endorsements);
     $("#btn_hire").text(translations[currentLang].btn_hire);
     $("#btn_resume").text(translations[currentLang].btn_resume);
