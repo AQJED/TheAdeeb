@@ -57,6 +57,9 @@
 
         code { font-family: var(--font-mono); color: var(--accent); }
 
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; color: #cbd5e1; }
+
         footer {
             text-align: center;
             padding: 60px 0;
@@ -84,67 +87,66 @@
             <h1>Read the Headers: Why I Stopped Reinventing the Data Stack</h1>
             
             <p>
-                In the early days of my simulation work, I spent an embarrassing amount of time writing manual bit-shifting logic. I thought I was being "lightweight" by manually packing and unpacking data for network protocols. In reality, I was just ignoring the tools right in front of me.
+                Early in my simulation work, I wasted an embarrassing amount of time writing manual bit-shifting code. I thought I was just doing the obvious thing by packing and unpacking protocol data by hand. In reality, I was ignoring the tools already sitting in the project.
             </p>
 
             <p>
-                Sometimes when you get so focused on solving the immediate data problem that you forget to check if the solution is already sitting in our <code>include</code> folder. We end up writing buggy, custom versions of things that have been stable for years.
+                When you are locked on reading the data coming in, it is easy to forget to check whether the solution already exists in your include folder. That is how we end up building buggy, homemade versions of things that have been stable for years.
             </p>
 
             <p>
-                <strong>The main takeaway is this: Your primary job as an integration engineer is to understand the existing library interface before you write a single line of custom logic.</strong>
+                <strong>Bottom line: as an integration engineer, your first job is to understand the library interface before you write custom logic.</strong>
             </p>
-
-            
 
             <h3>The Two Choices: The Manual Scripter vs. The Library Researcher</h3>
+            
             <p>
-                When you encounter a new data structure or protocol, you usually fall into one of two camps. On one side, you have the "Manual Scripter," who starts writing bit-shifts and offsets immediately. On the other side, you have the "Library Researcher," who audits the existing source code first.
+                When you hit a new data structure or protocol, you usually end up in one of two roles:
             </p>
+
+            <ul>
+                <li>The <strong>Bit-Shift Coder</strong> starts writing offsets and bit-shifts immediately.</li>
+                <li>The <strong>Header Reader</strong> audits the existing source first.</li>
+            </ul>
 
             <h3>Option A: Writing from Scratch (The Trap)</h3>
             <p>
-                Writing from scratch means you manually calculate every byte offset and bit-mask for your serialization logic. It feels productive because you are constantly typing, but it is often a waste of effort.
+                Writing from scratch means manually calculating byte offsets and bit-masks for serialization. It feels productive because you are constantly typing, but it is often wasted effort.
             </p>
 
             <p>
-                How it works: First, you identify a data requirement. Second, you ignore the library headers. Third, you spend hours writing custom packing code that is prone to "off-by-one" errors or alignment issues.
+                How it usually goes: you identify the requirement, skip the library headers, then spend hours writing custom packing code that is fragile, full of off-by-one mistakes and alignment surprises.
             </p>
 
             <p>
-                This matters because custom logic is a maintenance liability. In my experience, these "quick fixes" fail as soon as an edge case arises, such as a change in endianness or a minor protocol update. You end up being the only person who knows how your "spaghetti math" works, which is a dangerous place for any project.
+                This matters because custom serialization becomes a maintenance problem fast. These quick fixes tend to break as soon as something changes, such as endianness, a small protocol update, or some alignment behavior. Then you become the only person who understands your spaghetti math, which is a bad place for any project.
             </p>
-
-            
 
             <h3>Option B: Auditing Library Headers</h3>
             <p>
-                The alternative is to treat the library source code as your primary documentation. Instead of guessing, you open the header files (the <code>.h</code> or <code>.hpp</code> files) to see what class methods the original developers provided.
+                The better move is to treat the library source as your real documentation. Instead of guessing, open the .h / .hpp files and see what the original developers already built.
             </p>
 
             <p>
-                How it works: Before coding, you search the library directory for terms like <code>pack()</code>, <code>serialize()</code>, or <code>isValid()</code>. You find that 90% of your task is already finished and tested by an entire team of experts.
+                How it works: before coding, search the library for things like pack(), serialize(), or unmarshal(). Most of the time, you will find the core work is already implemented and tested by people who solved this problem years ago.
             </p>
 
-            <pre><code>// Using the existing library validation instead of manual bit-masking
-if (incoming_pdu->isValid()) { process(incoming_pdu); }</code></pre>
+            <pre><code>// Using existing CCL and DIS methods instead of manual bit-shifting
+const int entityPackedSize = entityCtrl.Pack(&amp;entityCtrl, outPtr, &amp;animationTable);
+entityPdu.unmarshal(ds);</code></pre>
 
             <p>
-                The practical consequences are undeniable. You get better reliability, faster development times, and cleaner code. If the library does not do exactly what you need, it is usually better to extend an existing class rather than replacing the whole system.
+                The payoff is obvious: better reliability, faster development, and cleaner code. And if the library does not do exactly what you need, extending a class is usually smarter than replacing the whole system.
             </p>
 
             <h3>Realistic Context: The "No Time" Excuse</h3>
             <p>
-                I often hear that "reading the source takes too long." However, in practice, spending thirty minutes reading header files usually saves three days of debugging. Simulation libraries like OpenDIS or CIGI are deep, but they are designed by people who faced the same problems you are facing now. 
+                I hear "reading source takes too long" all the time. In reality, thirty minutes reading headers often saves three days of debugging. Libraries like OpenDIS or the CIGI Communication Library (CCL) are deep, but they were built by people dealing with the same problems you are dealing with now.
             </p>
 
             <h3>What to Watch Next</h3>
             <p>
-                The industry is moving toward more automated serialization tools like Protobuf or flatbuffers. These tools make the "Manual Scripter" approach even more obsolete.
-            </p>
-
-            <p>
-                My recommendation: If you find yourself bit-shifting for more than ten minutes, stop. Open your <code>/include</code> folder and look for the professional solution. It is almost certainly already there, waiting for you to call it.
+                My rule now is simple: if you have been bit-shifting for more than ten minutes, stop. Open /include and look for the professional solution. It is probably already there, faster, tested, and cleaner, waiting for you to call it.
             </p>
 
         </article>
