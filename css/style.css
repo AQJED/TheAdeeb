@@ -1062,26 +1062,16 @@ navbar {
 }
 
 /* Navigation forced styling */
-
-/* Find this block at the bottom of your style.css and update it to this: */
-
 :lang(en) #nav_home,
 :lang(en) #nav_about,
 :lang(en) #nav_experience,
 :lang(en) #nav_portfolio,
 :lang(en) #nav_skills,
 :lang(en) #nav_endorsements,
-:lang(en) #nav_blog, /* ADD THIS LINE */
 :lang(en) #about_text {
     font-size: 28px;
     font-weight: 700;
     font-family: 'Harmattan', sans-serif;
-}
-
-/* Add this to ensure it stays visible and colored correctly in Chrome/Safari */
-.navbar-light .navbar-nav .nav-link#nav_blog {
-    color: #10b981; /* This matches your blog green accent */
-}
 }
 
 /* Add extra space below the "Show More" button */
