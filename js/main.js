@@ -111,18 +111,17 @@
       "nav_experience": "Experience",
       "nav_portfolio": "Portfolio",
       "nav_skills": "Skills",
-	  "nav_blog": "Blog",
       "nav_endorsements": "Endorsements",
       "hero_prefix": "I'm",
       "hero_title": "Adeeb Alqahtani",
-      "hero_subtitle": "Software Integration Engineer, Real-Time Systems Engineer, Simulation Interoperability Engineer",
+      "hero_subtitle": "Software Integration Engineer, Real-Time Systems Engineer, Simulation Interoperability Engineer", 
       "btn_hire": "Blog",
       "btn_resume": "My Resume",
       "btn_lang": "عربي",
       "about_title": "About Me",
       "about_subtitle": "12+ Years Experience",
-  	  "about_text": "I'm a Software Integration Engineer in defense and aerospace, specializing in real-time middleware and interface systems. I hold a B.S. in Computer Engineering (high-performance and embedded systems) from California State University, San Bernardino and an A.S. in Electrical & Electronics (Instrumentation and Control Systems) from Yanbu Industrial College. \nMy technical expertise includes designing and integrating low latency software and hardware for mission critical defense applications, including C/C++ development for flight simulators, digital and analog circuit design, and hardware and software integration that connects sensors, avionics, and real time training systems.",
-      "exp_header": "My Resume",
+      "about_text": "I'm a Software Integration Engineer in defense and aerospace, specializing in real-time middleware and interface systems. I hold a B.S. in Computer Engineering (high-performance and embedded systems) from California State University, San Bernardino and an A.S. in Electrical & Electronics (Instrumentation and Control Systems) from Yanbu Industrial College. \nMy technical expertise includes designing and integrating low latency software and hardware for mission critical defense applications, including C/C++ development for flight simulators, digital and analog circuit design, and hardware and software integration that connects sensors, avionics, and real time training systems.",
+	  "exp_header": "My Resume",
       "exp_subheader": "Professional & Academic Career",
       "exp_item1_title": "Software Integration Engineer",
       "exp_item1_company": "Rheinmetall Arabia, Riyadh, Saudi Arabia",
@@ -264,7 +263,6 @@
       "nav_experience": "السيرة الذاتية",
       "nav_portfolio": "المشاريع",
       "nav_skills": "المهارات",
-	  "nav_blog": "المدونة",
       "nav_endorsements": "التوصيات",
       "hero_prefix": "أنا",
       "hero_title": "أديب القحطاني",
@@ -274,7 +272,8 @@
       "btn_lang": "English",
       "about_title": "من أنا",
       "about_subtitle": "أكثر من 12 عامًا من الخبرة",
-	  "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات وتكامل انظمة الزمن الحقيقي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا بالاظافة الى شهادة جامعية متوسطة في الهندسة الكهربائية والإلكترونية من جامعة ينبع الصناعية .\nلدي أكثر من 12 عاما من الخبرة،  حيث عملت في تطوير البرمجيات الوسيطة و تكامل وتحسين أداء الأنظمة للتطبيقات الدفاعية الحساسة ومحاكيات الطيران.",      "exp_header": "السيرة الذاتية",
+	  "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات وتكامل انظمة الزمن الحقيقي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا بالاظافة الى شهادة جامعية متوسطة في الهندسة الكهربائية والإلكترونية من جامعة ينبع الصناعية .\nلدي أكثر من 12 عاما من الخبرة،  حيث عملت في تطوير البرمجيات الوسيطة و تكامل وتحسين أداء الأنظمة للتطبيقات الدفاعية الحساسة ومحاكيات الطيران.",      
+	  "exp_header": "السيرة الذاتية",
       "exp_subheader": "المسيرة المهنية والأكاديمية",
       "exp_item1_title": "مهندس تكامل برمجي",
       "exp_item1_company": "رينمتال العربية، الرياض، المملكة العربية السعودية",
@@ -418,7 +417,6 @@
     $("#nav_experience").text(translations[currentLang].nav_experience);
     $("#nav_portfolio").text(translations[currentLang].nav_portfolio);
     $("#nav_skills").text(translations[currentLang].nav_skills);
-	$("#nav_blog").text(translations[currentLang].nav_blog);
     $("#nav_endorsements").text(translations[currentLang].nav_endorsements);
     $("#btn_hire").text(translations[currentLang].btn_hire);
     $("#btn_resume").text(translations[currentLang].btn_resume);
