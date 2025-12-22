@@ -133,10 +133,10 @@
 uint32_t getLatestIGFrame() const;
 int8_t   getCurrentDatabaseID() const;
 std::array&lt;uint8_t, MAX_PACKET_SIZE&gt; data;
-……</code></pre>
 
-<pre><code>// EntityConfig.h (fixed-size IDs)
-uint16_t newEntityID;</code></pre>
+// EntityConfig.h (fixed-size IDs)
+uint16_t newEntityID;
+uint16_t igEntityType;</code></pre>
 
             <p>
                 The practical consequences are straightforward. uint32_t is always 32 bits on every machine. int8_t is always 8 bits. And using std::array&lt;uint8_t, MAX_PACKET_SIZE&gt; keeps your packet buffers consistent across Windows and Linux. When your layout is stable, you spend less time chasing “why is this field shifted” bugs and more time shipping working integration code.
@@ -160,8 +160,6 @@ uint16_t newEntityID;</code></pre>
                 My recommendation: wrap compiler-specific optimizations behind shared macros and strictly use fixed-width types for anything that leaves your program. If you treat every data boundary as a potential failure point, you avoid the long and painful cross-platform debugging phase later.
             </p>
 
-<pre><code>uint16_t igEntityType;</code></pre>
-
         </article>
     </div>
 
@@ -174,3 +172,4 @@ uint16_t newEntityID;</code></pre>
 </body>
 </html></code>
 
+Would you like me to help you draft the shared macro header mentioned in the conclusion to handle these cross-platform compiler optimizations?
