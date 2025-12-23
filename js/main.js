@@ -168,13 +168,13 @@
       "category": "professional"
     },
 	{
-      "title": "DIS to CIGI Middleware: Low-Level C++ Programming",
-      "subtitle": "Professional Application",
-      "description": "A middleware application that facilitates communication between a CGF system and an Image Generator by converting DIS protocol packets into CIGI protocol packets.",
-      "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, UDP, Git",
-      "link": "https://aqjed.github.io/DISCIGIMiddleware/",
-      "category": "professional"
-    },
+  "title": "SFATE Tactical Integration & Scenario Control",
+  "subtitle": "Professional Application",
+  "description": "A C++ middleware solution designed to bridge external hosts with the SFATE tactical simulation. This system utilizes custom plugins to drive entities and automates scenario control, while also providing DIS protocol output for multi-platform interoperability.",
+  "technologies": "C++, SFATE SDK, DIS Protocol, UDP, Boost, Multi-threading",
+  "link": "https://aqjed.github.io/SFATE-Integration/",
+  "category": "professional"
+},
    {
   "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
@@ -320,13 +320,13 @@
       "category": "professional"
     },
     {
-      "title": "(DIS to CIGI) مشروع برمجيات وسيطة",
-      "subtitle": "تطبيق احترافي",
-      "description": "تطبيق وسيط يسهل الاتصال بين نظام CGF ونظام توليد الصور عن طريق تحويل حزم بروتوكول DIS إلى حزم CIGI.",
-      "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, UDP, Git",
-      "link": "https://aqjed.github.io/DISCIGIMiddleware/",
-      "category": "professional"
-    },
+  "title": "تكامل SFATE التكتيكي والتحكم في السيناريو",
+  "subtitle": "تطبيق احترافي",
+  "description": "حل برمجيات وسيطة بلغة C++ مصمم لربط المضيفين الخارجيين بمحاكاة SFATE التكتيكية. يستخدم هذا النظام إضافات (Plugins) مخصصة لقيادة الكيانات وأتمتة التحكم في السيناريو، مع توفير مخرجات بروتوكول DIS لضمان التشغيل البيني بين الأنظمة المختلفة.",
+  "technologies": "C++, SFATE SDK, DIS Protocol, UDP, Boost, Multi-threading",
+  "link": "https://aqjed.github.io/SFATE-Integration/",
+  "category": "professional"
+},
 {
   "title": "محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
   "subtitle": "تطبيق احترافي",
