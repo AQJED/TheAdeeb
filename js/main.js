@@ -313,89 +313,88 @@
   "showLess": "عرض أقل",
   "projectCards": [
     {
-      "title": "نظام وسيط لمحاكي المهام الكاملة لطائرة الكوغر",
-      "subtitle": "تطبيق احترافي",
-      "description": "نظام وسيط لمحاكي المهام الكاملة لطائرة الكوغر (FMS)، وهو محاكي طيران عسكري عالي الدقة يُستخدم للتدريب التكتيكي.",
+      "title": "Cougar Full Mission Simulator – Middleware System Development",
+      "subtitle": "Professional Application",
+      "description": "Middleware system for the Cougar Full Mission Simulator (FMS), a high-fidelity military flight simulator used for tactical training.",
       "technologies": "C++, PCAPPLUSPLUS, Open DIS, CIGI, Boost, UDP, Git",
-      "link": "https://aqjed.github.io/DISCIGIMiddleware/",
+      "link": "https://aqjed.github.io/FMS_MiddleWare/",
       "category": "professional"
     },
-    {
-  "title": "تكامل SFATE التكتيكي والتحكم بالسيناريو",
-  "subtitle": "تطبيق احترافي للتكامل والتحكم",
-  "description": "طبقة برمجية وسيطة مكتوبة بلغة C++ لربط أنظمة المضيف الخارجية بمحاكاة SFATE التكتيكية. يعتمد النظام على إضافات برمجية (Plugins) مخصصة للتحكم بالكيانات وأتمتة أوامر السيناريو (مثل: تحميل/بدء/إيقاف/إيقاف مؤقت)، مع بث رسائل بروتوكول DIS عبر UDP لضمان التشغيل البيني مع الأنظمة المختلفة.",
-  "technologies": "C++، SFATE SDK، بروتوكول DIS، UDP، Boost، تعدد الخيوط (Multi-threading)",
+	{
+  "title": "SFATE Tactical Integration & Scenario Control",
+  "subtitle": "Professional Application",
+  "description": "A C++ middleware solution designed to bridge external hosts with the SFATE tactical simulation. This system utilizes custom plugins to drive entities and automates scenario control, while also providing DIS protocol output for multi-platform interoperability.",
+  "technologies": "C++, SFATE SDK, DIS Protocol, UDP, Boost, Multi-threading",
   "link": "https://aqjed.github.io/DISCIGIMiddleware/",
-  "category": "احترافي"
+  "category": "professional"
 },
-
-{
-  "title": "محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
-  "subtitle": "تطبيق احترافي",
-  "description": "محاكي هوست متوافق مع CIGI يحاكي حركة الطائرة باستخدام عصا التحكم ويوفر واجهة مستخدم للتحكم والمراقبة وتصحيح بيانات المحاكاة.",
+   {
+  "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
+  "subtitle": "Professional Application",
+  "description": "A CIGI-compliant host emulator that simulates jet motion and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
 },
 	  {
-  "title": "وسيط CIGI لربط المضيف بمولّد الصور (IG)",
-  "subtitle": "تطبيق احترافي للتكامل المرئي",
-  "description": "برمجية وسيطة مكتوبة بلغة C++ تقوم بترقية رسائل CIGI الصادرة من الحاسب المضيف من الإصدار 3.1 إلى 3.3، لتمكين أنظمة المحاكاة القديمة من العمل بسلاسة مع مولّدات الصور الحديثة (IG). النتيجة هي تحديثات آنية لموضع/اتجاه الكيانات وتشغيل عرض ثلاثي الأبعاد أكثر دقة واستقرارًا.",
-  "technologies": "C++، CIGI 3.1/3.3، برمجة الشبكات (UDP)، Boost، Git",
+  "title": "CIGI Protocol Bridge & IG Visualization Middleware",
+  "subtitle": "Professional Application",
+  "description": "A low-level C++ middleware that enables high-fidelity real-time visualization by converting CIGI 3.1 host packets into CIGI 3.3. This ensures legacy simulation hosts can successfully drive modern Image Generators (IG) for immersive 3D rendering.",
+  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
   "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
-  "category": "احترافي"
-},
-
-	  {
-  "title": "مقيّم امتثال الأمن السيبراني المعتمد على LLM (AI)",
-  "subtitle": "تطبيق احترافي",
-  "description": "أداة آلية تستخدم نموذج لغة كبير لتقييم ضوابط الأمن السيبراني في شركة مقابل متطلبات الامتثال من الهيئة الوطنية للأمن السيبراني (NCA).",
-  "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
-  "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
   "category": "professional"
 },
     {
-      "title": "ذراع آلي (نظام مضمن)",
-      "subtitle": "مشروع شخصي",
-      "description": "يحدد النظام موضع الجسم واتجاهه باستخدام أشعة الليزر والفوتوريسيستور للتحكم بذراع روبوتية بخمس درجات حرية.",
-      "technologies": "C/C++, Photo-resistors, Robotic Kinematics, Embedded Systems",
-      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
-      "category": "personal"
+      "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
+      "subtitle": "Professional Application",
+      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
+      "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
+      "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
+      "category": "professional"
     },
+    
     {
-      "title": "نظام التعرف على الوجوه",
-      "subtitle": "مشروع جامعي",
-      "description": "باستخدام تحليل المصفوفة غير السالبة (NMF)، يتم تحليل الصورة الملتقطة للتعرف على الشخص بمقارنتها مع قاعدة البيانات.",
+      "title": "NMF-Based Facial Recognition System (MATLAB)",
+      "subtitle": "Academic Project",
+      "description": "MATLAB-based face verification tool that uses Non-negative Matrix Factorization (NMF) to compare a captured facial image against a stored image dataset and decide whether there is a valid identity match.",
       "technologies": "MATLAB, NMF, Image Processing, GUI, Pattern Recognition",
       "link": "https://github.com/AQJED/Facial-Recognition-App-with-Matlab",
       "category": "academic"
     },
-    
-
     {
-      "title": "متحكم إشغال مواقف السيارات Real-Time (Verilog / FPGA)",
-      "subtitle": "مشروع شخصي",
-      "description": "تصميم وتنفيذ متحكم لإشغال مواقف السيارات باستخدام Verilog وآلة حالات منتهية (FSM) على  Xilinx FPGA، لتتبع دخول وخروج المركبات وتحديث حالة المواقف المتاحة بشكل Real time.",
-      "technologies": "Verilog, FSM, FPGA, Xilinx",
+      "title": "5 DOF Robotic Arm Object Detection (Embedded System)",
+      "subtitle": "Personal Project",
+      "description": "Determines the position and orientation of an object using laser beams and photoresistors to control a 5 DOF robotic arm.",
+      "technologies": "C/C++, Embedded Systems, Robotic Kinematics, DSP",
+      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
+      "category": "personal"
+    },
+   
+    
+    {
+      "title": "Real-Time Parking Occupancy Controller (Verilog / FPGA)",
+      "subtitle": "Personal Project",
+      "description": "Designed and implemented a Verilog-based FSM on a Xilinx FPGA to track vehicle entry/exit and update parking occupancy status in real time.",
+      "technologies": "Verilog, FSM Design, FPGA, Xilinx",
       "link": "https://github.com/AQJED/Parking-lot-occupancy",
       "category": "personal"
     },
     {
-      "title": "التحكم في الإضاءة وتوقع المسار (نظام مضمن)",
-      "subtitle": "مشروع جامعي",
-      "description": "نظام مضمن منخفض التكلفة للتحكم الذكي في الإضاءة وتوقع اتجاه مسار المشاة باستخدام مستشعرات متعددة.",
+      "title": "ARINC 429 Avionics Bus Interface (Verilog / FPGA)",
+      "subtitle": "Personal Project",
+      "description": "Designed and implemented an ARINC 429 transmitter/receiver core in Verilog on a Xilinx FPGA, handling word formatting, label decoding, parity, and data monitoring via a PC interface.",
+      "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
+      "link": "https://github.com/AQJED",
+      "category": "personal"
+    },
+    {
+      "title": "Light Control and Path Prediction (Embedded System)",
+      "subtitle": "Academic Project",
+      "description": "A cost-effective embedded system for intelligent light control and basic path prediction, utilizing an Arduino and various sensors.",
       "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
       "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
       "category": "academic"
-    },
-	    {
-  "title": "واجهة ناقل إلكترونيات الطيران ARINC 429 (Verilog / FPGA)",
-  "subtitle": "مشروع شخصي",
-  "description": "تصميم وتنفيذ نواة مرسل ومستقبل لبروتوكول ARINC 429 باستخدام Verilog على  Xilinx FPGA.",
-  "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
-  "link": "https://github.com/AQJED",
-  "category": "personal"
-}
+      }
   ]
 },
       "skills_header": "المهارات",
