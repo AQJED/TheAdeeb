@@ -183,6 +183,14 @@
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
 },
+	  {
+  "title": "CIGI Protocol Bridge & IG Visualization Middleware",
+  "subtitle": "Professional Application",
+  "description": "A low-level C++ middleware that enables high-fidelity real-time visualization by converting CIGI 3.1 host packets into CIGI 3.3. This ensures legacy simulation hosts can successfully drive modern Image Generators (IG) for immersive 3D rendering.",
+  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
+  "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
+  "category": "professional"
+},
     {
       "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
       "subtitle": "Professional Application",
@@ -191,14 +199,7 @@
       "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
       "category": "professional"
     },
-    {
-      "title": "CIGI to CIGI Middleware: Low-Level C++ Programming",
-      "subtitle": "Professional Application",
-      "description": "Facilitates communication between a Host Computer and an Image Generator by converting CIGI 3.1 packets into CIGI 3.3 packets.",
-      "technologies": "C++, CIGI, Boost, UDP, Git",
-      "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
-      "category": "professional"
-    },
+    
     {
       "title": "NMF-Based Facial Recognition System (MATLAB)",
       "subtitle": "Academic Project",
@@ -320,13 +321,14 @@
       "category": "professional"
     },
     {
-  "title": "تكامل SFATE التكتيكي والتحكم في السيناريو",
-  "subtitle": "تطبيق احترافي",
-  "description": "حل برمجيات وسيطة بلغة C++ مصمم لربط المضيفين الخارجيين بمحاكاة SFATE التكتيكية. يستخدم هذا النظام إضافات (Plugins) مخصصة لقيادة الكيانات وأتمتة التحكم في السيناريو، مع توفير مخرجات بروتوكول DIS لضمان التشغيل البيني بين الأنظمة المختلفة.",
-  "technologies": "C++, SFATE SDK, DIS Protocol, UDP, Boost, Multi-threading",
+  "title": "تكامل SFATE التكتيكي والتحكم بالسيناريو",
+  "subtitle": "تطبيق احترافي للتكامل والتحكم",
+  "description": "طبقة برمجية وسيطة مكتوبة بلغة C++ لربط أنظمة المضيف الخارجية بمحاكاة SFATE التكتيكية. يعتمد النظام على إضافات برمجية (Plugins) مخصصة للتحكم بالكيانات وأتمتة أوامر السيناريو (مثل: تحميل/بدء/إيقاف/إيقاف مؤقت)، مع بث رسائل بروتوكول DIS عبر UDP لضمان التشغيل البيني مع الأنظمة المختلفة.",
+  "technologies": "C++، SFATE SDK، بروتوكول DIS، UDP، Boost، تعدد الخيوط (Multi-threading)",
   "link": "https://aqjed.github.io/SFATE-Integration/",
-  "category": "professional"
+  "category": "احترافي"
 },
+
 {
   "title": "محاكي لطائرة يستخدم عصا التحكم وواجهة مستخدم متقدمة",
   "subtitle": "تطبيق احترافي",
@@ -335,6 +337,15 @@
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
 },
+	  {
+  "title": "وسيط CIGI لربط المضيف بمولّد الصور (IG)",
+  "subtitle": "تطبيق احترافي للتكامل المرئي",
+  "description": "برمجية وسيطة مكتوبة بلغة C++ تقوم بترقية رسائل CIGI الصادرة من الحاسب المضيف من الإصدار 3.1 إلى 3.3، لتمكين أنظمة المحاكاة القديمة من العمل بسلاسة مع مولّدات الصور الحديثة (IG). النتيجة هي تحديثات آنية لموضع/اتجاه الكيانات وتشغيل عرض ثلاثي الأبعاد أكثر دقة واستقرارًا.",
+  "technologies": "C++، CIGI 3.1/3.3، برمجة الشبكات (UDP)، Boost، Git",
+  "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
+  "category": "احترافي"
+},
+
 	  {
   "title": "مقيّم امتثال الأمن السيبراني المعتمد على LLM (AI)",
   "subtitle": "تطبيق احترافي",
@@ -359,14 +370,7 @@
       "link": "https://github.com/AQJED/Facial-Recognition-App-with-Matlab",
       "category": "academic"
     },
-    {
-      "title": "(CIGI to CIGI) مشروع برمجيات وسيطة",
-      "subtitle": "تطبيق احترافي",
-      "description": "تطبيق يسهل الاتصال بين الحاسوب المضيف ونظام توليد الصور عبر تحويل حزم CIGI 3.1 إلى CIGI 3.3.",
-      "technologies": "C++, CIGI, Boost, UDP, Git",
-      "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
-      "category": "professional"
-    },
+    
 
     {
       "title": "متحكم إشغال مواقف السيارات Real-Time (Verilog / FPGA)",
