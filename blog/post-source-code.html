@@ -87,26 +87,26 @@
             <h1>Read the Headers: Why I Stopped Reinventing the Data Stack</h1>
             
             <p>
-                Early in my simulation work, I wasted an embarrassing amount of time writing manual bit-shifting code. I thought I was just doing the obvious thing by packing and unpacking protocol data by hand. In reality, I was ignoring the tools already sitting in the project.
+                Early in my simulation work, I wasted an embarrassing amount of time writing manual bit-shifting code. I thought I was just doing the obvious thing by packing and unpacking protocol data by hand. In reality, I was ignoring the libraries that were already part of the codebase.
             </p>
 
             <p>
-                When you are locked on reading the data coming in, it is easy to forget to check whether the solution already exists in your include folder. That is how we end up building buggy, homemade versions of things that have been stable for years.
+                When you are locked on reading the data coming in, it is easy to forget to check whether the solution already exists in your include folder. That is how we end up building fragile, homemade versions of things that have been stable for years.
             </p>
 
             <p>
                 <strong>Bottom line: as an integration engineer, your first job is to understand the library interface before you write custom logic.</strong>
             </p>
 
-            <h3>The Two Choices: The Manual Scripter vs. The Library Researcher</h3>
+            <h3>The Two Choices: The Custom Builder vs. The Library User</h3>
             
             <p>
                 When you hit a new data structure or protocol, you usually end up in one of two roles:
             </p>
 
             <ul>
-                <li>The <strong>Bit-Shift Coder</strong> starts writing offsets and bit-shifts immediately.</li>
-                <li>The <strong>Header Reader</strong> audits the existing source first.</li>
+                <li>The <strong>Custom Builder</strong> starts writing offsets and bit-shifts immediately.</li>
+                <li>The <strong>Library User</strong> reviews the existing source first.</li>
             </ul>
 
             <h3>Option A: Writing from Scratch (The Trap)</h3>
@@ -115,7 +115,7 @@
             </p>
 
             <p>
-                How it usually goes: you identify the requirement, skip the library headers, then spend hours writing custom packing code that is fragile, full of off-by-one mistakes and alignment surprises.
+                How it usually goes: you identify the requirement, skip the library headers, then spend hours writing custom packing code that is fragile, full of indexing mistakes and alignment surprises.
             </p>
 
             <p>
