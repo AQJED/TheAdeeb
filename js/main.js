@@ -172,7 +172,7 @@
   "subtitle": "Professional Application",
   "description": "A C++ middleware solution designed to bridge external hosts with the SFATE tactical simulation. This system utilizes custom plugins to drive entities and automates scenario control, while also providing DIS protocol output for multi-platform interoperability.",
   "technologies": "C++, SFATE SDK, DIS Protocol, UDP, Boost, Multi-threading",
-  "link": "https://aqjed.github.io/SFATE-Integration/",
+  "link": "https://aqjed.github.io/DISCIGIMiddleware/",
   "category": "professional"
 },
    {
@@ -325,7 +325,7 @@
   "subtitle": "تطبيق احترافي للتكامل والتحكم",
   "description": "طبقة برمجية وسيطة مكتوبة بلغة C++ لربط أنظمة المضيف الخارجية بمحاكاة SFATE التكتيكية. يعتمد النظام على إضافات برمجية (Plugins) مخصصة للتحكم بالكيانات وأتمتة أوامر السيناريو (مثل: تحميل/بدء/إيقاف/إيقاف مؤقت)، مع بث رسائل بروتوكول DIS عبر UDP لضمان التشغيل البيني مع الأنظمة المختلفة.",
   "technologies": "C++، SFATE SDK، بروتوكول DIS، UDP، Boost، تعدد الخيوط (Multi-threading)",
-  "link": "https://aqjed.github.io/SFATE-Integration/",
+  "link": "https://aqjed.github.io/DISCIGIMiddleware/",
   "category": "احترافي"
 },
 
