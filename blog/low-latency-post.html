@@ -100,7 +100,7 @@
                 It is very easy to accidentally move data too much. A common pattern I see is: receive a UDP buffer, copy it into a struct, pass it to a function that copies it into a class, then copy it again into an output buffer.
             </p>
             <p>
-                Every memcpy adds a small amount of time, but more importantly, It causes the timing to fluctuate when the system is busy. In my middleware, I try to process data in place or use a single, pre-allocated buffer for the entire pipeline to keep memory movement at a minimum.
+                Every <code>memcpy</code> adds a small amount of time, but more importantly, It causes the timing to fluctuate when the system is busy. In my middleware, I try to process data in place or use a single, pre-allocated buffer for the entire pipeline to keep memory movement at a minimum.
             </p>
 
             <h3>Selective parsing</h3>
@@ -138,7 +138,7 @@
             <h3>Summary of what worked</h3>
             <ul>
                 <li>Measure the worst-case (p99), not the average. Averages hide the spikes that pilots actually feel.</li>
-                <li>Filter early. Check the port or the message ID before doing any heavy lifting.</li>
+                <li>Filter early. Check the port or the message ID before doing any real work.</li>
                 <li>Keep it predictable. Your code should do the exact same amount of work every time a packet arrives. If one path through your code is significantly "heavier" than another, you’ve just created a source of jitter.</li>
             </ul>
 
