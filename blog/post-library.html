@@ -84,74 +84,47 @@
             <h1>The High Cost of DIY Math: A Lesson in Systems Integration</h1>
             
             <p>
-                As a software integration engineer, you’re usually the translator between two systems that refuse to agree on basics. System A sends coordinates. System B tries to visualize them. Somewhere in the middle, things go weird.
+                As a software integration engineer, you’re usually the translator between two systems that don’t speak the same language. System A sends coordinates and System B tries to visualize them, but somewhere in the middle, the data go weird.
             </p>
 
             <p>
-                When the model starts drifting into the ocean or moving sideways, the first instinct is almost always “fix the math.” You open an editor, start writing trig, and convince yourself it’ll be faster than finding a library you already have.
+                When you see a model drifting into the ocean or moving sideways, it’s easy to think you can just write a few lines of trig and be done with it I mean, it feels faster to just do the math yourself than to go hunting for a library, but that’s usually where the trouble starts. In real integration work, your job is to be a reliable bridge builder, not a mathematician. I’ve found that using tested transforms is the only way to keep the data flow predictable.
             </p>
 
+            <h3>Two ways to handle the mismatch</h3>
             <p>
-                <strong>Bottom line: in real integration work, your job is to be a reliable bridge builder, not a mathematician. Use battle-tested conversions for standard transforms so you can focus on the actual data flow.</strong>
+                I usually see this go one of two ways: either you try to write the math by hand (the DIY route), or you plug in a library that has already solved these problems.
             </p>
 
-            <h3>The Two Choices: Custom Logic vs. Established Libraries</h3>
             
+            <h3>The Manual Trap</h3>
             <p>
-                When you hit a coordinate mismatch, you usually end up in one of two roles:
+                Manual implementation means taking raw input and applying your own rotation matrices or trig to produce what the target system expects. Usually, you spot the mismatch, grab some formulas from a wiki, and write C++ to handle the conversion.
             </p>
 
             <p>
-                The <strong>“DIY Converter”</strong> writes the transforms by hand.
-                <br>
-                The <strong>“Library User”</strong> plugs in a proven conversion path.
+                The problem is that it usually works in a quick test, but then it breaks as soon as the object moves far enough. Now you are fighting Earth curvature, reference frames, and classic issues like rotation singularities, where rotations fall apart because your axes line up. You end up wasting time fixing math instead of fixing the integration.
             </p>
 
-            <h3>Option A: The Manual Implementation</h3>
+            <h3>Using Proven Libraries</h3>
             <p>
-                Manual implementation means taking raw input and applying your own rotation matrices or trig to produce what the target system expects.
-            </p>
-
-            <p>
-                How it usually goes: you spot the mismatch, grab formulas from a wiki, write C++ to handle the conversion, then test it over a short distance.
+                The better way is to use a proven conversion utility and keep your code focused on the pipeline. Instead of hand-writing transforms, you call the conversion functions and push the results into your output packet.
             </p>
 
             <p>
-                The problem is it works in your quick test, then breaks as soon as the object moves far enough. Now you’re fighting Earth curvature, reference frames, and classic issues like gimbal lock, where rotations fall apart because axes line up.
-            </p>
-
-            <h3>Option B: Using Established Libraries</h3>
-            <p>
-                The better move is to use a proven conversion utility and keep your code focused on the pipeline. Instead of hand-writing transforms, you call the conversion functions and push the results into your output packet.
-            </p>
-
-            <p>
-                Here’s what that looks like in real middleware code, using one clean path for location and one for orientation:
+                Here is what that looks like in a clean middleware path:
             </p>
 
 <pre><code>MathConv::convertECEFToGeodetic(x, y, z, lat, lon, alt);
 auto ypr = MathConv::ecefToNedEulerDeg(orientation, lat, lon);</code></pre>
 
             <p>
-                The practical consequences are simple. You get consistent results across the full map, fewer surprises when objects move far, and fewer late-night debug sessions trying to prove your rotation matrix is “basically correct.” And when you command a right turn, the model actually turns right.
+                This gives you consistent results across the whole map. You don’t get those "random" drift issues, and when you command a right turn, the model actually turns right.
             </p>
 
             <h3>The Reality of Industry Habits</h3>
             <p>
-                People choose the manual route because they want to avoid dependencies or “bloat.” Vendors also love saying their coordinates are “standard,” but in practice you’ll still find mismatched conventions everywhere. North-up vs. axis flips, clockwise vs. counterclockwise, different frames that all claim to be the same.
-            </p>
-
-            <p>
-                Most of the time, the time you “save” by skipping a library gets paid back later with interest, right when you least want it.
-            </p>
-
-            <h3>Choosing Your Battles</h3>
-            <p>
-                The space is moving toward modular, plugin-style systems. With real-time protocols like CIGI or DIS, the math itself is not your unique value. The integration is.
-            </p>
-
-            <p>
-                If the math was invented 300 years ago, don’t reinvent it in your text editor. Reach for a library first, then spend your effort on the integration problems that actually need your expertise.
+                (Article continues...)
             </p>
 
         </article>
