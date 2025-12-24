@@ -17,23 +17,61 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-sans); line-height: 1.8; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+        }
+
         .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
         header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
         .back-link { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+
         article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
         .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
-        article h3 { color: var(--accent); font-family: var(--font-mono); margin-top: 40px; margin-bottom: 15px; font-size: 1.4rem; }
+        
+        article h3 { 
+            color: var(--accent); 
+            font-family: var(--font-mono); 
+            margin-top: 40px; 
+            margin-bottom: 15px; 
+            font-size: 1.4rem; 
+        }
+
         article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
         strong { color: white; }
-        pre { background: #000; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0; border: 1px solid #334155; }
+
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; color: #cbd5e1; font-size: 1.1rem; }
+
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #334155;
+        }
+
         code { font-family: var(--font-mono); color: var(--accent); }
-        footer { text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 80px; }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            margin-top: 80px;
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container">
             <nav>
@@ -48,29 +86,81 @@
             <span class="meta">TAGS: PORTABILITY // CPP // SYSTEMS-INTEGRATION</span>
             <h1>The Cross-Platform Headache: Architecture Lessons from a Multi-OS Build</h1>
             
-            <p>Dealing with data coming from different machines is a common headache for integration engineers. It’s usually the moment your assumptions about how data is stored and moved actually get tested. I’ve found that "portable code" isn't really portable if your heartbeat packets show up corrupted or your radar positions are offset just because the receiver is running a different OS.</p>
-
-            <p>The bottom line is that you have to design for universal compatibility from day one. You should always assume the hardware on the other end of the network isn't following the same rules as yours.</p>
-
-            <h3>Two Approaches to Cross-Platform Data</h3>
-            <p>When you’re building systems that have to talk across different operating systems, I usually see engineers take one of two paths:</p>
             <p>
-                <strong>The “Assumption-Driven Builder”:</strong> You assume an <code>int</code> is an <code>int</code> everywhere and let the compiler define the layout.<br>
-                <strong>The “Format-Defined Builder”:</strong> You don’t rely on the compiler. You specify fixed sizes, packing rules, and byte order.
+                Dealing with data coming from different machines is a common headache for integration engineers. It’s usually the moment your assumptions about how data is stored and moved actually get tested. I’ve found that "portable code" isn't really portable if your heartbeat packets show up corrupted or your radar positions are offset just because the receiver is running a different OS.
             </p>
 
-            <h3>The Layout Assumption Trap</h3>
-            <p>The Assumption approach is to use native types like <code>int</code> or <code>long</code> and trust the compiler to handle the alignment. I mean, it’s easy to write code on a Windows workstation using a <code>long</code> for a timestamp and then <code>memcpy</code> that struct into a network buffer.</p>
+            <p>
+                <strong>The bottom line is that you have to design for universal compatibility from day one. You should always assume the hardware on the other end of the network isn't following the same rules as yours.</strong>
+            </p>
 
-            <p>The problem is that type sizes aren't consistent. A <code>long</code> might be 4 bytes on Windows but 8 bytes on 64-bit Linux. On top of that, compilers insert "padding", those empty gaps between fields to help the CPU. If the sender and receiver don't insert those gaps in the exact same spots, your data stream shifts and the receiver just reads garbage.</p>
+            <h3>Two Approaches to Cross-Platform Data</h3>
+            
+            <p>
+                When you’re building systems that have to talk across different operating systems, I usually see engineers take one of two paths:
+            </p>
+
+            <ul>
+                <li>The <strong>“Assumption-Driven Builder”</strong>: You assume an int is an int everywhere and let the compiler define the layout.</li>
+                <li>The <strong>“Format-Defined Builder”</strong>: You don’t rely on the compiler. You specify fixed sizes, packing rules, and byte order.</li>
+            </ul>
+
+            <h3>The Layout Assumption Trap</h3>
+            
+            
+
+            <p>
+                The Assumption approach is to use native types like int or long and trust the compiler to handle the alignment. I mean, it’s easy to write code on a Windows workstation using a long for a timestamp and then memcpy that struct into a network buffer.
+            </p>
+
+            <p>
+                The problem is that type sizes aren't consistent. A long might be 4 bytes on Windows but 8 bytes on 64-bit Linux. On top of that, compilers insert "padding", those empty gaps between fields to help the CPU. If the sender and receiver don't insert those gaps in the exact same spots, your data stream shifts and the receiver just reads garbage.
+            </p>
+
+            
 
             <h3>Using Defensive Architecture</h3>
-            <p>A defensive architecture uses fixed-width integers and clear packing rules so the layout stays the same everywhere. Instead of a generic <code>int</code>, I prefer types like <code>uint32_t</code> or <code>int8_t</code> because they are guaranteed to be the same size on every machine. I also use fixed-size containers like <code>std::array</code> so the buffers don't depend on hidden compiler behavior.</p>
+            <p>
+                A defensive architecture uses fixed-width integers and clear packing rules so the layout stays the same everywhere. Instead of a generic int, I prefer types like uint32_t or int8_t because they are guaranteed to be the same size on every machine. I also use fixed-size containers like std::array so the buffers don't depend on hidden compiler behavior.
+            </p>
 
-            <p>Here is how I usually define those state fields in a header:</p>
+            <p>
+                Here is how I usually define those state fields in a header:
+            </p>
 
-<pre><code>// C++
-// SharedMemory.h (fixed-size state fields)</code></pre>
+<pre><code>// SharedMemory.h (fixed-size state fields)
+uint32_t getLatestIGFrame() const;
+int8_t   getCurrentDatabaseID() const;
+std::array&lt;uint8_t, MAX_PACKET_SIZE&gt; data;
+
+// EntityConfig.h (fixed-size IDs)
+uint16_t newEntityID;
+uint16_t igEntityType;</code></pre>
+
+            <p>
+                The practical result of this is that your layout becomes stable. You spend less time chasing "shifted field" bugs and more time actually shipping code. When a uint32_t is always 32 bits, you know exactly where your data starts and ends.
+            </p>
+
+            <h3>Dealing with Endianness and Sign Extension</h3>
+            
+            
+
+            <p>
+                The hardest bugs usually come from endianness, the byte order used to store numbers. Your workstation probably stores the most significant byte last, but some hardware expects it first. For a single byte (8-bit), there is no difference between little-endian and big-endian, 0xAB is stored as [AB] either way. The problem shows up the moment the value covers more than one byte. For example, the 16-bit value 0x1234 is [34 12] in little-endian and [12 34] in big-endian. If you skip the conversion, the receiver sees reversed numbers that make no sense. 
+            </p>
+            
+            <p>
+                I’ve also seen sign extension break parsing logic. If you use a signed char for raw data, a value like 255 can suddenly become a negative number when it’s converted to an integer. Using std::uint8_t for raw bytes is a boring but effective way to avoid that mess.
+            </p>
+
+            <h3>Build on Solid Basics</h3>
+            <p>
+                The industry is moving toward modular systems where different compilers and operating systems are mixed together, so hard-coding compiler-specific keywords turn into a build error later. I’ve found that the best way forward is to wrap any compiler-specific optimizations behind shared macros and strictly use fixed-width types for anything that leaves your program. 
+            </p>
+            
+            <p>
+                If you treat every data boundary as a potential failure point, you avoid the long and painful cross-platform debugging phase that usually kills a project's timeline.
+            </p>
 
         </article>
     </div>
@@ -80,5 +170,6 @@
             <p>Built by Adeeb. Code. Crash. Learn. Repeat.</p>
         </div>
     </footer>
+
 </body>
 </html>
