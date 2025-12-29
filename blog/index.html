@@ -47,11 +47,11 @@
 
         /* GRID */
         .latest-logs h2 { font-size: 2rem; margin-bottom: 40px; font-family: var(--font-mono); border-left: 4px solid var(--accent); padding-left: 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .card { background-color: var(--card-bg); border: 1px solid #334155; padding: 30px; border-radius: 8px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 15px; display: inline-block; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 15px; line-height: 1.3; }
         .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
         .read-more { font-family: var(--font-mono); font-size: 0.9rem; font-weight: bold; color: var(--text-main); }
         .read-more:hover { color: var(--accent); }
@@ -95,10 +95,10 @@
                         Most “best practices” articles assume you have a full team, QA, and time to experiment. A lot of real integration work doesn’t look like that.
                     </p>
                     <p style="margin-bottom: 20px;">
-                        This blog exists because I learned most lessons the hard way. I made the classic first-timer mistakes: wrong assumptions about byte order, type sizes, packet layouts, “clean” networks, and “safe” dev machines. When the other side is a black box, those mistakes get expensive fast.
+                        This blog exists because I learned most lessons the hard way. I made the classic first-timer mistakes: wrong assumptions about byte order, type sizes, packet layouts, “clean” networks, and “safe” dev machines.
                     </p>
                     <p>
-                        So I write these posts to document what actually went wrong, what I assumed, what broke, and what fixed it. The goal is simple: help beginners in cross-platform programming, and engineers integrating with existing hardware or software, avoid my rocky path and ship something reliable sooner.
+                        I document what actually went wrong, what I assumed, what broke, and what fixed it. The goal is simple: help engineers integrating with existing hardware or software avoid my rocky path and ship something reliable sooner.
                     </p>
                 </div>
                 <div class="stats">
@@ -127,10 +127,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">LATENCY // REAL-TIME // PERFORMANCE</span>
+                            <span class="tag">SIMULATION // MIDDLEWARE // PERFORMANCE</span>
                             <h3>Low Latency in Simulation Middleware: Practical Lessons</h3>
                             <p>
-                                Focus on predictability over raw speed. Lessons on reducing memory movement, selective parsing, and avoiding allocations to eliminate jitter in flight simulation.
+                                Performance usually comes down to predictability, not raw speed. Lessons on reducing memory movement, selective parsing, and avoiding allocations to eliminate jitter.
                             </p>
                         </div>
                         <a href="low-latency-post.html" class="read-more">Read Log →</a>
@@ -138,10 +138,10 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">LIBRARIES // ARCHITECTURE // EFFICIENCY</span>
-                            <h3>Read the Headers: Why I Stopped Reinventing the Data Stack</h3>
+                            <span class="tag">ENGINEERING // PROTOCOLS // ARCHITECTURE</span>
+                            <h3>Read the Headers First: Stop Writing Manual Bit Shifts</h3>
                             <p>
-                                An audit of why I stopped writing manual bit-shifting logic. Your primary job is to understand the existing library interface before you write a single line of custom code.
+                                Why I stopped writing manual bit-shifting code. A thirty-minute audit of library headers often saves three days of debugging fragile, homemade serialization logic.
                             </p>
                         </div>
                         <a href="post-source-code.html" class="read-more">Read Log →</a>
@@ -149,24 +149,13 @@
 
                     <article class="card">
                         <div>
-                            <span class="tag">PORTABILITY // CPP // SYSTEMS-INTEGRATION</span>
+                            <span class="tag">MULTI-OS // MEMORY // INTEGRATION</span>
                             <h3>The Cross-Platform Headache: Architecture Lessons from a Multi-OS Build</h3>
                             <p>
-                                Lessons on fixed-width integers and the sign extension disaster. Architect for universal compatibility by assuming the hardware on the other end is different from your own.
+                                Designing for universal compatibility. Practical lessons on fixed-width integers, layout assumption traps, and handling endianness correctly in a multi-OS environment.
                             </p>
                         </div>
                         <a href="post-cross-platform.html" class="read-more">Read Log →</a>
-                    </article>
-
-                    <article class="card">
-                        <div>
-                            <span class="tag">BOOST // SHARED-MEMORY // PERFORMANCE</span>
-                            <h3>The Buffer Paradox: Architectural Debt in Real-Time FIFOs</h3>
-                            <p>
-                                In high-performance simulation, a deep buffer is a reservoir for stale data. Why I moved from sequence-heavy FIFOs to a state-update model to ensure deterministic performance.
-                            </p>
-                        </div>
-                        <a href="post-shared-memory.html" class="read-more">Read Log →</a>
                     </article>
 
                     <article class="card">
@@ -178,28 +167,6 @@
                             </p>
                         </div>
                         <a href="post-mistakes.html" class="read-more">Read Log →</a>
-                    </article>
-
-                    <article class="card">
-                        <div>
-                            <span class="tag">GEODESY // MATH</span>
-                            <h3>The High Cost of DIY Math: A Lesson in Systems Integration</h3>
-                            <p>
-                                You are a bridge-builder, not a mathematician. Why custom trigonometry will fail as soon as your object moves far enough, and why you should stand on the shoulders of giants.
-                            </p>
-                        </div>
-                        <a href="post-library.html" class="read-more">Read Log →</a>
-                    </article>
-
-                    <article class="card">
-                        <div>
-                            <span class="tag">NETWORKING // BPF</span>
-                            <h3>Keeping the Noise Out: Why Kernel-Level Filtering Wins</h3>
-                            <p>
-                                Stop letting junk traffic wake up your application. Moving packet filtering from User-Space to the Kernel via BPF to ensure stable, real-time networking.
-                            </p>
-                        </div>
-                        <a href="post-bpf.html" class="read-more">Read Log →</a>
                     </article>
 
                 </div>
