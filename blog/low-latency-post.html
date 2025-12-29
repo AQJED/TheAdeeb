@@ -80,69 +80,92 @@
             </p>
 
             <p>
-                I’ve spent a lot of time building middleware that translates packets between different protocols. What I learned is that <strong>performance usually comes down to predictability, not raw speed.</strong> A stable processing time is more important than being “fast on average”.
+                I’ve spent a lot of time building middleware that translates packets between different protocols. What I learned is that performance usually comes down to predictability, not raw speed. A stable processing time is more important than being “fast on average”.
             </p>
 
-            <h3>Latency and Jitter</h3>
+            <h3>Latency and jitter</h3>
             <p>
                 People talk about latency a lot, but jitter is usually the bigger problem. A pilot can adapt to a steady 20 ms lag. They can’t adapt to a delay that jumps between 10 ms and 50 ms.
             </p>
             <p>
-                When I build middleware, I try to make the processing time as deterministic as possible. In my field, <strong>middleware with latency larger than 1 ms is considered slow.</strong>
+                When I build middleware, I try to make the processing time as deterministic as possible. And in my field, middleware with latency larger than 1 ms is considered slow.
             </p>
 
-            <h3>Where Delay Comes From</h3>
+            <h3>Where delay comes from</h3>
             <p>
-                I split delay into two areas:
-            </p>
-            <ul>
-                <li><strong>Network and OS delay:</strong> Time lost before your application even sees the packet (Kernel buffering, driver overhead, scheduling).</li>
-                <li><strong>Application delay:</strong> Time spent inside your code: parsing, coordinate conversion, and thread synchronization.</li>
-            </ul>
-
-            <h3>Reducing Memory Movement</h3>
-            <p>
-                It is very easy to accidentally move data too much. Each <code>memcpy</code> costs time, but the bigger issue is timing fluctuation. Under load, those extra copies don’t just add delay; they add inconsistency.
+                I split delay into two areas.
             </p>
             <p>
-                I try to process in place, or use a single pre-allocated buffer for the whole pipeline. <strong>I want the packet to arrive, get touched once, and leave.</strong>
+                The first is network and OS delay. This is time lost before your application even sees the packet. Kernel buffering, driver overhead, scheduling, and that kind of stuff. You have limited control here, outside of OS tuning and how you capture traffic.
+            </p>
+            <p>
+                The second is application delay. This is time spent inside your code: parsing, coordinate conversion, and thread synchronization. This is where you can adjust your code to avoid lag.
             </p>
 
-            <h3>Selective Parsing</h3>
+            <h3>Reducing memory movement</h3>
+            <p>
+                It is very easy to accidentally move data too much. The common pattern is: receive a UDP buffer, copy it into a struct, pass it to a function that copies it into a class, then copy it again into an output buffer.
+            </p>
+            <p>
+                Each memcpy costs time, but the bigger issue is timing fluctuation. Under load, those extra copies don’t just add delay. They add inconsistency.
+            </p>
+            <p>
+                In my middleware, I try to process in place, or use a single pre-allocated buffer for the whole pipeline. I want the packet to arrive, get touched once, and leave.
+            </p>
+
+            <h3>Selective parsing</h3>
             <p>
                 You don’t always need to decode the entire packet. If you receive a big CIGI or DIS update but you only need the ownship position, decoding everything is wasted CPU.
             </p>
             <p>
-                I found that adding early exit rules—like checking the packet ID and dropping it before the parsing logic starts—stabilized CPU load a lot. <strong>If you don’t need a packet, touch it for the shortest time possible.</strong>
+                I treat it like skimming a letter to confirm what it is, instead of reading every line.
+            </p>
+            <p>
+                I found that adding early exit rules, like checking the packet ID and dropping it before the parsing logic starts, stabilized CPU load a lot. If you don’t need a packet, touch it for the shortest time possible.
             </p>
 
-            <h3>Avoiding Allocations</h3>
+            <h3>Avoiding allocations in the time-sensitive path</h3>
             <p>
-                Calling <code>new</code> or <code>malloc</code> inside the main loop is a classic source of jitter. Most of the time allocations are fast, but sometimes they spike when the allocator needs to reclaim memory. 
+                Calling new or malloc inside the main loop is a classic source of jitter. Most of the time allocations are fast. Sometimes they spike. This is because the allocator may do extra work, like searching, syncing, or reclaiming memory. You don’t control when that happens, and it shows up as a random timing hit.
             </p>
             <p>
-                Fixed-size, pre-allocated buffers are boring, but they remove this variable. <strong>For middleware, boring is good.</strong>
-            </p>
-
-            <h3>Backlog and Outdated Data</h3>
-            <p>
-                If traffic spikes and you can’t keep up, a queue builds up. If you then try to process every packet in that queue, you end up forwarding outdated data.
-            </p>
-            <p>
-                In simulation, <strong>it is usually better to drop older state updates and jump to the newest one</strong> than to process everything in order. Sequence integrity matters for commands, but state updates are different.
+                Fixed-size, pre-allocated buffers are boring, but they remove this variable. For middleware, boring is good.
             </p>
 
-            <h3>Compromises in Real-Time Design</h3>
+            <h3>Backlog and outdated data</h3>
             <p>
-                There is no pure win. If you want lower receive delay, you can spin in a thread and catch the packet the moment it hits the NIC, but it burns a CPU core at 100%. 
+                This is a real-time problem. If traffic spikes and you can’t keep up, a queue builds up.
             </p>
             <p>
-                If you want more bandwidth, batching packets can help, but it ruins timing because the first packet must wait for the last. In flight sims, <strong>consistent spacing is usually more important than total capacity.</strong>
+                If you then try to process every packet in that queue, you end up forwarding outdated data. Even when the spike ends, your middleware is still behind real time because it’s busy catching up.
+            </p>
+            <p>
+                In simulation, it is usually better to drop older state updates and jump to the newest one than to process everything in order. Sequence integrity matters for some message types, but state updates are not one of them.
             </p>
 
-            <h3>What Worked For Me</h3>
+            <h3>Compromises in real-time design</h3>
             <p>
-                <strong>I don’t trust averages. I measure worst-case behavior, like p99,</strong> because averages hide the spikes that pilots actually feel. I filter early, check the message ID before doing any real work, and keep the hot path predictable. In a simulator, jitter is what people notice first.
+                There is no pure win. Every gain has a cost.
+            </p>
+            <p>
+                If you want lower receive delay, you can spin in a thread and catch the packet the moment it hits the NIC. This works, but it burns a CPU core at 100%, and it can create scheduling problems for the rest of the system.
+            </p>
+            <p>
+                If you want more Bandwidth, batching packets can help, but it ruins timing. This is because the first packet in the batch is forced to wait for the last one. In flight sims, consistent spacing is usually more important than total capacity.
+            </p>
+            <p>
+                Reliability is not one idea either. Some data is disposable. A position update can be dropped because a new one is coming soon. A control command like a gear toggle cannot be dropped because it might be sent once. In practice, this means different message types need different handling paths.
+            </p>
+
+            <h3>What worked for me</h3>
+            <p>
+                I don’t trust averages. I measure worst-case behavior, like p99, because averages hide the spikes that pilots actually feel.
+            </p>
+            <p>
+                I filter early. I check the port or message ID before doing any real work.
+            </p>
+            <p>
+                And I keep the hot path predictable. I want the code to do the same amount of work every time a packet arrives. If one path is heavier than another, that difference becomes jitter. In a simulator, jitter is what people notice first.
             </p>
 
         </article>
