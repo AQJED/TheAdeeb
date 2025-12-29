@@ -58,8 +58,6 @@
             overflow-x: auto;
             white-space: pre;
         }
-        .code-comment { color: #64748b; }
-        .code-keyword { color: var(--accent); }
 
         footer {
             text-align: center;
@@ -84,54 +82,76 @@
 
     <div class="container">
         <article>
-            <span class="meta">TAGS: ENGINEERING-WORKFLOW // ARCHITECTURE // SIM-PROTOCOLS</span>
+            <span class="meta">TAGS: ENGINEERING // PROTOCOLS // ARCHITECTURE</span>
             <h1>Read the Headers First: Stop Writing Manual Bit Shifts</h1>
             
             <p>
                 Early in my simulation work, I wasted an embarrassing amount of time writing manual bit-shifting code. I thought I was doing the obvious thing by packing and unpacking protocol data by hand. In reality, I was ignoring libraries that were already sitting in the codebase.
             </p>
-
             <p>
-                When you are locked in on the incoming data, it is easy to forget to check if the solution already exists in your include folder. <strong>As an integration engineer, your first job is to understand the library interface before you write custom logic.</strong>
+                When you are locked in on the incoming data, it is easy to forget to check if the solution already exists in your include folder. That is how we end up building fragile, homemade versions of things that have been stable for years.
+            </p>
+            <p>
+                Bottom line: as an integration engineer, your first job is to understand the library interface before you write custom logic.
             </p>
 
-            <h3>The Manual Bit-Shift Trap</h3>
+            <h3>Two choices I keep seeing</h3>
             <p>
-                Writing from scratch feels productive because you are constantly typing. But manual serialization is busy work. You skip the library headers, then you spend hours writing custom packing code that is <strong>fragile and full of indexing mistakes or alignment surprises.</strong>
+                When you hit a new data structure or protocol, you usually end up in one of two mindsets.
             </p>
             <p>
-                These quick fixes break as soon as something changes—like endianness, a protocol update, or alignment behavior on a different architecture. Then you become the only person who understands your math. That is a dangerous place for any project.
+                One mindset is to start writing offsets and bit-shifts immediately. It feels like progress because you are constantly typing.
+            </p>
+            <p>
+                The other mindset is to review what the project already has first. You open the headers, check the classes, and see how the library expects you to use it.
             </p>
 
-            <h3>Auditing Headers is the Better Move</h3>
+            <h3>Writing from scratch is a trap</h3>
             <p>
-                The better move is to treat the library source as your real documentation. Instead of guessing, open the <code>.h</code> and <code>.hpp</code> files and see what the original developers already built.
+                Writing from scratch usually means manually calculating byte offsets and bit-masks for serialization. It feels productive, but a lot of the time it is just busy work.
             </p>
             <p>
-                Before writing anything, search the library for keywords like <strong>pack, serialize, marshal, or unmarshal.</strong> Most of the time you will find the core work is already implemented and tested by people who solved the same problem years ago.
+                This is how it usually goes. You see the requirement, you skip the library headers, then you spend hours writing custom packing code that is fragile and full of indexing mistakes and alignment surprises.
+            </p>
+            <p>
+                And it becomes a maintenance problem fast. These quick fixes tend to break as soon as something changes, like endianness, a small protocol update, or alignment behavior on a different machine. Then you become the only person who understands your math. That is a bad place for any project.
+            </p>
+
+            <h3>Auditing headers is the better move</h3>
+            <p>
+                The better move is to treat the library source as your real documentation. Instead of guessing, open the .h and .hpp files and see what the original developers already built.
+            </p>
+            <p>
+                Before writing anything, I search the library for keywords like pack, serialize, marshal, or unmarshal. Most of the time you will find the core work is already implemented and tested by people who solved the same problem years ago.
+            </p>
+            <p>
+                In my case, the “manual bit shifting” phase ended the moment I started using the functions that were already there.
             </p>
 
             <div class="code-block">
-<span class="code-comment">// Using existing CCL and DIS methods instead of manual bit-shifting</span>
-<span class="code-keyword">const int</span> entityPackedSize = entityCtrl.Pack(&entityCtrl, outPtr, &animationTable);
+// Using existing CCL and DIS methods instead of manual bit-shifting
+const int entityPackedSize = entityCtrl.Pack(&entityCtrl, outPtr, &animationTable);
 entityPdu.unmarshal(ds);
             </div>
 
             <p>
-                The payoff is simple: <strong>Better reliability, faster development, and cleaner code.</strong> If the library doesn't do exactly what you need, extending a class is usually smarter than replacing the whole system.
+                The payoff is simple. Better reliability, faster development, and cleaner code. And if the library does not do exactly what you need, extending a class is usually smarter than replacing the whole system.
             </p>
 
-            <h3>The "No Time" Excuse</h3>
+            <h3>The “no time” excuse</h3>
             <p>
-                I hear "reading source takes too long" all the time. In reality, <strong>thirty minutes reading headers often saves three days of debugging.</strong>
+                I hear “reading source takes too long” all the time. In reality, thirty minutes reading headers often saves three days of debugging.
             </p>
             <p>
-                Libraries like OpenDIS or the CIGI Communication Library (CCL) are deep, but they were built by people dealing with the same problems you are dealing with now. The hard part is not that the solution is missing—it's accepting that you should stop guessing and go look.
+                Libraries like OpenDIS or the CIGI Communication Library (CCL) are deep, but they were built by people dealing with the same problems you are dealing with now. The hard part is not that the solution is missing. The hard part is accepting that you should stop guessing and go look.
             </p>
 
-            <h3>My New Rule</h3>
+            <h3>What I do now</h3>
             <p>
-                If I have been bit-shifting for more than ten minutes, I stop. I open <code>/include</code> and look for the professional solution first. <strong>It is usually already there, tested, and waiting for you to call it.</strong>
+                My rule now is simple. If I have been bit-shifting for more than ten minutes, I stop.
+            </p>
+            <p>
+                I open /include and look for the professional solution first. It is usually already there, tested, and cleaner, waiting for you to call it.
             </p>
 
         </article>
