@@ -46,19 +46,37 @@
         article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
         strong { color: white; }
 
-        ul { margin-bottom: 20px; padding-left: 20px; }
-        li { margin-bottom: 10px; color: #cbd5e1; font-size: 1.1rem; }
-
-        pre {
-            background: #000;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 20px 0;
-            border: 1px solid #334155;
+        code {
+            font-family: var(--font-mono);
+            background-color: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #f8fafc;
         }
 
-        code { font-family: var(--font-mono); color: var(--accent); }
+        .code-block {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: #94a3b8;
+            border-left: 4px solid var(--accent);
+            margin-bottom: 25px;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .img-placeholder {
+            background-color: #1e293b;
+            border: 1px dashed #475569;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
 
         footer {
             text-align: center;
@@ -83,83 +101,68 @@
 
     <div class="container">
         <article>
-            <span class="meta">TAGS: PORTABILITY // CPP // SYSTEMS-INTEGRATION</span>
+            <span class="meta">TAGS: CROSS-PLATFORM // C++ // MEMORY-LAYOUT</span>
             <h1>The Cross-Platform Headache: Architecture Lessons from a Multi-OS Build</h1>
             
             <p>
-                Dealing with data coming from different machines is a common headache for integration engineers. It’s usually the moment your assumptions about how data is stored and moved actually get tested. I’ve found that "portable code" isn't really portable if your heartbeat packets show up corrupted or your radar positions are offset just because the receiver is running a different OS.
+                Dealing with data coming from different machines is a common headache for integration engineers. It’s usually the moment your assumptions about how data is stored and moved get tested.
             </p>
 
             <p>
-                <strong>The bottom line is that you have to design for universal compatibility from day one. You should always assume the hardware on the other end of the network isn't following the same rules as yours.</strong>
+                The bottom line is that <strong>you have to design for universal compatibility from day one.</strong> You should always assume the hardware on the other end of the network isn’t following the same rules as yours.
             </p>
-
-            <h3>Two Approaches to Cross-Platform Data</h3>
-            
-            <p>
-                When you’re building systems that have to talk across different operating systems, I usually see engineers take one of two paths:
-            </p>
-
-            <ul>
-                <li>The <strong>“Assumption-Driven Builder”</strong>: You assume an int is an int everywhere and let the compiler define the layout.</li>
-                <li>The <strong>“Format-Defined Builder”</strong>: You don’t rely on the compiler. You specify fixed sizes, packing rules, and byte order.</li>
-            </ul>
 
             <h3>The Layout Assumption Trap</h3>
-            
-            
-
             <p>
-                The Assumption approach is to use native types like int or long and trust the compiler to handle the alignment. I mean, it’s easy to write code on a Windows workstation using a long for a timestamp and then memcpy that struct into a network buffer.
+                The assumption approach is to use native types like <code>int</code> or <code>long</code> and trust the compiler to handle alignment and layout.
             </p>
-
             <p>
-                The problem is that type sizes aren't consistent. A long might be 4 bytes on Windows but 8 bytes on 64-bit Linux. On top of that, compilers insert "padding", those empty gaps between fields to help the CPU. If the sender and receiver don't insert those gaps in the exact same spots, your data stream shifts and the receiver just reads garbage.
+                I did this early on. It’s easy to write code on a Windows workstation, use a <code>long</code> for a timestamp, define a struct that “looks correct”, and then <code>memcpy</code> that struct straight into a network buffer.
             </p>
-
-            
+            <p>
+                The problem is that type sizes aren’t consistent. A <code>long</code> might be 4 bytes on Windows but 8 bytes on 64-bit Linux. On top of that, compilers insert padding. <strong>If the sender and receiver don’t insert those gaps in the exact same spots, your data stream shifts and the receiver reads garbage.</strong>
+            </p>
 
             <h3>Using Defensive Architecture</h3>
             <p>
-                A defensive architecture uses fixed-width integers and clear packing rules so the layout stays the same everywhere. Instead of a generic int, I prefer types like uint32_t or int8_t because they are guaranteed to be the same size on every machine. I also use fixed-size containers like std::array so the buffers don't depend on hidden compiler behavior.
+                A defensive architecture uses fixed-width integers and clear packing rules. Instead of a generic <code>int</code>, I prefer types like <code>uint32_t</code> or <code>int8_t</code> because they are guaranteed to be the same size on every machine.
             </p>
 
-            <p>
-                Here is how I usually define those state fields in a header:
-            </p>
-
-<pre><code>// SharedMemory.h (fixed-size state fields)
+            <div class="code-block">
+// SharedMemory.h (fixed-size state fields)
 uint32_t getLatestIGFrame() const;
 int8_t   getCurrentDatabaseID() const;
-std::array&lt;uint8_t, MAX_PACKET_SIZE&gt; data;
+std::array<uint8_t, MAX_PACKET_SIZE> data;
 
 // EntityConfig.h (fixed-size IDs)
 uint16_t newEntityID;
-uint16_t igEntityType;</code></pre>
+uint16_t igEntityType;
+            </div>
 
             <p>
-                The practical result of this is that your layout becomes stable. You spend less time chasing "shifted field" bugs and more time actually shipping code. When a uint32_t is always 32 bits, you know exactly where your data starts and ends.
+                When a <code>uint32_t</code> is always 32 bits, you know exactly where your data starts and ends.
             </p>
 
-            <h3>Dealing with Endianness and Sign Extension</h3>
-            
+            <h3>Endianness and Sign Mistakes</h3>
+            <p>
+                The hardest bugs usually come from endianness. Your workstation probably stores the most significant byte last (little-endian), but some hardware expects it first (big-endian).
+            </p>
+
             
 
             <p>
-                The hardest bugs usually come from endianness, the byte order used to store numbers. Your workstation probably stores the most significant byte last, but some hardware expects it first. For a single byte (8-bit), there is no difference between little-endian and big-endian, 0xAB is stored as [AB] either way. The problem shows up the moment the value covers more than one byte. For example, the 16-bit value 0x1234 is [34 12] in little-endian and [12 34] in big-endian. If you skip the conversion, the receiver sees reversed numbers that make no sense. 
+                For example, the 16-bit value <code>0x1234</code> is <code>[34 12]</code> in little-endian and <code>[12 34]</code> in big-endian. If you skip the conversion, the receiver sees reversed numbers that make no sense.
             </p>
-            
             <p>
-                I’ve also seen sign extension break parsing logic. If you use a signed char for raw data, a value like 255 can suddenly become a negative number when it’s converted to an integer. Using std::uint8_t for raw bytes is a boring but effective way to avoid that mess.
+                I’ve also seen sign extension break parsing logic. If you use a signed char for raw data, a value like 255 can suddenly become a negative number when converted to an integer. <strong>Using <code>std::uint8_t</code> for raw bytes is a boring but effective way to avoid that mess.</strong>
             </p>
 
             <h3>Build on Solid Basics</h3>
             <p>
-                The industry is moving toward modular systems where different compilers and operating systems are mixed together, so hard-coding compiler-specific keywords turn into a build error later. I’ve found that the best way forward is to wrap any compiler-specific optimizations behind shared macros and strictly use fixed-width types for anything that leaves your program. 
+                The industry is moving toward modular systems where different compilers and operating systems are mixed together. Hard-coding compiler-specific keywords turns into a build error later.
             </p>
-            
             <p>
-                If you treat every data boundary as a potential failure point, you avoid the long and painful cross-platform debugging phase that usually kills a project's timeline.
+                If you treat every data boundary as a potential failure point, you avoid the long and painful cross-platform debugging phase that usually kills a project’s timeline.
             </p>
 
         </article>
