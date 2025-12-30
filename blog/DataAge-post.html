@@ -1,341 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Age vs. Latency | The Solo Developer</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --accent: #10b981;
-            --accent-hover: #34d399;
-            --font-mono: 'Courier New', Courier, monospace;
-            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<style>
+    /* --- DIAGRAM CONTAINER --- */
+    .latency-diag-container {
+        margin: 40px 0;
+        padding: 25px; /* Slightly reduced padding */
+        background-color: #162032;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        overflow-x: auto; /* Safety net: prevents spilling on small windows */
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* --- PIPELINE FLOW --- */
+    .diag-flow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        margin-bottom: 30px;
+        min-width: 650px; /* Ensures the diagram doesn't squash too much before mobile-view kicks in */
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.8;
-        }
+    .diag-node {
+        background-color: var(--card-bg);
+        border: 1px solid #334155;
+        padding: 12px 10px;
+        border-radius: 4px;
+        flex: 0 1 120px; /* More flexible width */
+        min-width: 100px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    .diag-node.middleware {
+        border: 1px solid var(--accent);
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+    }
 
-        header { padding: 20px 0; border-bottom: 1px solid #334155; margin-bottom: 60px; }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: var(--font-mono); font-weight: bold; font-size: 1.2rem; color: var(--accent); }
-        .back-link { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+    .diag-node.result {
+        border-style: dashed;
+        background-color: transparent;
+    }
 
-        article h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
-        .meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 40px; display: block; }
-        
-        article h3 { 
-            color: var(--accent); 
-            font-family: var(--font-mono); 
-            margin-top: 40px; 
-            margin-bottom: 15px; 
-            font-size: 1.4rem; 
-        }
+    .node-label {
+        font-family: var(--font-mono);
+        color: #e2e8f0 !important;
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
 
-        article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
+    .middleware .node-label {
+        color: var(--accent) !important;
+    }
 
-        /* DIAGRAM STYLING WITH VISIBILITY FIXES */
-        .latency-diag-container {
-            margin: 40px 0;
-            padding: 30px;
-            background-color: #162032;
-            border-radius: 8px;
-            border: 1px solid #334155;
-        }
-        .diag-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        .diag-node {
-            background-color: var(--card-bg);
-            border: 1px solid #334155;
-            padding: 15px;
-            border-radius: 4px;
-            min-width: 130px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
-        .diag-node.middleware {
-            border: 1px solid var(--accent);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
-        }
-        .diag-node.result {
-            border-style: dashed;
-            background-color: transparent;
-        }
-        .node-label {
-            font-family: var(--font-mono);
-            color: #e2e8f0 !important; /* Forced visibility */
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .middleware .node-label {
-            color: var(--accent) !important;
-        }
-        .node-sub {
-            font-size: 0.75rem;
-            color: #94a3b8 !important; /* Forced visibility */
-            margin-top: 4px;
-        }
-        .diag-connector {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1;
-            min-width: 80px;
-        }
-        .conn-text {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #94a3b8 !important; /* Forced visibility */
-            text-align: center;
-            line-height: 1.2;
-            margin-bottom: 5px;
-        }
-        .conn-arrow {
-            color: #475569 !important;
-            font-size: 1.2rem;
-        }
-        .data-age-bar {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #334155;
-        }
-        .age-label {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent) !important;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-        .age-line {
-            height: 8px;
-            background: #334155;
-            border-radius: 4px;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .age-fill {
-            width: 95%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent));
-            border-radius: 4px;
-        }
-        .age-arrow {
-            color: var(--accent) !important;
-            margin-left: -5px;
-            font-size: 0.8rem;
-        }
-        .age-caption {
-            font-size: 0.8rem;
-            color: #94a3b8 !important;
-            margin-top: 8px;
-            text-align: right;
-            font-style: italic;
-        }
-        .diag-caption {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #94a3b8 !important;
-            line-height: 1.5;
-        }
+    .node-sub {
+        font-size: 0.7rem;
+        color: #94a3b8 !important;
+        margin-top: 4px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #334155;
-            margin-top: 80px;
-        }
+    .diag-connector {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1 1 40px; /* Allows connectors to shrink first */
+        min-width: 30px;
+    }
 
-        @media (max-width: 768px) {
-            .diag-flow { flex-direction: column; }
-            .diag-connector { padding: 10px 0; }
-            .conn-arrow { transform: rotate(90deg); }
-        }
-    </style>
-</head>
-<body>
+    .conn-text {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: #94a3b8 !important;
+        text-align: center;
+        line-height: 1.1;
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">&lt;Solo_Dev /&gt;</div>
-                <a href="index.html" class="back-link">← Back to Logs</a>
-            </nav>
+    .conn-arrow {
+        color: #475569 !important;
+        font-size: 1rem;
+    }
+
+    /* --- DATA AGE BAR --- */
+    .data-age-bar {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #334155;
+    }
+
+    .age-label {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--accent) !important;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+
+    .age-line {
+        height: 8px;
+        background: #334155;
+        border-radius: 4px;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .age-fill {
+        width: 95%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--accent));
+        border-radius: 4px;
+    }
+
+    .age-arrow {
+        color: var(--accent) !important;
+        margin-left: -5px;
+        font-size: 0.8rem;
+    }
+
+    .age-caption {
+        font-size: 0.75rem;
+        color: #94a3b8 !important;
+        margin-top: 8px;
+        text-align: right;
+        font-style: italic;
+    }
+
+    .diag-caption {
+        margin-top: 20px;
+        font-size: 0.85rem;
+        color: #94a3b8 !important;
+        line-height: 1.5;
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+        .diag-flow { 
+            flex-direction: column; 
+            min-width: auto; 
+        }
+        .diag-node { width: 100%; flex: 1 1 auto; }
+        .diag-connector { padding: 10px 0; }
+        .conn-arrow { transform: rotate(90deg); }
+    }
+</style>
+
+<figure class="latency-diag-container" role="group" aria-label="End-to-end latency and data age pipeline">
+    <div class="diag-flow">
+        <div class="diag-node">
+            <span class="node-label">Black Box</span>
+            <span class="node-sub">Event Happens</span>
         </div>
-    </header>
-
-    <div class="container">
-        <article>
-            <span class="meta">TAGS: SIMULATION // ARCHITECTURE // PERFORMANCE</span>
-            <h1>Data Age vs. Latency: What “Performance” Means in Integrated Simulation Systems</h1>
-            
-            <p>
-                In an integrated simulation setup, people use the word performance like it is one number. In reality, it is usually two different problems mixed together.
-            </p>
-            <p>
-                One problem is latency. The other is data age. If you don’t separate them, you end up blaming the wrong machine, or you waste time optimizing code that was never the issue.
-            </p>
-            <p>
-                Latency is the time it takes data to move through a stage. In middleware terms, it is what happens from the moment the packet reaches your application until the moment you send it out. This is the part you own.
-            </p>
-            <p>
-                Data age is how old the state is when it becomes useful at the other end. Data age is not only your middleware. It belongs to the whole chain.
-            </p>
-            <p>
-                It can grow before it reaches you. It can also grow after you send it. In integration work, that is normal.
-            </p>
-            <p>
-                There is also a third actor people forget. Network infrastructure adds its own delay. Switches, routers, firewalls, even weird NIC driver paths. That latency belongs to neither the producer nor your middleware. It is just part of the pipeline.
-            </p>
-
-            <h3>A formula that helps</h3>
-            <p>
-                When I want to explain data age in a simple way, I think of it like this:
-            </p>
-            <p>
-                Data age = latency + sampling delay + buffering
-            </p>
-
-            <figure class="latency-diag-container" role="group" aria-label="End-to-end latency and data age pipeline">
-                <div class="diag-flow">
-                    <div class="diag-node blackbox">
-                        <span class="node-label">Black Box</span>
-                        <span class="node-sub">Event Happens</span>
-                    </div>
-                    <div class="diag-connector">
-                        <span class="conn-text">Sampling +<br>Network</span>
-                        <span class="conn-arrow">──▶</span>
-                    </div>
-                    <div class="diag-node middleware">
-                        <span class="node-label">Middleware</span>
-                        <span class="node-sub">Processing</span>
-                    </div>
-                    <div class="diag-connector">
-                        <span class="conn-text">Network<br>Latency</span>
-                        <span class="conn-arrow">──▶</span>
-                    </div>
-                    <div class="diag-node blackbox">
-                        <span class="node-label">Black Box</span>
-                        <span class="node-sub">Internal logic</span>
-                    </div>
-                    <div class="diag-connector">
-                        <span class="conn-text">Display<br>Latency</span>
-                        <span class="conn-arrow">──▶</span>
-                    </div>
-                    <div class="diag-node result">
-                        <span class="node-label">Visible Result</span>
-                    </div>
-                </div>
-                <div class="data-age-bar">
-                    <div class="age-label">DATA AGE</div>
-                    <div class="age-line">
-                        <div class="age-fill"></div>
-                        <div class="age-arrow">▶</div>
-                    </div>
-                    <div class="age-caption">Grows across the whole chain</div>
-                </div>
-                <figcaption class="diag-caption">
-                    End-to-end view. Latency is internal to each stage; Data Age is the cumulative sum of the entire pipeline.
-                </figcaption>
-            </figure>
-
-            <p>
-                Latency is the travel and processing time through stages. Sampling delay is the “waiting for the next update” problem. Buffering is what happens when any box in the middle decides to queue instead of passing data forward.
-            </p>
-            <p>
-                This formula is not strict math. It is a mental model. But it helps you stop mixing different problems together.
-            </p>
-            <p>
-                If your producer publishes at 5 Hz, the sampling delay is already there. Even with a perfect network and perfect middleware, you are still waiting for the next update.
-            </p>
-            <p>
-                If any system buffers deeply, buffering becomes the real enemy. Your middleware can run fast and still deliver old state because it arrived late to you.
-            </p>
-
-            <h3>What you control and what you don’t</h3>
-            <p>
-                Most machines in an integration are a black box. You don’t rewrite their internal architecture. You don’t get to change how they schedule threads or manage queues.
-            </p>
-            <p>
-                So your job is to control your boundary. Receive in the shortest time possible. Do predictable work. Send in the shortest time possible. Then measure your portion and document it.
-            </p>
-            <p>
-                That is how you prove whether the delay is created inside your software or outside it.
-            </p>
-            <p>
-                Black box does not always mean zero control though. With documentation and experience, you can sometimes tune these systems without touching their code. Update rates, buffer depths, network settings, priority modes, and similar controls. Sometimes it helps a lot, sometimes it barely moves, but it is the only lever you usually have.
-            </p>
-
-            <h3>A real example I faced</h3>
-            <p>
-                I had to integrate two systems that were not designed for each other.
-            </p>
-            <p>
-                One system was a simulation engine. It was designed to send entity updates at a low rate, around 5 Hz. That was not a bug. That was the design. It also reported velocity and speed, but it still sent updates at that slow rate.
-            </p>
-            <p>
-                On the other side was an image generator. The IG needs high-rate position updates so it can draw the entity every frame and keep the motion smooth. If the position only jumps every 200 ms, the aircraft doesn’t look like it is flying. It looks like it is teleporting.
-            </p>
-            <p>
-                The key detail here is that the IG did not predict the aircraft position from velocity. Its internal logic cared about position updates. Velocity being present in the packet did not mean the IG was using it for extrapolation.
-            </p>
-            <p>
-                So you end up with a mismatch in system nature.
-            </p>
-            <p>
-                The simulation engine was built to publish entity state at a low rate. The image generator was built to consume high-rate position updates for smooth rendering.
-            </p>
-            <p>
-                Here you don’t have control over the internal code of either system. The job is still to make them integrate.
-            </p>
-            <p>
-                This is where data age and sampling delay become more useful than raw middleware latency. My middleware could be fast. The motion could still look bad, because the producer is sampling slowly and the IG is not filling the gaps.
-            </p>
-            <p>
-                The fix was adjusting the system settings, using documentation and experience, to push the update rate to a rate that is smooth enough for the IG to draw the airplane position in real time without making it look like it is teleporting.
-            </p>
-            <p>
-                This is the reality of integration work. Sometimes performance is not about “making code faster”. Sometimes performance is about aligning two systems that were built with different purposes.
-            </p>
-
-            <h3>The simple takeaway</h3>
-            <p>
-                Latency tells you how fast your stage is.
-            </p>
-            <p>
-                Data age tells you how current the whole system is.
-            </p>
-            <p>
-                And in integrated simulation systems, data age is often controlled by sampling delay, buffering, and even network infrastructure. Your middleware can only control its piece. The rest is black boxes, documentation, and whatever tuning the system allows.
-            </p>
-
-        </article>
+        <div class="diag-connector">
+            <span class="conn-text">Sampling +<br>Network</span>
+            <span class="conn-arrow">──▶</span>
+        </div>
+        <div class="diag-node middleware">
+            <span class="node-label">Middleware</span>
+            <span class="node-sub">Processing</span>
+        </div>
+        <div class="diag-connector">
+            <span class="conn-text">Network<br>Latency</span>
+            <span class="conn-arrow">──▶</span>
+        </div>
+        <div class="diag-node">
+            <span class="node-label">Black Box</span>
+            <span class="node-sub">Internal logic</span>
+        </div>
+        <div class="diag-connector">
+            <span class="conn-text">Display<br>Latency</span>
+            <span class="conn-arrow">──▶</span>
+        </div>
+        <div class="diag-node result">
+            <span class="node-label">Visible Result</span>
+        </div>
     </div>
-
-    <footer>
-        <div class="container">
-            <p>Built by Adeeb. Code. Crash. Learn. Repeat.</p>
+    <div class="data-age-bar">
+        <div class="age-label">DATA AGE</div>
+        <div class="age-line">
+            <div class="age-fill"></div>
+            <div class="age-arrow">▶</div>
         </div>
-    </footer>
-
-</body>
-</html>
+        <div class="age-caption">Grows across the whole chain</div>
+    </div>
+    <figcaption class="diag-caption">
+        End-to-end view. Latency is internal to each stage; Data Age is the cumulative sum of the entire pipeline.
+    </figcaption>
+</figure>
