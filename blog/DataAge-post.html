@@ -44,7 +44,117 @@
         }
 
         article p { margin-bottom: 20px; font-size: 1.1rem; color: #cbd5e1; }
-        strong { color: white; }
+
+        /* DIAGRAM STYLING WITH VISIBILITY FIXES */
+        .latency-diag-container {
+            margin: 40px 0;
+            padding: 30px;
+            background-color: #162032;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        .diag-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .diag-node {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 4px;
+            min-width: 130px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .diag-node.middleware {
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+        }
+        .diag-node.result {
+            border-style: dashed;
+            background-color: transparent;
+        }
+        .node-label {
+            font-family: var(--font-mono);
+            color: #e2e8f0 !important; /* Forced visibility */
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .middleware .node-label {
+            color: var(--accent) !important;
+        }
+        .node-sub {
+            font-size: 0.75rem;
+            color: #94a3b8 !important; /* Forced visibility */
+            margin-top: 4px;
+        }
+        .diag-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            min-width: 80px;
+        }
+        .conn-text {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #94a3b8 !important; /* Forced visibility */
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        .conn-arrow {
+            color: #475569 !important;
+            font-size: 1.2rem;
+        }
+        .data-age-bar {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+        }
+        .age-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent) !important;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .age-line {
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .age-fill {
+            width: 95%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent));
+            border-radius: 4px;
+        }
+        .age-arrow {
+            color: var(--accent) !important;
+            margin-left: -5px;
+            font-size: 0.8rem;
+        }
+        .age-caption {
+            font-size: 0.8rem;
+            color: #94a3b8 !important;
+            margin-top: 8px;
+            text-align: right;
+            font-style: italic;
+        }
+        .diag-caption {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8 !important;
+            line-height: 1.5;
+        }
 
         footer {
             text-align: center;
@@ -53,6 +163,12 @@
             font-size: 0.9rem;
             border-top: 1px solid #334155;
             margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .diag-flow { flex-direction: column; }
+            .diag-connector { padding: 10px 0; }
+            .conn-arrow { transform: rotate(90deg); }
         }
     </style>
 </head>
@@ -91,7 +207,7 @@
                 There is also a third actor people forget. Network infrastructure adds its own delay. Switches, routers, firewalls, even weird NIC driver paths. That latency belongs to neither the producer nor your middleware. It is just part of the pipeline.
             </p>
 
-            <h3>A formula that helps</h3>
+            <h3>A mental formula that helps</h3>
             <p>
                 When I want to explain data age in a simple way, I think of it like this:
             </p>
@@ -99,7 +215,48 @@
                 Data age = latency + sampling delay + buffering
             </p>
 
-            
+            <figure class="latency-diag-container" role="group" aria-label="End-to-end latency and data age pipeline">
+                <div class="diag-flow">
+                    <div class="diag-node blackbox">
+                        <span class="node-label">Black Box</span>
+                        <span class="node-sub">Event Happens</span>
+                    </div>
+                    <div class="diag-connector">
+                        <span class="conn-text">Sampling +<br>Network</span>
+                        <span class="conn-arrow">──▶</span>
+                    </div>
+                    <div class="diag-node middleware">
+                        <span class="node-label">Middleware</span>
+                        <span class="node-sub">Processing</span>
+                    </div>
+                    <div class="diag-connector">
+                        <span class="conn-text">Network<br>Latency</span>
+                        <span class="conn-arrow">──▶</span>
+                    </div>
+                    <div class="diag-node blackbox">
+                        <span class="node-label">Black Box</span>
+                        <span class="node-sub">Internal logic</span>
+                    </div>
+                    <div class="diag-connector">
+                        <span class="conn-text">Display<br>Latency</span>
+                        <span class="conn-arrow">──▶</span>
+                    </div>
+                    <div class="diag-node result">
+                        <span class="node-label">Visible Result</span>
+                    </div>
+                </div>
+                <div class="data-age-bar">
+                    <div class="age-label">DATA AGE</div>
+                    <div class="age-line">
+                        <div class="age-fill"></div>
+                        <div class="age-arrow">▶</div>
+                    </div>
+                    <div class="age-caption">Grows across the whole chain</div>
+                </div>
+                <figcaption class="diag-caption">
+                    End-to-end view. Latency is internal to each stage; Data Age is the cumulative sum of the entire pipeline.
+                </figcaption>
+            </figure>
 
             <p>
                 Latency is the travel and processing time through stages. Sampling delay is the “waiting for the next update” problem. Buffering is what happens when any box in the middle decides to queue instead of passing data forward.
