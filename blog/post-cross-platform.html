@@ -60,12 +60,17 @@
             border-radius: 8px;
             font-family: var(--font-mono);
             font-size: 0.95rem;
-            color: #94a3b8;
+            color: #e2e8f0;
             border-left: 4px solid var(--accent);
             margin-bottom: 25px;
             overflow-x: auto;
             white-space: pre;
         }
+
+        /* Syntax Highlighting */
+        .code-comment { color: #10b981; font-style: italic; }
+        .code-keyword { color: #60a5fa; }
+        .code-func { color: #34d399; }
 
         footer {
             text-align: center;
@@ -140,14 +145,14 @@
             </p>
 
             <div class="code-block">
-// SharedMemory.h (fixed-size state fields)
-uint32_t getLatestIGFrame() const;
-int8_t   getCurrentDatabaseID() const;
-std::array&lt;uint8_t, MAX_PACKET_SIZE&gt; data;
+<span class="code-comment">// SharedMemory.h (fixed-size state fields)</span>
+<span class="code-keyword">uint32_t</span> <span class="code-func">getLatestIGFrame</span>() <span class="code-keyword">const</span>;
+<span class="code-keyword">int8_t</span>   <span class="code-func">getCurrentDatabaseID</span>() <span class="code-keyword">const</span>;
+std::array&lt;<span class="code-keyword">uint8_t</span>, MAX_PACKET_SIZE&gt; data;
 
-// EntityConfig.h (fixed-size IDs)
-uint16_t newEntityID;
-uint16_t igEntityType;
+<span class="code-comment">// EntityConfig.h (fixed-size IDs)</span>
+<span class="code-keyword">uint16_t</span> newEntityID;
+<span class="code-keyword">uint16_t</span> igEntityType;
             </div>
 
             <p>
