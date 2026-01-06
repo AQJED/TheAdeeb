@@ -52,12 +52,17 @@
             border-radius: 8px;
             font-family: var(--font-mono);
             font-size: 0.95rem;
-            color: #94a3b8;
+            color: #e2e8f0;
             border-left: 4px solid var(--accent);
             margin-bottom: 25px;
             overflow-x: auto;
             white-space: pre;
         }
+
+        /* Syntax Highlighting */
+        .code-comment { color: #10b981; font-style: italic; }
+        .code-keyword { color: #60a5fa; }
+        .code-func { color: #34d399; }
 
         footer {
             text-align: center;
@@ -129,9 +134,9 @@
             </p>
 
             <div class="code-block">
-// Using existing CCL and DIS methods instead of manual bit-shifting
-const int entityPackedSize = entityCtrl.Pack(&entityCtrl, outPtr, &animationTable);
-entityPdu.unmarshal(ds);
+<span class="code-comment">// Using existing CCL and DIS methods instead of manual bit-shifting</span>
+<span class="code-keyword">const int</span> entityPackedSize = entityCtrl.<span class="code-func">Pack</span>(&amp;entityCtrl, outPtr, &amp;animationTable);
+entityPdu.<span class="code-func">unmarshal</span>(ds);
             </div>
 
             <p>
