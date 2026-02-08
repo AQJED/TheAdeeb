@@ -114,13 +114,13 @@
       "nav_endorsements": "Endorsements",
       "hero_prefix": "I'm",
       "hero_title": "Adeeb Alqahtani",
-      "hero_subtitle": "Software Integration Engineer, Real-Time Systems Engineer, Simulation Interoperability Engineer", 
+      "hero_subtitle": "Software Integration Engineer, Real-Time Systems Engineer, Defense Systems Integration Engineer", 
       "btn_hire": "Blog",
       "btn_resume": "My Resume",
       "btn_lang": "عربي",
       "about_title": "About Me",
       "about_subtitle": "12+ Years Experience",
-      "about_text": "I'm a Software Integration Engineer in defense and aerospace, specializing in real-time middleware and interface systems. I hold a B.S. in Computer Engineering (high-performance and embedded systems) from California State University, San Bernardino and an A.S. in Electrical & Electronics (Instrumentation and Control Systems) from Yanbu Industrial College. \nMy technical expertise includes designing and integrating low latency software and hardware for mission critical defense applications, including C/C++ development for flight simulators, digital and analog circuit design, and hardware and software integration that connects sensors, avionics, and real time training systems.",
+      "about_text": "Software Integration Engineer specialized in defense systems, working on middleware development, systems integration, and performance optimization for sensitive defense applications and flight simulators.",
 	  "exp_header": "My Resume",
       "exp_subheader": "Professional & Academic Career",
       "exp_item1_title": "Software Integration Engineer",
@@ -175,73 +175,41 @@
   "link": "https://aqjed.github.io/DISCIGIMiddleware/",
   "category": "professional"
 },
-   {
+   
+	  {
+  "title": "Bell 412 Mission Simulator – Middleware System Development",
+  "subtitle": "Professional Application",
+  "description": "Middleware system for the Bell 412 Mission Simulator, interfacing the flight dynamics engine with key subsystems and a custom IOS for scenario control.",
+  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
+  "link": "",
+  "category": "professional"
+},
+    {
+      "title": "Engagement Skills Trainer (EST) Shooting Simulator",
+      "subtitle": "Professional Application",
+      "description": "Shooting skills training simulator using computer vision and sensor fusion, integrating OptiTrack sensors to detect IR laser weapons via timestamped synchronization.",
+      "technologies": "C++, OptiTrack SDK, Computer Vision, Sensor Fusion, Temporal Sync",
+      "link": "",
+      "category": "professional"
+    },
+    
+    {
+      "title": "Real-Time Protocol Stress Engine & Performance Validator (Internal Tool)",
+      "subtitle": "Academic Project",
+      "description": "Internal stress engine to validate middleware stability using high-rate DIS and CIGI streams, profiling latency and jitter under worst-case density scenarios.",
+      "technologies": "Tech Stack: C++, Open DIS, CIGI, Boost, UDP",
+      "link": "",
+      "category": "academic"
+    },
+    {
   "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
   "description": "A CIGI-compliant host emulator that simulates jet motion and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
-},
-	  {
-  "title": "CIGI Protocol Bridge & IG Visualization Middleware",
-  "subtitle": "Professional Application",
-  "description": "A low-level C++ middleware that enables high-fidelity real-time visualization by converting CIGI 3.1 host packets into CIGI 3.3. This ensures legacy simulation hosts can successfully drive modern Image Generators (IG) for immersive 3D rendering.",
-  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
-  "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
-  "category": "professional"
-},
-    {
-      "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
-      "subtitle": "Professional Application",
-      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
-      "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
-      "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
-      "category": "professional"
-    },
+}
     
-    {
-      "title": "NMF-Based Facial Recognition System (MATLAB)",
-      "subtitle": "Academic Project",
-      "description": "MATLAB-based face verification tool that uses Non-negative Matrix Factorization (NMF) to compare a captured facial image against a stored image dataset and decide whether there is a valid identity match.",
-      "technologies": "MATLAB, NMF, Image Processing, GUI, Pattern Recognition",
-      "link": "https://github.com/AQJED/Facial-Recognition-App-with-Matlab",
-      "category": "academic"
-    },
-    {
-      "title": "5 DOF Robotic Arm Object Detection (Embedded System)",
-      "subtitle": "Personal Project",
-      "description": "Determines the position and orientation of an object using laser beams and photoresistors to control a 5 DOF robotic arm.",
-      "technologies": "C/C++, Embedded Systems, Robotic Kinematics, DSP",
-      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
-      "category": "personal"
-    },
-   
-    
-    {
-      "title": "Real-Time Parking Occupancy Controller (Verilog / FPGA)",
-      "subtitle": "Personal Project",
-      "description": "Designed and implemented a Verilog-based FSM on a Xilinx FPGA to track vehicle entry/exit and update parking occupancy status in real time.",
-      "technologies": "Verilog, FSM Design, FPGA, Xilinx",
-      "link": "https://github.com/AQJED/Parking-lot-occupancy",
-      "category": "personal"
-    },
-    {
-      "title": "ARINC 429 Avionics Bus Interface (Verilog / FPGA)",
-      "subtitle": "Personal Project",
-      "description": "Designed and implemented an ARINC 429 transmitter/receiver core in Verilog on a Xilinx FPGA, handling word formatting, label decoding, parity, and data monitoring via a PC interface.",
-      "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
-      "link": "https://github.com/AQJED",
-      "category": "personal"
-    },
-    {
-      "title": "Light Control and Path Prediction (Embedded System)",
-      "subtitle": "Academic Project",
-      "description": "A cost-effective embedded system for intelligent light control and basic path prediction, utilizing an Arduino and various sensors.",
-      "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
-      "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
-      "category": "academic"
-      }
   ]
 },
       "skills_header": "Skills",
@@ -267,13 +235,12 @@
       "nav_endorsements": "التوصيات",
       "hero_prefix": "أنا",
       "hero_title": "أديب القحطاني",
-      "hero_subtitle": "مهندس تكامل برمجيات، مهندس أنظمة لحظية، مهندس تكامل وتوافق أنظمة المحاكاة",
-      "btn_hire": "مدونتي",
+      "hero_subtitle": "مهندس تكامل برمجيات، مهندس أنظمة لحظية، مهندس تكامل أنظمة الدفاع و الطيران",       "btn_hire": "مدونتي",
       "btn_resume": "السيرة الذاتية",
       "btn_lang": "English",
       "about_title": "من أنا",
       "about_subtitle": "أكثر من 12 عامًا من الخبرة",
-	  "about_text": "مهندس تكامل برمجيات شغوف بتطوير البرمجيات وتكامل انظمة الزمن الحقيقي. أحمل بكالوريوس في هندسة الحاسب مع تخصص في الأنظمة عالية الأداء والمضمنة من جامعة كاليفورنيا بالاظافة الى شهادة جامعية متوسطة في الهندسة الكهربائية والإلكترونية من جامعة ينبع الصناعية .\nلدي أكثر من 12 عاما من الخبرة،  حيث عملت في تطوير البرمجيات الوسيطة و تكامل وتحسين أداء الأنظمة للتطبيقات الدفاعية الحساسة ومحاكيات الطيران.",      
+	  "about_text": "ممهندس تكامل برمجيات متخصص في أنظمة الدفاع اعمل في تطوير البرمجيات الوسيطة و تكامل وتحسين أداء الأنظمة للتطبيقات الدفاعية الحساسة ومحاكيات الطيران",      
 	  "exp_header": "السيرة الذاتية",
       "exp_subheader": "المسيرة المهنية والأكاديمية",
       "exp_item1_title": "مهندس تكامل برمجي",
@@ -320,7 +287,7 @@
       "link": "https://aqjed.github.io/FMS_MiddleWare/",
       "category": "professional"
     },
-	{
+  {
   "title": "SFATE Tactical Integration & Scenario Control",
   "subtitle": "Professional Application",
   "description": "A C++ middleware solution designed to bridge external hosts with the SFATE tactical simulation. This system utilizes custom plugins to drive entities and automates scenario control, while also providing DIS protocol output for multi-platform interoperability.",
@@ -328,73 +295,40 @@
   "link": "https://aqjed.github.io/DISCIGIMiddleware/",
   "category": "professional"
 },
-   {
+   
+    {
+  "title": "Bell 412 Mission Simulator – Middleware System Development",
+  "subtitle": "Professional Application",
+  "description": "Middleware system for the Bell 412 Mission Simulator, interfacing the flight dynamics engine with key subsystems and a custom IOS for scenario control.",
+  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
+  "link": "",
+  "category": "professional"
+},
+    {
+      "title": "Engagement Skills Trainer (EST) Shooting Simulator",
+      "subtitle": "Professional Application",
+      "description": "Shooting skills training simulator using computer vision and sensor fusion, integrating OptiTrack sensors to detect IR laser weapons via timestamped synchronization.",
+      "technologies": "C++, OptiTrack SDK, Computer Vision, Sensor Fusion, Temporal Sync",
+      "link": "",
+      "category": "professional"
+    },
+    
+    {
+      "title": "Real-Time Protocol Stress Engine & Performance Validator (Internal Tool)",
+      "subtitle": "Academic Project",
+      "description": "Internal stress engine to validate middleware stability using high-rate DIS and CIGI streams, profiling latency and jitter under worst-case density scenarios.",
+      "technologies": "Tech Stack: C++, Open DIS, CIGI, Boost, UDP",
+      "link": "",
+      "category": "academic"
+    },
+    {
   "title": "Host Emulator for CIGI-Compliant Aircraft Simulation with Integrated User Interface",
   "subtitle": "Professional Application",
   "description": "A CIGI-compliant host emulator that simulates jet motion and offers a rich user interface for controlling, monitoring, and debugging aircraft simulation data.",
   "technologies": "C++, CIGI v3.3, Boost.Asio, Windows Joystick API, Multithreading, DirectInput",
   "link": "https://aqjed.github.io/hostemulator/",
   "category": "professional"
-},
-	  {
-  "title": "CIGI Protocol Bridge & IG Visualization Middleware",
-  "subtitle": "Professional Application",
-  "description": "A low-level C++ middleware that enables high-fidelity real-time visualization by converting CIGI 3.1 host packets into CIGI 3.3. This ensures legacy simulation hosts can successfully drive modern Image Generators (IG) for immersive 3D rendering.",
-  "technologies": "C++, CIGI 3.1/3.3, Network Programming (UDP), Boost, Git",
-  "link": "https://aqjed.github.io/Host-to-IG-Middleware/",
-  "category": "professional"
-},
-    {
-      "title": "LLM-Driven Cybersecurity Compliance Evaluator (AI)",
-      "subtitle": "Professional Application",
-      "description": "An automated tool that uses a large language model to evaluate a company's cybersecurity controls against National Cybersecurity Authority (NCA) compliance requirements.",
-      "technologies": "Ollama API (LLM), Python(Scripting/Automation), Pandas(Data Handling)",
-      "link": "https://aqjed.github.io/LLM-Driven-Cybersecurity-Compliance-Evaluator/",
-      "category": "professional"
-    },
-    
-    {
-      "title": "NMF-Based Facial Recognition System (MATLAB)",
-      "subtitle": "Academic Project",
-      "description": "MATLAB-based face verification tool that uses Non-negative Matrix Factorization (NMF) to compare a captured facial image against a stored image dataset and decide whether there is a valid identity match.",
-      "technologies": "MATLAB, NMF, Image Processing, GUI, Pattern Recognition",
-      "link": "https://github.com/AQJED/Facial-Recognition-App-with-Matlab",
-      "category": "academic"
-    },
-    {
-      "title": "5 DOF Robotic Arm Object Detection (Embedded System)",
-      "subtitle": "Personal Project",
-      "description": "Determines the position and orientation of an object using laser beams and photoresistors to control a 5 DOF robotic arm.",
-      "technologies": "C/C++, Embedded Systems, Robotic Kinematics, DSP",
-      "link": "https://github.com/AQJED/5-DOF-Robotic-Arm-Object-Detection",
-      "category": "personal"
-    },
-   
-    
-    {
-      "title": "Real-Time Parking Occupancy Controller (Verilog / FPGA)",
-      "subtitle": "Personal Project",
-      "description": "Designed and implemented a Verilog-based FSM on a Xilinx FPGA to track vehicle entry/exit and update parking occupancy status in real time.",
-      "technologies": "Verilog, FSM Design, FPGA, Xilinx",
-      "link": "https://github.com/AQJED/Parking-lot-occupancy",
-      "category": "personal"
-    },
-    {
-      "title": "ARINC 429 Avionics Bus Interface (Verilog / FPGA)",
-      "subtitle": "Personal Project",
-      "description": "Designed and implemented an ARINC 429 transmitter/receiver core in Verilog on a Xilinx FPGA, handling word formatting, label decoding, parity, and data monitoring via a PC interface.",
-      "technologies": "Verilog, FPGA, ARINC 429, FSM Design, UART",
-      "link": "https://github.com/AQJED",
-      "category": "personal"
-    },
-    {
-      "title": "Light Control and Path Prediction (Embedded System)",
-      "subtitle": "Academic Project",
-      "description": "A cost-effective embedded system for intelligent light control and basic path prediction, utilizing an Arduino and various sensors.",
-      "technologies": "C/C++, Sensors, Microcontroller, Circuit Design",
-      "link": "https://github.com/AQJED/Light-Control-and-Path-Prediction-Embedded-System-",
-      "category": "academic"
-      }
+}
   ]
 },
       "skills_header": "المهارات",
