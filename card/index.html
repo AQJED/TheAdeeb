@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #e0e0e0; /* Desktop background */
+            background-color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,13 +26,13 @@
             text-decoration: none;
         }
 
-        /* --- Card Container (Mobile Simulation) --- */
+        /* --- Card Container --- */
         .card-container {
             width: 100%;
-            max-width: 400px; /* iPhone width approximation */
+            max-width: 400px;
             min-height: 100vh;
-            background-color: #414141; /* Main Dark Color */
-            color: #FAF9F6; /* Main Light Color */
+            background-color: #414141; /* Dark Gray Background */
+            color: #FAF9F6; /* Off-White Text */
             position: relative;
             overflow: hidden;
             display: flex;
@@ -42,7 +42,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
-        /* Desktop: Add rounded corners to simulate a phone */
         @media (min-width: 450px) {
             .card-container {
                 min-height: 850px;
@@ -51,7 +50,7 @@
             }
         }
 
-        /* --- Decorative Background Patterns (Leaves) --- */
+        /* --- Decorative Background Patterns --- */
         .pattern {
             position: absolute;
             background-color: #797979;
@@ -59,24 +58,21 @@
             z-index: 0;
         }
 
-        /* Leaf Shape Helper */
         .leaf {
             border-radius: 0 50% 50% 50%;
             transform: rotate(45deg);
         }
 
-        /* Top Left Cluster */
         .p1 { width: 80px; height: 80px; top: -20px; left: -20px; transform: rotate(135deg); }
         .p2 { width: 60px; height: 60px; top: 50px; left: -10px; transform: rotate(135deg); opacity: 0.3;}
         .p3 { width: 50px; height: 50px; top: -10px; left: 60px; transform: rotate(135deg); opacity: 0.5;}
         .p4 { width: 30px; height: 30px; top: 120px; left: 10px; border-radius: 50%; opacity: 0.2; }
 
-        /* Bottom Right Cluster */
         .p5 { width: 100px; height: 100px; bottom: -30px; right: -30px; transform: rotate(-45deg); }
         .p6 { width: 70px; height: 70px; bottom: 60px; right: -10px; transform: rotate(-45deg); opacity: 0.3;}
         .p7 { width: 50px; height: 50px; bottom: 0px; right: 80px; transform: rotate(-45deg); opacity: 0.5;}
 
-        /* --- Content Wrapper (Z-index above pattern) --- */
+        /* --- Content Wrapper --- */
         .content {
             z-index: 10;
             width: 100%;
@@ -86,7 +82,7 @@
             height: 100%;
         }
 
-        /* --- Header Section --- */
+        /* --- Header --- */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -165,7 +161,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: auto; /* Push bottom button down */
+            margin-bottom: auto;
         }
 
         .btn {
@@ -197,19 +193,34 @@
         .btn-text {
             flex-grow: 1;
             text-align: center;
-            padding-right: 40px; /* Balance the icon width */
+            padding-right: 40px;
         }
 
-        /* --- Save Contact Button (Bottom) --- */
-        .save-contact {
+        /* --- Save/Download Buttons (Bottom) --- */
+        .bottom-actions {
+            width: 100%;
+            display: flex;
+            gap: 10px; /* Space between the two bottom buttons */
             margin-top: 30px;
+        }
+
+        .save-btn {
             border: 2px solid #FAF9F6;
             box-sizing: border-box;
             color: #414141;
+            flex: 1; /* Makes buttons equal width */
+            padding: 15px 10px;
+            font-size: 0.9rem; /* Slightly smaller font to fit text */
         }
-
-        .save-contact .btn-icon {
-            font-size: 1.1rem;
+        
+        .save-btn .btn-text {
+            padding-right: 0; /* Remove padding since icon is on left */
+            margin-left: 5px;
+        }
+        
+        .save-btn .btn-icon {
+            width: auto;
+            margin-right: 5px;
         }
 
     </style>
@@ -221,7 +232,6 @@
         <div class="pattern leaf p2"></div>
         <div class="pattern leaf p3"></div>
         <div class="pattern p4"></div>
-        
         <div class="pattern leaf p5"></div>
         <div class="pattern leaf p6"></div>
         <div class="pattern leaf p7"></div>
@@ -248,12 +258,15 @@
                     <span class="btn-icon"><i class="fas fa-mobile-alt"></i></span>
                     <span class="btn-text">Call</span>
                 </a>
-
                 
-
                 <a href="https://wa.me/966583161518" class="btn" target="_blank">
                     <span class="btn-icon"><i class="fab fa-whatsapp"></i></span>
                     <span class="btn-text">WhatsApp</span>
+                </a>
+
+                <a href="Adeeb-Alqahtani.pdf" download="Adeeb-Alqahtani.pdf" class="btn">
+                    <span class="btn-icon"><i class="fas fa-file-pdf"></i></span>
+                    <span class="btn-text">Download Resume</span>
                 </a>
 
                 <a href="https://theadeeb.com" class="btn" target="_blank">
@@ -262,10 +275,17 @@
                 </a>
             </div>
 
-            <a href="Adeeb-Alqahtani.vcf" download="Adeeb-Alqahtani.vcf" class="btn save-contact">
-                <span class="btn-icon"><i class="fas fa-download"></i></span>
-                <span class="btn-text">Save Contact</span>
-            </a>
+            <div class="bottom-actions">
+                <a href="Adeeb-Alqahtani.vcf" download="Adeeb-Alqahtani.vcf" class="btn save-btn">
+                    <span class="btn-icon"><i class="fas fa-address-card"></i></span>
+                    <span class="btn-text">Save Contact</span>
+                </a>
+
+                <a href="my-card.png" download="Adeeb-Card.jpg" class="btn save-btn">
+                    <span class="btn-icon"><i class="fas fa-image"></i></span>
+                    <span class="btn-text">Save Card</span>
+                </a>
+            </div>
         </div>
     </div>
 
