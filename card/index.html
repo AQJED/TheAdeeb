@@ -43,7 +43,7 @@
         }
 
         @media (min-width: 450px) {
-            .-container {
+            .card-container {
                 min-height: 850px;
                 border-radius: 30px;
                 height: auto;
@@ -211,11 +211,17 @@
             flex: 1; /* Makes buttons equal width */
             padding: 15px 10px;
             font-size: 0.9rem; /* Slightly smaller font to fit text */
+            text-decoration: none; /* Ensure link underline is gone */
+            display: flex; /* Flex needed for alignment */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
         
         .save-btn .btn-text {
             padding-right: 0; /* Remove padding since icon is on left */
             margin-left: 5px;
+            flex-grow: 0; /* Stop expanding to fill space */
         }
         
         .save-btn .btn-icon {
@@ -227,7 +233,7 @@
 </head>
 <body>
 
-    <div class="-container">
+    <div class="card-container">
         <div class="pattern leaf p1"></div>
         <div class="pattern leaf p2"></div>
         <div class="pattern leaf p3"></div>
@@ -256,7 +262,7 @@
             <div class="actions">
                 <a href="tel:+966583161518" class="btn">
                     <span class="btn-icon"><i class="fas fa-mobile-alt"></i></span>
-                    <span class="btn-text">Call</span>
+                    <span class="btn-text">Call Mobile</span>
                 </a>
                 
                 <a href="https://wa.me/966583161518" class="btn" target="_blank">
@@ -264,7 +270,7 @@
                     <span class="btn-text">WhatsApp</span>
                 </a>
 
-                <a href="Adeeb-Alqahtani.pdf" download="Adeeb-Alqahtani.pdf" class="btn">
+                 <a href="Adeeb-Alqahtani.pdf" download="Adeeb-Alqahtani.pdf" class="btn">
                     <span class="btn-icon"><i class="fas fa-file-pdf"></i></span>
                     <span class="btn-text">Download Resume</span>
                 </a>
@@ -281,13 +287,50 @@
                     <span class="btn-text">Save Contact</span>
                 </a>
 
-                <a href="my-card.png" download="Adeeb-Card.png" class="btn save-btn">
+                <button id="save-image-btn" class="btn save-btn">
                     <span class="btn-icon"><i class="fas fa-image"></i></span>
                     <span class="btn-text">Save Card</span>
-                </a>
+                </button>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('save-image-btn').addEventListener('click', async () => {
+            const imageName = 'my-card.png'; // The file on your server/folder
+            
+            try {
+                // 1. Fetch the image from the server
+                const response = await fetch(imageName);
+                const blob = await response.blob();
+                
+                // 2. Create a file object
+                const file = new File([blob], 'Adeeb-Card.png', { type: 'image/png' });
+
+                // 3. Check if the browser supports sharing files (Mobile Safari/Chrome)
+                if (navigator.share) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Adeeb Alqahtani Business Card',
+                        text: 'Check out my digital business card.'
+                    });
+                    console.log('Shared successfully');
+                } else {
+                    // Fallback for Desktop: Just download it normally
+                    const link = document.createElement('a');
+                    link.href = imageName;
+                    link.download = 'Adeeb-Card.jpg';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            } catch (error) {
+                console.error('Error sharing:', error);
+                // Fallback if fetch fails (e.g., local file system restrictions)
+                window.location.href = imageName;
+            }
+        });
+    </script>
 
 </body>
 </html>
