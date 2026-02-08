@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adeeb Alqahtani — Digital Business Card</title>
+  <meta name="description" content="Adeeb Alqahtani | Senior Software Integration Engineer — Digital Business Card" />
+  <meta property="og:title" content="Adeeb Alqahtani — Digital Business Card" />
+  <meta property="og:description" content="Senior Software Integration Engineer" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0f14" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.58);
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 20px 55px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Noto Kufi Arabic", "Noto Naskh Arabic", sans-serif;
+      background: radial-gradient(900px 420px at 10% 0%, rgba(255,255,255,.10), transparent 55%),
+                  radial-gradient(900px 420px at 90% 10%, rgba(255,255,255,.08), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 14px;
+    }
+    .wrap {
+      width: min(860px, 100%);
+      display: grid;
+      gap: 16px;
+    }
+    .card {
+      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,.04));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .header {
+      padding: 22px 22px 18px 22px;
+      display: grid;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .name {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: baseline;
+    }
+    .name h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: .2px;
+    }
+    .name .ar {
+      font-size: 22px;
+      opacity: .92;
+    }
+    .title {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      padding: 18px 22px 22px;
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .block {
+      background: rgba(0,0,0,.12);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .label {
+      font-size: 12px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 10px;
+    }
+    .row {
+      display: grid;
+      gap: 10px;
+    }
+    .item {
+      display: grid;
+      gap: 2px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .item .k {
+      font-size: 12px;
+      color: var(--muted2);
+    }
+    .item a, .item span {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      word-break: break-word;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      user-select: none;
+    }
+    .btn:hover {
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .qr {
+      display: grid;
+      place-items: center;
+      gap: 10px;
+    }
+    .qr img {
+      width: min(220px, 70vw);
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.92);
+      padding: 10px;
+    }
+    .qr .hint {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.45;
+    }
+    .footer {
+      padding: 14px 22px;
+      color: var(--muted2);
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="Digital business card">
+      <div class="header">
+        <div class="name">
+          <h1>Adeeb Alqahtani</h1>
+          <div class="ar rtl">أديب القحطاني</div>
+        </div>
+        <p class="title">Senior Software Integration Engineer</p>
+        <div class="badge">📍 Riyadh, Saudi Arabia</div>
+      </div>
+
+      <div class="grid">
+        <div class="block">
+          <div class="label">Contact</div>
+
+          <div class="row">
+            <div class="item">
+              <div class="k">Phone</div>
+              <a href="tel:+966583161518">+966 58 316 1518</a>
+            </div>
+
+            <div class="item">
+              <div class="k">Email</div>
+              <a href="mailto:Adeeb.Alqahtani@gmail.com">Adeeb.Alqahtani@gmail.com</a>
+            </div>
+
+            <div class="item">
+              <div class="k">Website</div>
+              <a href="https://theadeeb.com" target="_blank" rel="noopener">theadeeb.com</a>
+            </div>
+
+            <div class="item">
+              <div class="k">LinkedIn</div>
+              <a href="https://www.linkedin.com/in/adalqahtani" target="_blank" rel="noopener">linkedin.com/in/adalqahtani</a>
+            </div>
+          </div>
+
+          <div class="actions" aria-label="Quick actions">
+            <a class="btn" href="tel:+966583161518"> Call</a>
+            <a class="btn" href="mailto:Adeeb.Alqahtani@gmail.com"> Email</a>
+            <a class="btn" href="https://wa.me/966583161518" target="_blank" rel="noopener"> WhatsApp</a>
+            <a class="btn" href="Adeeb-Alqahtani.vcf" download> Save Contact</a>
+          </div>
+
+          <div style="height: 12px"></div>
+
+          
+        </div>
+
+        <div class="block qr">
+          <div class="label">QR</div>
+          <img src="qr.png" alt="QR code to open this card" />
+          <div class="hint">
+            Scan to open this card.<br/>
+            Link: <span class="mono">https://theadeeb.com/card/</span>
+          </div>
+          <a class="btn" href="https://theadeeb.com/card/" target="_blank" rel="noopener">🔗 Open link</a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>© 2026 Adeeb Alqahtani</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
