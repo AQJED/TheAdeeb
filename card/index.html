@@ -1,264 +1,273 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Adeeb Alqahtani — Digital Business Card</title>
-  <meta name="description" content="Adeeb Alqahtani | Senior Software Integration Engineer — Digital Business Card" />
-  <meta property="og:title" content="Adeeb Alqahtani — Digital Business Card" />
-  <meta property="og:description" content="Senior Software Integration Engineer" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b0f14" />
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.58);
-      --border: rgba(255,255,255,.14);
-      --shadow: 0 20px 55px rgba(0,0,0,.55);
-      --radius: 18px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Noto Kufi Arabic", "Noto Naskh Arabic", sans-serif;
-      background: radial-gradient(900px 420px at 10% 0%, rgba(255,255,255,.10), transparent 55%),
-                  radial-gradient(900px 420px at 90% 10%, rgba(255,255,255,.08), transparent 60%),
-                  var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 28px 14px;
-    }
-    .wrap {
-      width: min(860px, 100%);
-      display: grid;
-      gap: 16px;
-    }
-    .card {
-      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,.04));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .header {
-      padding: 22px 22px 18px 22px;
-      display: grid;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .name {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      align-items: baseline;
-    }
-    .name h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: .2px;
-    }
-    .name .ar {
-      font-size: 22px;
-      opacity: .92;
-    }
-    .title {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-      padding: 18px 22px 22px;
-    }
-    @media (max-width: 760px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-    .block {
-      background: rgba(0,0,0,.12);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      padding: 16px;
-    }
-    .label {
-      font-size: 12px;
-      letter-spacing: .35px;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 10px;
-    }
-    .row {
-      display: grid;
-      gap: 10px;
-    }
-    .item {
-      display: grid;
-      gap: 2px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-    }
-    .item .k {
-      font-size: 12px;
-      color: var(--muted2);
-    }
-    .item a, .item span {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 15px;
-      word-break: break-word;
-    }
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: transform .08s ease, background .15s ease, border-color .15s ease;
-      user-select: none;
-    }
-    .btn:hover {
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
-      transform: translateY(-1px);
-    }
-    .btn:active {
-      transform: translateY(0);
-    }
-    .qr {
-      display: grid;
-      place-items: center;
-      gap: 10px;
-    }
-    .qr img {
-      width: min(220px, 70vw);
-      height: auto;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.92);
-      padding: 10px;
-    }
-    .qr .hint {
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-      line-height: 1.45;
-    }
-    .footer {
-      padding: 14px 22px;
-      color: var(--muted2);
-      font-size: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-      border-top: 1px solid rgba(255,255,255,.10);
-    }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    .rtl {
-      direction: rtl;
-      text-align: right;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: rgba(255,255,255,.78);
-      font-size: 12px;
-      width: fit-content;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeeb Alqahtani - Digital Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- General Reset & Layout --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #e0e0e0; /* Desktop background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* --- Card Container (Mobile Simulation) --- */
+        .card-container {
+            width: 100%;
+            max-width: 400px; /* iPhone width approximation */
+            min-height: 100vh;
+            background-color: #414141; /* Main Dark Color */
+            color: #FAF9F6; /* Main Light Color */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Desktop: Add rounded corners to simulate a phone */
+        @media (min-width: 450px) {
+            .card-container {
+                min-height: 850px;
+                border-radius: 30px;
+                height: auto;
+            }
+        }
+
+        /* --- Decorative Background Patterns (Leaves) --- */
+        .pattern {
+            position: absolute;
+            background-color: #797979;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Leaf Shape Helper */
+        .leaf {
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+        }
+
+        /* Top Left Cluster */
+        .p1 { width: 80px; height: 80px; top: -20px; left: -20px; transform: rotate(135deg); }
+        .p2 { width: 60px; height: 60px; top: 50px; left: -10px; transform: rotate(135deg); opacity: 0.3;}
+        .p3 { width: 50px; height: 50px; top: -10px; left: 60px; transform: rotate(135deg); opacity: 0.5;}
+        .p4 { width: 30px; height: 30px; top: 120px; left: 10px; border-radius: 50%; opacity: 0.2; }
+
+        /* Bottom Right Cluster */
+        .p5 { width: 100px; height: 100px; bottom: -30px; right: -30px; transform: rotate(-45deg); }
+        .p6 { width: 70px; height: 70px; bottom: 60px; right: -10px; transform: rotate(-45deg); opacity: 0.3;}
+        .p7 { width: 50px; height: 50px; bottom: 0px; right: 80px; transform: rotate(-45deg); opacity: 0.5;}
+
+        /* --- Content Wrapper (Z-index above pattern) --- */
+        .content {
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+
+        .logo-box {
+            width: 120px; 
+            height: auto;
+            margin-bottom: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-box img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .slogan {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #FAF9F6;
+            margin-top: 10px;
+        }
+
+        /* --- Profile Info --- */
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #FAF9F6;
+        }
+
+        .profile-info h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #FAF9F6;
+        }
+
+        /* --- Social Icons --- */
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .socials a {
+            color: #FAF9F6;
+            font-size: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .socials a:hover {
+            transform: scale(1.1);
+            color: #797979;
+        }
+
+        /* --- Action Buttons List --- */
+        .actions {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: auto; /* Push bottom button down */
+        }
+
+        .btn {
+            background-color: #FAF9F6;
+            color: #414141;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #dcdcdc;
+        }
+
+        .btn-icon {
+            width: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-text {
+            flex-grow: 1;
+            text-align: center;
+            padding-right: 40px; /* Balance the icon width */
+        }
+
+        /* --- Save Contact Button (Bottom) --- */
+        .save-contact {
+            margin-top: 30px;
+            border: 2px solid #FAF9F6;
+            box-sizing: border-box;
+            color: #414141;
+        }
+
+        .save-contact .btn-icon {
+            font-size: 1.1rem;
+        }
+
+    </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="card" aria-label="Digital business card">
-      <div class="header">
-        <div class="name">
-          <h1>Adeeb Alqahtani</h1>
-          <div class="ar rtl">أديب القحطاني</div>
+
+    <div class="card-container">
+        <div class="pattern leaf p1"></div>
+        <div class="pattern leaf p2"></div>
+        <div class="pattern leaf p3"></div>
+        <div class="pattern p4"></div>
+        
+        <div class="pattern leaf p5"></div>
+        <div class="pattern leaf p6"></div>
+        <div class="pattern leaf p7"></div>
+
+        <div class="content">
+            <div class="header">
+                <div class="logo-box">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                <div class="slogan">I build defense solution</div>
+            </div>
+
+            <div class="profile-info">
+                <h1>Adeeb Alqahtani</h1>
+                <h2>Software Integration Engineer</h2>
+            </div>
+
+            <div class="socials">
+                <a href="https://www.linkedin.com/in/adalqahtani" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+
+            <div class="actions">
+                <a href="tel:+966583161518" class="btn">
+                    <span class="btn-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span class="btn-text">Call</span>
+                </a>
+
+                
+
+                <a href="https://wa.me/966583161518" class="btn" target="_blank">
+                    <span class="btn-icon"><i class="fab fa-whatsapp"></i></span>
+                    <span class="btn-text">WhatsApp</span>
+                </a>
+
+                <a href="https://theadeeb.com" class="btn" target="_blank">
+                    <span class="btn-icon"><i class="fas fa-globe"></i></span>
+                    <span class="btn-text">Website</span>
+                </a>
+            </div>
+
+            <a href="Adeeb-Alqahtani.vcf" download="Adeeb-Alqahtani.vcf" class="btn save-contact">
+                <span class="btn-icon"><i class="fas fa-download"></i></span>
+                <span class="btn-text">Save Contact</span>
+            </a>
         </div>
-        <p class="title">Senior Software Integration Engineer</p>
-        <div class="badge">📍 Riyadh, Saudi Arabia</div>
-      </div>
+    </div>
 
-      <div class="grid">
-        <div class="block">
-          <div class="label">Contact</div>
-
-          <div class="row">
-            <div class="item">
-              <div class="k">Phone</div>
-              <a href="tel:+966583161518">+966 58 316 1518</a>
-            </div>
-
-            <div class="item">
-              <div class="k">Email</div>
-              <a href="mailto:Adeeb.Alqahtani@gmail.com">Adeeb.Alqahtani@gmail.com</a>
-            </div>
-
-            <div class="item">
-              <div class="k">Website</div>
-              <a href="https://theadeeb.com" target="_blank" rel="noopener">theadeeb.com</a>
-            </div>
-
-            <div class="item">
-              <div class="k">LinkedIn</div>
-              <a href="https://www.linkedin.com/in/adalqahtani" target="_blank" rel="noopener">linkedin.com/in/adalqahtani</a>
-            </div>
-          </div>
-
-          <div class="actions" aria-label="Quick actions">
-            <a class="btn" href="tel:+966583161518"> Call</a>
-            <a class="btn" href="mailto:Adeeb.Alqahtani@gmail.com"> Email</a>
-            <a class="btn" href="https://wa.me/966583161518" target="_blank" rel="noopener"> WhatsApp</a>
-            <a class="btn" href="Adeeb-Alqahtani.vcf" download> Save Contact</a>
-          </div>
-
-          <div style="height: 12px"></div>
-
-          
-        </div>
-
-        <div class="block qr">
-          <div class="label">QR</div>
-          <img src="qr.png" alt="QR code to open this card" />
-          <div class="hint">
-            Scan to open this card.<br/>
-            Link: <span class="mono">https://theadeeb.com/card/</span>
-          </div>
-          <a class="btn" href="https://theadeeb.com/card/" target="_blank" rel="noopener">🔗 Open link</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div>© 2026 Adeeb Alqahtani</div>
-      </div>
-    </section>
-  </main>
 </body>
 </html>
