@@ -500,7 +500,7 @@ a {
 
     .about .about-text p {
         font-size: 16px;
-        color: #fff; /* Use a contrasting color for readability */
+        color: #414141;
     }
 
     .about .about-text a.btn {
@@ -522,7 +522,7 @@ a {
 }
 
 #about_subtitle {
-    color: #ffffff; /* or any color of your choice */
+    color: #414141;
 }
 
 /******************************/
