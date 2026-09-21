@@ -473,29 +473,17 @@ a {
 .about {
     position: relative;
     width: 100%;
-    /* Use padding-bottom to enforce a 2:1 aspect ratio.
-       (For a different ratio, adjust this value accordingly.)
-       For example, for a 2:1 ratio: 100/2 = 50% */
-    padding-bottom: 60%;
-    background: url('../img/about.jpg') no-repeat center center;
-    background-size: cover;
+    padding: 45px 0 15px 0;
 }
 
-    /* Remove the separate image column if present */
     .about .about-img {
         display: none;
     }
 
-    /* Position the text container absolutely on the right half */
     .about .about-content {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%; /* Only use the right half */
-        height: 100%; /* Match the height of the container */
-        padding: 60px;
-        z-index: 2; /* Ensure text is above the background image */
-        background: transparent;
+        position: relative;
+        width: 100%;
+        padding: 0 15px;
     }
 
     .about .about-text p {
@@ -503,18 +491,12 @@ a {
         color: #414141;
     }
 
-    .about .about-text a.btn {
+    .about .about-content > a.btn {
         margin-top: 15px;
     }
+
         
 
-@media (max-width: 991.98px) {
-    .about .about-content {
-        width: 100%;
-        padding: 45px 15px;
-        position: relative;
-    }
-}
 
 .about a.btn:hover {
     color: #fff !important;
@@ -640,6 +622,63 @@ a {
     border-left: 5px solid #dddddd;
 }
 
+/**********************************/
+/******* Certifications CSS *******/
+/**********************************/
+.certifications {
+    position: relative;
+    padding: 45px 0 15px 0;
+}
+
+.cert-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.cert-card {
+    background: #FAF9F6;
+    border-left: 5px solid #414141;
+    padding: 20px 25px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, .08);
+}
+
+    .cert-card h3 {
+        margin: 0 0 6px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #414141;
+    }
+
+    .cert-card .cert-issuer {
+        margin: 0;
+        font-size: 15px;
+        color: #797979;
+    }
+
+.rtl-certifications .cert-wrapper {
+    direction: rtl;
+}
+
+.rtl-certifications .cert-card {
+    border-left: none;
+    border-right: 5px solid #414141;
+    text-align: right;
+}
+
+/**********************************/
+/****** Timeline description ******/
+/**********************************/
+.timeline-desc {
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #797979;
+}
+
+
+
 /******************************/
 /******** Portfolio Cards ******/
 /******************************/
@@ -650,33 +689,6 @@ a {
     margin-bottom: 30px;
 }
 
-/* Add margin between filter buttons and project cards */
-.project-filters {
-    margin-bottom: 30px; /* Adjust this value as needed */
-}
-
-    .project-filters.rtl-filters {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: center;
-    }
-
-    .project-filters .filter-btn {
-        border: none;
-        background: #414141; /* updated */
-        color: #FAF9F6;
-        padding: 6px 12px;
-        margin: 0 5px;
-        cursor: pointer;
-        transition: color 0.3s, background 0.3s;
-    }
-
-        .project-filters .filter-btn.active,
-        .project-filters .filter-btn:hover {
-            background: transparent;
-            color: #414141; /* updated */
-            border: 2px solid #414141; /* updated */
-        }
 
 .project-card {
     background: var(--card-bg, rgba(255, 255, 255, 0.1));
@@ -734,19 +746,7 @@ a {
         font-weight: bold;
     }
 
-#projects-grid.rtl-projects .project-card {
-    direction: rtl;
-    text-align: right;
-}
 
-    #projects-grid.rtl-projects .project-card .tech-stack {
-        direction: ltr;
-        text-align: left;
-    }
-
-    #projects-grid.rtl-projects .project-card .proj-subtitle {
-        text-align: right;
-    }
 
 .project-link {
     display: inline-block;
@@ -832,95 +832,6 @@ a {
         grid-template-columns: 1fr;
     }
 }
-
-/******************************/
-/******* Testimonial CSS ******/
-/******************************/
-.testimonial {
-    position: relative;
-    margin: 45px 0 0 0; /* Remove bottom margin */
-    padding: 90px 0;
-    background: #414141;
-}
-
-    .testimonial .container {
-        max-width: 900px;
-    }
-
-    .testimonial .testimonial-icon {
-        margin-bottom: 45px;
-        text-align: center;
-    }
-
-        .testimonial .testimonial-icon i {
-            font-size: 60px;
-            color: rgba(256, 256, 256, .5);
-        }
-
-    .testimonial .testimonial-item {
-        position: relative;
-        margin: 0 15px;
-        text-align: center;
-    }
-
-    .testimonial .testimonial-img {
-        position: relative;
-        margin-bottom: 15px;
-        z-index: 1;
-    }
-
-    .testimonial .testimonial-item img {
-        margin: 0 auto;
-        width: 120px;
-        padding: 10px;
-        border: 5px dotted #FAF9F6;
-        border-radius: 100px;
-    }
-
-    .testimonial .testimonial-text {
-        position: relative;
-        margin-top: -70px;
-        padding: 65px 35px 30px 35px;
-        text-align: center;
-        background: #FAF9F6;
-        border-radius: 500px;
-    }
-
-    .testimonial .testimonial-item p {
-        font-size: 18px;
-        font-style: italic;
-    }
-
-    .testimonial .testimonial-text h3 {
-        color: #414141;
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-
-    .testimonial .testimonial-text h4 {
-        color: #666666;
-        font-size: 14px;
-        margin-bottom: 0;
-    }
-
-    .testimonial .owl-dots {
-        margin-top: 15px;
-        text-align: center;
-    }
-
-    .testimonial .owl-dot {
-        display: inline-block;
-        margin: 0 5px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(256, 256, 256, .5);
-    }
-
-        .testimonial .owl-dot.active {
-            background: #FAF9F6;
-        }
 
 /******************************/
 /********* Footer CSS **********/
@@ -1061,17 +972,135 @@ navbar {
     padding-bottom: 20px;
 }
 
-/* Navigation forced styling */
-:lang(en) #nav_home,
-:lang(en) #nav_about,
-:lang(en) #nav_experience,
-:lang(en) #nav_portfolio,
-:lang(en) #nav_skills,
-:lang(en) #nav_endorsements,
-:lang(en) #about_text {
+/* Navigation and about-body sizing. Set per language: Arabic uses its own
+   face and a larger size, since Arabic glyphs read smaller than Latin at an
+   identical font-size. */
+body {
+    --fs-nav: 28px;
+}
+
+body.lang-ar {
+    --fs-nav: 34px;
+}
+
+/* A single font-size rule whose value is inherited from body. The nav links
+   need the size to follow the language class while their parent also receives
+   inline styles, and an inherited custom property propagates reliably there. */
+#nav_home,
+#nav_about,
+#nav_experience,
+#nav_certifications,
+#nav_portfolio,
+#nav_skills {
+    font-size: var(--fs-nav);
+    font-weight: 700;
+    font-family: 'Harmattan', sans-serif;
+}
+
+#about_text {
     font-size: 28px;
     font-weight: 700;
     font-family: 'Harmattan', sans-serif;
+}
+
+/* Arabic styling hangs off a body class rather than :lang(ar), because
+   :lang() styles are not reliably re-resolved when <html lang> changes after
+   load. <html lang/dir> is still set, for assistive tech and bidi. */
+body.lang-ar #nav_home,
+body.lang-ar #nav_about,
+body.lang-ar #nav_experience,
+body.lang-ar #nav_certifications,
+body.lang-ar #nav_portfolio,
+body.lang-ar #nav_skills,
+body.lang-ar #about_text,
+body.lang-ar #about_subtitle,
+body.lang-ar #hero_title,
+body.lang-ar #hero_prefix,
+body.lang-ar .hero .hero-text h2,
+body.lang-ar .section-header h2,
+body.lang-ar .section-header p,
+body.lang-ar .timeline-text h2,
+body.lang-ar .timeline-text h4,
+body.lang-ar .timeline-desc,
+body.lang-ar .cert-card h3,
+body.lang-ar .cert-card .cert-issuer,
+body.lang-ar .skill-card p,
+body.lang-ar .footer-info h2,
+body.lang-ar .footer-info h3,
+body.lang-ar .footer-info h3 a,
+body.lang-ar .btn {
+    /* Sakkal Majalla is used where it is installed locally; Cairo, loaded from
+       Google Fonts, covers every other platform. */
+    font-family: 'Sakkal Majalla', 'Cairo', sans-serif;
+}
+
+/* Sakkal Majalla is a compact Naskh face and sets noticeably smaller than
+   Cairo at an identical font-size. The Arabic UI is scaled up about a quarter
+   to match the Latin optical size, with extra leading. */
+body.lang-ar #about_text {
+    font-size: 34px;
+    line-height: 1.75;
+}
+
+body.lang-ar .section-header h2 {
+    font-size: 54px;
+}
+
+body.lang-ar .timeline-desc,
+body.lang-ar .cert-card .cert-issuer {
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+body.lang-ar .timeline-text h2 {
+    font-size: 38px;
+}
+
+body.lang-ar .timeline-text h4,
+body.lang-ar .cert-card h3 {
+    font-size: 24px;
+}
+
+body.lang-ar .hero .hero-text p {
+    font-size: 30px;
+}
+
+body.lang-ar .hero .hero-text h1 {
+    font-size: 72px;
+}
+
+body.lang-ar .hero .hero-text h2 {
+    font-size: 42px;
+}
+
+body.lang-ar .btn {
+    font-size: 17px;
+}
+
+@media (max-width: 767.98px) {
+    body.lang-ar {
+        --fs-nav: 28px;
+    }
+
+    body.lang-ar #about_text {
+        font-size: 28px;
+    }
+
+    body.lang-ar .section-header h2 {
+        font-size: 36px;
+    }
+
+    body.lang-ar .hero .hero-text h1 {
+        font-size: 42px;
+    }
+
+    body.lang-ar .hero .hero-text h2 {
+        font-size: 27px;
+    }
+
+    body.lang-ar .hero .hero-text p {
+        font-size: 21px;
+    }
 }
 
 /* Add extra space below the "Show More" button */
@@ -1108,3 +1137,205 @@ navbar {
 .skills .section-header h2 {
     margin-bottom: 20px;
 }
+
+/**********************************/
+/********* Responsive ************/
+/**********************************/
+
+/* The typed hero role can wrap on a narrow screen, so it grows instead of
+   holding a fixed height. Two lines are reserved to keep the typing animation
+   from shifting the layout. */
+@media (max-width: 991.98px) {
+    .hero .hero-text h2 {
+        display: block;
+        height: auto;
+        min-height: 2.4em;
+        line-height: 1.2;
+    }
+}
+
+
+/* Below 768px the two-lane timeline collapses to a single rail: full-width
+   entries, markers on the left, and the date moved inside the card. */
+@media (max-width: 767.98px) {
+    .experience .timeline::after {
+        left: 8px;
+        margin-left: 0;
+    }
+
+    .experience .timeline .timeline-item,
+    .experience .timeline .timeline-item.left,
+    .experience .timeline .timeline-item.right {
+        width: 100%;
+        left: 0;
+        padding-left: 38px;
+        padding-right: 0;
+    }
+
+    .experience .timeline .timeline-item::after,
+    .experience .timeline .timeline-item.right::after {
+        left: 1px;
+        right: auto;
+        top: 28px;
+    }
+
+    .experience .timeline .timeline-item::before,
+    .experience .timeline .timeline-item.right::before {
+        left: 18px;
+        right: auto;
+        top: 26px;
+        border-color: transparent #dddddd transparent transparent;
+    }
+
+    /* .timeline-date is the first child of .timeline-text, so dropping the
+       absolute positioning lands it at the top of the card. */
+    .experience .timeline .timeline-item.left .timeline-date,
+    .experience .timeline .timeline-item.right .timeline-date {
+        position: static;
+        width: auto;
+        left: auto;
+        right: auto;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .experience .timeline .timeline-text,
+    .experience .timeline .timeline-item.right .timeline-text {
+        padding: 20px;
+        border-right: none;
+        border-left: 5px solid #dddddd;
+    }
+
+    /* Matches the .left/.right specificity above so Arabic dates align with the
+       RTL text, while the date run itself stays LTR. */
+    .rtl-experience .timeline .timeline-item.left .timeline-date,
+    .rtl-experience .timeline .timeline-item.right .timeline-date {
+        direction: ltr;
+        text-align: right;
+    }
+}
+
+/* min() lets the single column shrink below the 300px track floor, so the
+   grid still fits a 320px viewport. */
+.projects-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+/* Let the track count follow the available width below 576px, so a phone
+   shows two or three icons per row rather than one. */
+@media (max-width: 575.98px) {
+    .skills-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 12px;
+        padding: 10px 0;
+    }
+
+    .skill-card {
+        width: 100%;
+        max-width: 120px;
+        height: 110px;
+    }
+}
+
+
+/* Nav clicks are offset in main.js; deep links and history navigation use the
+   browser's native scroll, which needs this margin to clear the sticky navbar. */
+#home, #about, #experience, #certifications, #portfolio, #skills {
+    scroll-margin-top: 100px;
+}
+
+@media (min-width: 992px) {
+    #home, #about, #experience, #certifications, #portfolio, #skills {
+        scroll-margin-top: 130px;
+    }
+}
+
+
+/**********************************/
+/******* RTL Timeline Fixes *******/
+/**********************************/
+/* Under dir="rtl" the static position of a 50%-wide item is the right lane,
+   so the offsets are mirrored: `.left` stays right, `.right` moves left. */
+@media (min-width: 768px) {
+    .rtl-experience .timeline .timeline-item.left {
+        left: 0;
+        padding-left: 30px;
+        padding-right: 0;
+    }
+
+    .rtl-experience .timeline .timeline-item.right {
+        left: -50%;
+        padding-right: 30px;
+        padding-left: 0;
+    }
+
+    /* Dots and arrows point at the rail from the opposite side now. */
+    .rtl-experience .timeline .timeline-item.left::after {
+        left: -8px;
+        right: auto;
+    }
+
+    .rtl-experience .timeline .timeline-item.right::after {
+        right: -8px;
+        left: auto;
+    }
+
+    .rtl-experience .timeline .timeline-item.left::before {
+        left: 10px;
+        right: auto;
+        border-color: transparent #dddddd transparent transparent;
+    }
+
+    .rtl-experience .timeline .timeline-item.right::before {
+        right: 10px;
+        left: auto;
+        border-color: transparent transparent transparent #dddddd;
+    }
+
+    /* Date sits on the far side of the rail from its card. */
+    .rtl-experience .timeline .timeline-item.left .timeline-date {
+        left: auto;
+        right: calc(100% + 55px);
+        text-align: right;
+    }
+
+    .rtl-experience .timeline .timeline-item.right .timeline-date {
+        right: auto;
+        left: calc(100% + 55px);
+        text-align: left;
+    }
+
+    /* Accent bar faces the rail. */
+    .rtl-experience .timeline .timeline-item.left .timeline-text {
+        border-right: none;
+        border-left: 5px solid #dddddd;
+    }
+
+    .rtl-experience .timeline .timeline-item.right .timeline-text {
+        border-left: none;
+        border-right: 5px solid #dddddd;
+    }
+}
+
+/* The date is a Latin/numeric run, so it stays LTR inside RTL text at every
+   width and is placed by text-align. */
+.rtl-experience .timeline .timeline-date {
+    direction: ltr;
+}
+
+.rtl-experience .timeline .timeline-item.left .timeline-date,
+.rtl-experience .timeline .timeline-item.right .timeline-date {
+    direction: ltr;
+}
+
+/* The footer e-mail is a link, so it needs a light colour on the dark footer. */
+.footer .footer-info h3 a {
+    color: #FAF9F6;
+    opacity: .85;
+    transition: .3s;
+}
+
+    .footer .footer-info h3 a:hover {
+        color: #FAF9F6;
+        opacity: 1;
+    }
